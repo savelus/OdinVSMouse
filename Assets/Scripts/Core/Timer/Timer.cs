@@ -11,7 +11,7 @@ namespace Core.Timer
         public bool TimerIsRunning { get; private set; }
 
         private float _startSeconds;
-        private float _remainingWorldSeconds;
+        private int _previousMinutes;
         private Action<Timer> _onTimerChanged;
         private Action<Timer> _onTimerEnd;
 
@@ -42,16 +42,15 @@ namespace Core.Timer
 
             var worldSeconds = RemainingTime * SecondsInOneDay / _startSeconds;
 
-            if (Math.Truncate(worldSeconds) == Math.Truncate(_remainingWorldSeconds))
-            {
-                _remainingWorldSeconds = worldSeconds;
-                return;
-            }
-            _remainingWorldSeconds = worldSeconds;
-
             var hours = (int)Math.Truncate(worldSeconds / SecondsInOneHour);
             var minutes = (int)Math.Truncate((worldSeconds - hours * SecondsInOneHour)/ SecondsInOneMinute);
-            
+            if (minutes == _previousMinutes)
+            {
+                _previousMinutes = minutes;
+                return;
+            }
+
+            _previousMinutes = minutes;
             TimeString = $"{hours:D2}h {minutes:D2}m";
             _onTimerChanged?.Invoke(this);
         }
