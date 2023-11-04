@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Utils;
 using System.Collections;
+using Data;
 using UnityEngine;
 
 namespace Assets.Scripts.Entities
@@ -9,6 +10,7 @@ namespace Assets.Scripts.Entities
         protected override void Hit(Transform hitter)
         {
             Destroy(gameObject);
+            StaticGameData.KilledMouseInGame++;
         }
 
         protected override void OnTriggerEnter2D(Collider2D collision)
