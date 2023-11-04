@@ -8,13 +8,8 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Timer _timer; 
     private void Start()
     {
-        _timer.SubscribeOnTimerChange(SetTimer);
-        
+        _timer.SubscribeOnTimerChange(timer => _timerText.text = timer.TimeString);
         _timer.StartTimer(10);
     }
-
-    private void SetTimer(Timer timer)
-    {
-        _timerText.text = timer.TimeString;
-    }
+        
 }
