@@ -44,6 +44,8 @@ namespace Assets.Scripts.Projectiles
 
         private new Rigidbody2D rigidbody;
 
+        public SpriteDrawer CraterDrawer { get; set; }
+
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody2D>();
@@ -72,7 +74,7 @@ namespace Assets.Scripts.Projectiles
 
         private void OnLiveDistanceEnded()
         {
-            Destroy(gameObject);
+            DestroySelf();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -85,7 +87,22 @@ namespace Assets.Scripts.Projectiles
 
         private void OnHit()
         {
-            Destroy(gameObject);
+            DestroySelf();
+        }
+
+        private bool isDestroyed;
+        private void DestroySelf()
+        {
+            if (!isDestroyed)
+            {
+                isDestroyed = true;
+
+                var point = Camera.main.WorldToScreenPoint(transform.position).AsVector2();
+                point = new(point.x / Screen.width, point.y / Screen.height);
+                if (new Rect(0, 0, 1, 1).Contains(point))
+                    CraterDrawer?.DrawOn(point);
+                Destroy(gameObject);
+            }
         }
     }
 }

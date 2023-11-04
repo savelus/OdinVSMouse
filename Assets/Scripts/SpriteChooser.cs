@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
-    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Image))]
     public class SpriteChooser : MonoBehaviour
     {
         [field: SerializeField]
@@ -11,7 +12,8 @@ namespace Assets.Scripts
 
         private void Awake()
         {
-            GetComponent<SpriteRenderer>().sprite = Sprites[Random.Range(0, Sprites.Length)];
+            var sprite = Sprites[Random.Range(0, Sprites.Length)];
+            GetComponent<Image>().sprite = sprite;
         }
     }
 }

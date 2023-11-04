@@ -18,6 +18,9 @@ namespace Assets.Scripts.Projectiles
         [SerializeField]
         private Player.Player player;
 
+        [SerializeField]
+        private SpriteDrawer craterDrawer;
+
         private void Update()
         {
             if (Input.GetMouseButtonDown((int)MouseButton.Left))
@@ -43,6 +46,7 @@ namespace Assets.Scripts.Projectiles
             var projectile = Instantiate(lightningProjectile, pos, transform.rotation, transform).GetComponent<Projectile>();
             projectile.AngleDeg = angleDeg;
             projectile.LiveDistance = liveDistance;
+            projectile.CraterDrawer = craterDrawer;
         }
     }
 }

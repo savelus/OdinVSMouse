@@ -52,7 +52,7 @@ namespace Assets.Scripts.Player
             head.transform.eulerAngles = head.transform.eulerAngles.WithZ(Random.Range(-5, 5));
 
             var angle = MathUtils.DirectionToAngle(transform.position - mousePos);
-            transform.position += new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * 0f;//* 0.03f;
+            //transform.position += new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * 0.03f; //מעהאקא
         }
     }
 }
