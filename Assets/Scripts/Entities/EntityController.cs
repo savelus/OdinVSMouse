@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Timer;
 using UnityEngine;
 
 namespace Assets.Scripts.Entities
@@ -23,6 +24,9 @@ namespace Assets.Scripts.Entities
         private GameObject zigzagMouse;
         [SerializeField]
         private GameObject fastZigzagMouse;
+
+        [SerializeField] 
+        private Timer timer;
         private GameObject[] entityPrefabs;
 
         private float[] entitySpawnChanceProportions;
@@ -38,14 +42,14 @@ namespace Assets.Scripts.Entities
 
         private void Awake()
         {
-            //подписаться на таймер += End;
+            timer.SubscribeOnTimerEnd(_ => End());
             entityPrefabs = new GameObject[4] { basicMouse, fastMouse, zigzagMouse, fastMouse };
             entitySpawnChanceProportions = new float[4] { 10, 2, 2, 1 };
         }
 
         private void Update()
         {
-            if (isGamePlaying)
+            if (_isGamePlaying)
             {
                 elapsedTime += Time.deltaTime;
                 if (elapsedTime > SpawnCooldown) 
@@ -85,10 +89,10 @@ namespace Assets.Scripts.Entities
             }
         }
 
-        private bool isGamePlaying = true;
+        private bool _isGamePlaying = true;
         private void End()
         {
-            isGamePlaying = false;
+            _isGamePlaying = false;
         }
     }
 }

@@ -21,11 +21,8 @@ namespace Core.UI
         private int _currentCheckPoint;
         private Tweener _sliderTweener;
         private int _killedMouse;
-
-        [SerializeField] private Button _testButton;
         private void Start()
         {
-            _testButton.onClick.AddListener(() => StaticGameData.KilledMouseInGame++);
             StaticGameData.SubscribeOnKillMouseInGame(MouseKilled);
             _currentCheckPoint = 0;
             SetupBuffButton();
