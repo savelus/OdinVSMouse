@@ -20,6 +20,8 @@ namespace MainMenu
     
         private AsyncOperation _loadGameSceneOperation;
         private int _currentNumberImage;
+        private Vector3 _ruleInvisiblePosition;
+        private const float _moveTimeRuleScreen = 0.8f;
 
         private void Start()
         {
@@ -51,16 +53,16 @@ namespace MainMenu
         private void NextImage()
         {
             if (_currentNumberImage >= PreloadGameImages.Count)
+            {
                 OpenGameScene();
+                return;
+            }
             PreloadGameImagesButton.image.sprite = PreloadGameImages[_currentNumberImage];
             _currentNumberImage++;
         }
 
-        private void OpenGameScene()
-        {
+        private void OpenGameScene() => 
             _loadGameSceneOperation.allowSceneActivation = true;
-            
-        }
 
         private void StartGame()
         {
@@ -74,19 +76,20 @@ namespace MainMenu
 
         private void SetupRule()
         {
-            RulesScreen.transform.position = new Vector3(transform.position.x, -Screen.height);
+            _ruleInvisiblePosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, -Screen.height/2, 0));
+            RulesScreen.transform.position = _ruleInvisiblePosition;
             RulesScreen.SetActive(false);
         }
 
         private void OpenRule() {
             RulesScreen.SetActive(true);
-            RulesScreen.transform.DOMove(MenuScreen.transform.position, 1f);
+            RulesScreen.transform.DOMove(MenuScreen.transform.position, _moveTimeRuleScreen);
         }
 
         private void CloseRule()
         {
             DOTween.Sequence()
-                .Append(RulesScreen.transform.DOMoveY(-Screen.height, 1f))
+                .Append(RulesScreen.transform.DOMove(_ruleInvisiblePosition, _moveTimeRuleScreen))
                 .AppendCallback(() => RulesScreen.SetActive(false));
         }
     }
