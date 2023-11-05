@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-namespace Assets.Scripts.Projectiles
+﻿namespace Projectiles
 {
     public class LightningProjectile : Projectile
     {

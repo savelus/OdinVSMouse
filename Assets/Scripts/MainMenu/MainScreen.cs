@@ -66,7 +66,7 @@ namespace MainMenu
 
         private void StartGame()
         {
-            _loadGameSceneOperation =  SceneManager.LoadSceneAsync("SampleScene");
+            _loadGameSceneOperation =  SceneManager.LoadSceneAsync("GameScene");
             _loadGameSceneOperation.allowSceneActivation = false;
             PreloadGameImagesButton.gameObject.SetActive(true);
             MenuScreen.SetActive(false);

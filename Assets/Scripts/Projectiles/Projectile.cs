@@ -1,8 +1,7 @@
-﻿using Assets.Scripts.Utils;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using Utils;
 
-namespace Assets.Scripts.Projectiles
+namespace Projectiles
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Projectile : MonoBehaviour

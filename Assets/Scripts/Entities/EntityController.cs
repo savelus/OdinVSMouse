@@ -1,12 +1,9 @@
-﻿using Assets.Scripts.Utils;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Core.Timer;
 using UnityEngine;
+using Utils;
 
-namespace Assets.Scripts.Entities
+namespace Entities
 {
     public class EntityController : MonoBehaviour
     {
@@ -27,38 +24,42 @@ namespace Assets.Scripts.Entities
 
         [SerializeField] 
         private Timer timer;
-        private GameObject[] entityPrefabs;
+        private GameObject[] _entityPrefabs;
 
-        private float[] entitySpawnChanceProportions;
+        private float[] _entitySpawnChanceProportions;
+
         public float GetEntitySpawnChanceProportion(EntityType type) => 
-            entitySpawnChanceProportions[(int)type];
+            _entitySpawnChanceProportions[(int)type];
+
         public void SetEntitySpawnChanceProportion(EntityType type, float proportion) => 
-            entitySpawnChanceProportions[(int)type] = proportion;
+            _entitySpawnChanceProportions[(int)type] = proportion;
+
 
         public float HalfFieldWidth => field.localScale.x / 2;
         public float HalfFieldHeight => field.localScale.y / 2;
 
-        private float elapsedTime;
+        private float _elapsedTime;
+        private bool _isGamePlaying = true;
+
 
         private void Awake()
         {
             timer.SubscribeOnTimerEnd(_ => End());
-            entityPrefabs = new GameObject[4] { basicMouse, fastMouse, zigzagMouse, fastMouse };
-            entitySpawnChanceProportions = new float[4] { 10, 2, 2, 1 };
+            _entityPrefabs = new GameObject[4] { basicMouse, fastMouse, zigzagMouse, fastZigzagMouse };
+            _entitySpawnChanceProportions = new float[4] { 10, 2, 2, 1 };
         }
 
         private void Update()
         {
-            if (_isGamePlaying)
-            {
-                elapsedTime += Time.deltaTime;
-                if (elapsedTime > SpawnCooldown) 
-                {
-                    elapsedTime = 0;
-                    SpawnEntity();
-                }
-            }
+            if (!_isGamePlaying) return;
+            _elapsedTime += Time.deltaTime;
+            if (_elapsedTime <= SpawnCooldown) return;
+            _elapsedTime = 0;
+            SpawnEntity();
         }
+
+        public void StartGame() => 
+            _isGamePlaying = true;
 
         private void SpawnEntity()
         {
@@ -76,20 +77,19 @@ namespace Assets.Scripts.Entities
 
             GameObject GetRndEntity()
             {
-                var stop = Random.Range(0, entitySpawnChanceProportions.Sum());
+                var stop = Random.Range(0, _entitySpawnChanceProportions.Sum());
                 int i = 0;
                 float pointer = 0;
                 do
                 {
-                    pointer += entitySpawnChanceProportions[i];
+                    pointer += _entitySpawnChanceProportions[i];
                     i++;
                 } while (stop > pointer);
 
-                return entityPrefabs[i - 1];
+                return _entityPrefabs[i - 1];
             }
         }
 
-        private bool _isGamePlaying = true;
         private void End()
         {
             _isGamePlaying = false;

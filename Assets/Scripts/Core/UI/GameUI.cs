@@ -1,15 +1,26 @@
-using Core.Timer;
+using Entities;
 using TMPro;
 using UnityEngine;
 
-public class GameUI : MonoBehaviour
+namespace Core.UI
 {
-    [SerializeField] private TMP_Text _timerText;
-    [SerializeField] private Timer _timer; 
-    private void Start()
+    public class GameUI : MonoBehaviour
     {
-        _timer.SubscribeOnTimerChange(timer => _timerText.text = timer.TimeString);
-        _timer.StartTimer(10);
-    }
+        [SerializeField] private TMP_Text _timerText;
+        [SerializeField] private Timer.Timer _timer; 
+        [SerializeField] private EntityController _entityController;
+        [SerializeField] private Countdown _countdown;
+        private void Start()
+        {
+            _countdown.ViewCountdown(3, StartGame);
+        }
+
+        private void StartGame()
+        {
+            _timer.SubscribeOnTimerChange(timer => _timerText.text = timer.TimeString);
+            _entityController.StartGame();
+            _timer.StartTimer(72);
+        }
         
+    }
 }
