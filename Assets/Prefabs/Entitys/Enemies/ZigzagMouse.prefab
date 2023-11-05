@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699e826754ecbe64fadf455731f0296b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialSpeed: 7
+  initialSpeed: 4
   initialAngleDeg: 0
 --- !u!114 &2652154716521362635
 MonoBehaviour:

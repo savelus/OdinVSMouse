@@ -1,3 +1,4 @@
+using Data;
 using Entities;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace Core.UI
         [SerializeField] private Timer.Timer _timer; 
         [SerializeField] private EntityController _entityController;
         [SerializeField] private Countdown _countdown;
+        [SerializeField] private EndGame _endGame;
+        [SerializeField] private float _influenceLastGame = 1;
         private void Start()
         {
             _countdown.ViewCountdown(3, StartGame);
@@ -18,8 +21,10 @@ namespace Core.UI
         private void StartGame()
         {
             _timer.SubscribeOnTimerChange(timer => _timerText.text = timer.TimeString);
-            _entityController.StartGame();
-            _timer.StartTimer(72);
+            _timer.SubscribeOnTimerEnd(_ => _endGame.ViewEndGameScreen());
+            _entityController.StartGame(_influenceLastGame * StaticGameData.KilledMouseInGame / 100);
+            StaticGameData.KilledMouseInGame = 0;
+            _timer.StartTimer(10);
         }
         
     }

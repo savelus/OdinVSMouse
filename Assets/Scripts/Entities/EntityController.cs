@@ -58,8 +58,10 @@ namespace Entities
             SpawnEntity();
         }
 
-        public void StartGame() => 
+        public void StartGame(float speedIncrease)
+        {
             _isGamePlaying = true;
+        }
 
         private void SpawnEntity()
         {
