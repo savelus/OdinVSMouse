@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,6 +51,8 @@ MonoBehaviour:
   initialSpeed: 11
   initialAngleDeg: 0
   <LiveDistance>k__BackingField: 10
+  explosionPrefab: {fileID: 4473531392552257940, guid: 5d89db8ab3593034683642141095dd24, type: 3}
+  afterHitLiveDistance: 0.8
 --- !u!114 &1008909310629415789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,9 +154,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.64, y: -0.24}
+  m_Offset: {x: 2.38, y: 0}
   serializedVersion: 2
-  m_Radius: 1.07
+  m_Radius: 1.1
 --- !u!50 &6347294642249352217
 Rigidbody2D:
   serializedVersion: 4

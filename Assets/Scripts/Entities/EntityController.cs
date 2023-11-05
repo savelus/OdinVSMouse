@@ -2,6 +2,7 @@
 using Core.Timer;
 using UnityEngine;
 using Utils;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Entities
 {
@@ -26,6 +27,9 @@ namespace Entities
         private Timer timer;
         private GameObject[] _entityPrefabs;
 
+        [SerializeField]
+        private SpriteDrawer crossDrawer;
+
         private float[] _entitySpawnChanceProportions;
 
         public float GetEntitySpawnChanceProportion(EntityType type) => 
@@ -47,6 +51,7 @@ namespace Entities
             timer.SubscribeOnTimerEnd(_ => End());
             _entityPrefabs = new GameObject[4] { basicMouse, fastMouse, zigzagMouse, fastZigzagMouse };
             _entitySpawnChanceProportions = new float[4] { 10, 2, 2, 1 };
+            Entity.SpeedModifier = 0.7f;
         }
 
         private void Update()
@@ -76,19 +81,33 @@ namespace Entities
 
             entity.AngleDeg = MathUtils.DirectionToAngle(transform.position - entity.transform.position) + 
                 Mathf.Sign(Random.value - 0.5f) * (10 + Random.Range(0, 35));
+            entity.CrossDrawer = crossDrawer;
+        }
 
-            GameObject GetRndEntity()
+        private GameObject GetRndEntity()
+        {
+            var stop = Random.Range(0, _entitySpawnChanceProportions.Sum());
+            int i = 0;
+            float pointer = 0;
+            do
             {
-                var stop = Random.Range(0, _entitySpawnChanceProportions.Sum());
-                int i = 0;
-                float pointer = 0;
-                do
-                {
-                    pointer += _entitySpawnChanceProportions[i];
-                    i++;
-                } while (stop > pointer);
+                pointer += _entitySpawnChanceProportions[i];
+                i++;
+            } while (stop > pointer);
 
-                return _entityPrefabs[i - 1];
+            return _entityPrefabs[i - 1];
+        }
+
+        public void SpawnHorde(int mouseCount)
+        {
+            for (int i = 0; i < mouseCount; i++)
+            {
+                var prefab = GetRndEntity();
+                var dir = Mathf.Sign(Random.value - 0.5f);
+                var pos = new Vector2(dir * (HalfFieldWidth + Random.Range(0, 4f)), Random.Range(-HalfFieldHeight, HalfFieldHeight));
+                var entity = Instantiate(prefab, pos, new Quaternion(), transform).GetComponent<Entity>();
+                entity.AngleDeg = (dir + 1) / 2 * 180 + Random.Range(-10, 10);
+                entity.CrossDrawer = crossDrawer;
             }
         }
 

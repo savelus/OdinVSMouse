@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
 using Utils;
 
 namespace Entities
@@ -6,14 +7,6 @@ namespace Entities
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Entity : MonoBehaviour
     {
-/*        private Vector3 initialPos;
-        private Vector3 position;
-        public Vector3 Position
-        {
-            get => transform.position;
-            private set => transform.position = value;
-        }*/
-
         [SerializeField]
         private float initialSpeed;
         private float speed;
@@ -41,6 +34,11 @@ namespace Entities
             }
         }
 
+        public static float SpeedModifier = 1;
+
+        [field: SerializeField]
+        public SpriteDrawer CrossDrawer { get; set; }
+
         private new Rigidbody2D rigidbody;
         private EntityController entityController;
 
@@ -56,14 +54,14 @@ namespace Entities
 
         private void UpdateDirection()
         {
-            rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed;
+            rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed * SpeedModifier;
         }
         
         private void FixedUpdate()
         {
             UpdateDirection();
 
-            if (IsOutOfField(1.1f))
+            if (IsOutOfField(1.3f))
             {
                 OnOutOfField();
             }
@@ -92,12 +90,12 @@ namespace Entities
 
         private void OnOutOfField()
         {
-            Destroy(gameObject);
+            DestroySelf();
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == TagManager.Projectile)
+            if (collision.CompareTag(TagManager.Projectile))
             {
                 Hit(collision.transform);
             }
@@ -105,6 +103,27 @@ namespace Entities
 
         protected virtual void Hit(Transform hitter)
         {
+            
+        }
+
+        public bool IsDestroyed { get; private set; }
+        public virtual void Die()
+        {
+            if (!IsDestroyed)
+            {
+                var point = SpriteDrawer.TransformToScreenSpace(transform.position);
+                if (new Rect(0, 0, 1, 1).Contains(point))
+                    CrossDrawer?.DrawOn(point);
+
+                DestroySelf();
+                StaticGameData.KilledMouseInGame++;
+            }
+        }
+
+        private void DestroySelf()
+        {
+            IsDestroyed = true;
+            Destroy(gameObject);
         }
     }
 
