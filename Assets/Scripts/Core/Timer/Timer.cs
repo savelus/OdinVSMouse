@@ -20,6 +20,7 @@ namespace Core.Timer
         private const float SecondsInOneMinute = 60;
         private void Update()
         {
+            if(!TimerIsRunning) return;
             var currentTime = GetCurrentTime();
             ChangeTime(currentTime);
             if (RemainingTime < 0.01f)
@@ -29,9 +30,7 @@ namespace Core.Timer
         private void EndTimer()
         {
             ChangeTime(0);
-            _onTimerChanged = null;
-            _onTimerEnd?.Invoke(this);
-            _onTimerEnd = null;
+            StopTimer();
         }
 
         private void ChangeTime(float time)
