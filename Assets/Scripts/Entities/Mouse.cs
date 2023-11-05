@@ -1,9 +1,8 @@
-﻿using Assets.Scripts.Utils;
-using System.Collections;
-using Data;
+﻿using Data;
 using UnityEngine;
+using Utils;
 
-namespace Assets.Scripts.Entities
+namespace Entities
 {
     public class Mouse : Entity
     {

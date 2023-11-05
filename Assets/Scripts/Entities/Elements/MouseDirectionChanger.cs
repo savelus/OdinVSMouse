@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Entities.Elements
+namespace Entities.Elements
 {
     [RequireComponent(typeof(Mouse))]
     public class MouseDirectionChanger : MonoBehaviour

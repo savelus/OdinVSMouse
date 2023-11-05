@@ -43,6 +43,7 @@ namespace Core.UI
         private void ClickOnBuffButton()
         {
             _sliderTweener?.Pause();
+            _slider.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
             _buffButton.gameObject.SetActive(false);
 
             _currentCheckPoint++;

@@ -1,10 +1,8 @@
-﻿using Assets.Scripts.Utils;
-using System.Collections;
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
-using Assets.Scripts.Player;
+using Utils;
 
-namespace Assets.Scripts.Projectiles
+namespace Projectiles
 {
     public class ProjectileController : MonoBehaviour
     {

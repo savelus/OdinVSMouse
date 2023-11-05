@@ -1,10 +1,8 @@
-using Assets.Scripts.SharedUtils.Extensions;
-using Assets.Scripts.Utils;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
-namespace Assets.Scripts.Player
+namespace Player
 {
     public class Player : MonoBehaviour
     {
@@ -52,7 +50,7 @@ namespace Assets.Scripts.Player
             head.transform.eulerAngles = head.transform.eulerAngles.WithZ(Random.Range(-5, 5));
 
             var angle = MathUtils.DirectionToAngle(transform.position - mousePos);
-            //transform.position += new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * 0.03f; //îòäà÷à
+            //transform.position += new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * 0.03f; //Ð¾Ñ‚Ð´Ð°Ñ‡Ð°
         }
     }
 }
