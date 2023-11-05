@@ -35,11 +35,17 @@ namespace Projectiles
         private float elapsedDistance;
         private Vector3 lastPos;
 
+        [SerializeField]
+        private GameObject explosionPrefab;
+
         private void UpdateDirection()
         {
             rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed;
             transform.localEulerAngles = new(0, 0, angleDeg);
         }
+
+        [SerializeField]
+        private float afterHitLiveDistance;
 
         private new Rigidbody2D rigidbody;
 
@@ -79,14 +85,18 @@ namespace Projectiles
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (TagManager.IsEntity(collision.tag))
-            {
                 OnHit();
-            }
         }
 
+        private bool isHitted;
         private void OnHit()
         {
-            DestroySelf();
+            if (!isHitted)
+            {
+                isHitted = true;
+                LiveDistance = afterHitLiveDistance;
+                elapsedDistance = 0;
+            }
         }
 
         private bool isDestroyed;
@@ -96,10 +106,10 @@ namespace Projectiles
             {
                 isDestroyed = true;
 
-                var point = Camera.main.WorldToScreenPoint(transform.position).AsVector2();
-                point = new(point.x / Screen.width, point.y / Screen.height);
+                var point = SpriteDrawer.TransformToScreenSpace(transform.position);
                 if (new Rect(0, 0, 1, 1).Contains(point))
                     CraterDrawer?.DrawOn(point);
+                Instantiate(explosionPrefab, transform.position, new Quaternion());
                 Destroy(gameObject);
             }
         }

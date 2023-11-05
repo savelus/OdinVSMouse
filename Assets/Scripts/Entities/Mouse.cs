@@ -8,8 +8,8 @@ namespace Entities
     {
         protected override void Hit(Transform hitter)
         {
-            Destroy(gameObject);
-            StaticGameData.KilledMouseInGame++;
+            base.Hit(hitter);
+            Die();
         }
 
         protected override void OnTriggerEnter2D(Collider2D collision)

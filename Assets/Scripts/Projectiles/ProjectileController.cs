@@ -28,6 +28,7 @@ namespace Projectiles
                     lastAttackTime = Time.timeSinceLevelLoad;
 
                     player.Shake();
+                    player.FlashCloud();
 
                     var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     var targetPos = mousePos + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));

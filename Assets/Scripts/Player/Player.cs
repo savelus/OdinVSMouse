@@ -14,6 +14,15 @@ namespace Player
 
         [SerializeField]
         private Transform cloud;
+        [SerializeField]
+        private SpriteRenderer cloudFlash;
+        [SerializeField]
+        private Color cloudFlashColor;
+        [SerializeField]
+        private float cloudFlashDuration;
+
+        [SerializeField]
+        private SpriteRenderer stroke;
 
         private Vector3 initialPos;
         private Vector3 initialCloudPos;
@@ -24,7 +33,7 @@ namespace Player
         private void Awake()
         {
             initialPos = transform.position;
-            initialCloudPos = cloud.transform.position;
+            initialCloudPos = cloud.transform.localPosition;
 
             var points = new List<Transform>();
                 attackPointsHolder.ForEachChield(point => points.Add(point.transform));
@@ -33,9 +42,13 @@ namespace Player
 
         private void FixedUpdate()
         {
-            cloud.transform.position = initialCloudPos + new Vector3(0, Mathf.Sin(Time.timeSinceLevelLoad) * 0.04f, 0);
-            targetPos = initialPos + new Vector3(0, Mathf.Sin(Time.timeSinceLevelLoad*0.8f) * 0.015f, 0);
+            cloud.transform.localPosition = initialCloudPos + new Vector3(0, Mathf.Sin(Time.timeSinceLevelLoad * 1.2f) * 0.03f, 0);
+            targetPos = initialPos + new Vector3(0, Mathf.Sin(Time.timeSinceLevelLoad*1.0f) * 0.06f, 0);
             transform.position = Vector3.Lerp(transform.position, targetPos, 0.01f);
+            flashElapsedTime = Mathf.Max(0, flashElapsedTime - Time.deltaTime);
+            cloudFlash.color = Color.Lerp(Color.clear, cloudFlashColor, flashElapsedTime / cloudFlashDuration);
+
+            stroke.color = Color.white.WithAlpha(Mathf.Lerp(0.1f, 0.25f, (Mathf.Sin(Time.timeSinceLevelLoad * 0.8f + 1) + 1) / 2));
         }
 
         public Vector3 GetRndAttackPoint() => attackPoints[Random.Range(0, attackPoints.Length)].position;
@@ -51,6 +64,12 @@ namespace Player
 
             var angle = MathUtils.DirectionToAngle(transform.position - mousePos);
             //transform.position += new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * 0.03f; //отдача
+        }
+
+        private float flashElapsedTime;
+        public void FlashCloud()
+        {
+            flashElapsedTime = cloudFlashDuration;
         }
     }
 }
