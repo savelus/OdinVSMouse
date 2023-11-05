@@ -24,7 +24,7 @@ namespace Core.UI
             _timer.SubscribeOnTimerEnd(_ => _endGame.ViewEndGameScreen());
             _entityController.StartGame(_influenceLastGame * StaticGameData.KilledMouseInGame / 100);
             StaticGameData.KilledMouseInGame = 0;
-            _timer.StartTimer(10);
+            _timer.StartTimer(20);
         }
         
     }
