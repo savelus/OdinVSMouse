@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Image))]
 public class SpriteChooser : MonoBehaviour
 {
     [field: SerializeField]
@@ -10,6 +9,10 @@ public class SpriteChooser : MonoBehaviour
     private void Awake()
     {
         var sprite = Sprites[Random.Range(0, Sprites.Length)];
-        GetComponent<Image>().sprite = sprite;
+        var image = GetComponent<Image>();
+        if (image != null)
+            image.sprite = sprite;
+        else
+            GetComponent<SpriteRenderer>().sprite = sprite;
     }
 }
