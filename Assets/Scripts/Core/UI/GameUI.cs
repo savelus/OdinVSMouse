@@ -9,7 +9,7 @@ public class GameUI : MonoBehaviour
     private void Start()
     {
         _timer.SubscribeOnTimerChange(timer => _timerText.text = timer.TimeString);
-        _timer.StartTimer(10);
+        _timer.StartTimer(72);
     }
         
 }
