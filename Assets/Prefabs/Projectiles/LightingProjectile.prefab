@@ -51,7 +51,6 @@ MonoBehaviour:
   initialSpeed: 11
   initialAngleDeg: 0
   <LiveDistance>k__BackingField: 10
-  explosionPrefab: {fileID: 4473531392552257940, guid: 5d89db8ab3593034683642141095dd24, type: 3}
   afterHitLiveDistance: 0.8
 --- !u!114 &1008909310629415789
 MonoBehaviour:
@@ -62,14 +61,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5552915157588962620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90182f10067d7fe4086b12869ab16411, type: 3}
+  m_Script: {fileID: 11500000, guid: f5bf82d569409bf48b10db9697249ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Sprites>k__BackingField:
   - {fileID: 21300000, guid: db4407f7d3bd1524ea2c70381d6cf1d6, type: 3}
   - {fileID: 21300000, guid: faaaade964d82f74a9ffe78940b8353f, type: 3}
   - {fileID: 21300000, guid: 55f50447ec503694a99dd2f5a6a543ad, type: 3}
-  <SwapCooldown>k__BackingField: 0.2
+  <SwapCooldown>k__BackingField: 0
 --- !u!212 &3319787520246401242
 SpriteRenderer:
   m_ObjectHideFlags: 0

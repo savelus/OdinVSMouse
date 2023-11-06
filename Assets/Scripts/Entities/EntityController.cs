@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Assets.Scripts;
 using Core.Timer;
 using UnityEngine;
 using Utils;
@@ -12,9 +13,6 @@ namespace Entities
         public float SpawnCooldown { get; private set; }
 
         [SerializeField]
-        private Transform field;
-
-        [SerializeField]
         private GameObject basicMouse;
         [SerializeField]
         private GameObject fastMouse;
@@ -22,9 +20,6 @@ namespace Entities
         private GameObject zigzagMouse;
         [SerializeField]
         private GameObject fastZigzagMouse;
-
-        [SerializeField] 
-        private Timer timer;
         private GameObject[] _entityPrefabs;
 
         [SerializeField]
@@ -39,33 +34,32 @@ namespace Entities
             _entitySpawnChanceProportions[(int)type] = proportion;
 
 
-        public float HalfFieldWidth => field.localScale.x / 2;
-        public float HalfFieldHeight => field.localScale.y / 2;
+        public float HalfFieldWidth => Camera.main.ViewportToWorldPoint(new(1, 0)).x - transform.position.x;
+        public float HalfFieldHeight => Camera.main.ViewportToWorldPoint(new(0, 1)).y - transform.position.y;
 
         private float _elapsedTime;
-        private bool _isGamePlaying;
-
 
         private void Awake()
         {
-            timer.SubscribeOnTimerEnd(_ => End());
+            Debug.Log("Info:");
+            Debug.Log("Screen width: " + Screen.width);
+            Debug.Log("World pos x:" + Camera.main.ViewportToWorldPoint(new(1, 0)));
+
             _entityPrefabs = new GameObject[4] { basicMouse, fastMouse, zigzagMouse, fastZigzagMouse };
+            proportionValues = new float[4];
             _entitySpawnChanceProportions = new float[4] { 10, 2, 2, 1 };
             Entity.SpeedModifier = 0.7f;
         }
 
         private void Update()
         {
-            if (!_isGamePlaying) return;
-            _elapsedTime += Time.deltaTime;
-            if (_elapsedTime <= SpawnCooldown) return;
-            _elapsedTime = 0;
-            SpawnEntity();
-        }
+            //if (!GameManager.IsGameStarted) return;
 
-        public void StartGame(float speedIncrease)
-        {
-            _isGamePlaying = true;
+            _elapsedTime += Time.deltaTime;
+            if (_elapsedTime <= SpawnCooldown / Entity.SpeedModifier) return;
+            _elapsedTime = 0;
+
+            SpawnEntity();
         }
 
         private void SpawnEntity()
@@ -75,13 +69,33 @@ namespace Entities
                 new Vector3(Mathf.Sign(Random.value - 0.5f) * HalfFieldWidth, Random.Range(-HalfFieldHeight, HalfFieldHeight));
             pos += transform.position;
 
-            var prefab = GetRndEntity();
+            var prefab = GetRndEntityFair();
 
             var entity = Instantiate(prefab, pos, transform.rotation, transform).GetComponent<Entity>();
 
             entity.AngleDeg = MathUtils.DirectionToAngle(transform.position - entity.transform.position) + 
                 Mathf.Sign(Random.value - 0.5f) * (10 + Random.Range(0, 35));
-            entity.CrossDrawer = crossDrawer;
+        }
+
+        private float[] proportionValues;
+        private GameObject GetRndEntityFair()
+        {
+            if (proportionValues.All(value => value <= 0))
+                for (int i = 0; i < proportionValues.Length; i++)
+                    proportionValues[i] += _entitySpawnChanceProportions[i];
+
+            var stop = Random.Range(0, proportionValues.Sum());
+            int entityIndex = -1;
+            float pointer = 0;
+            do
+            {
+                entityIndex++;
+                pointer += proportionValues[entityIndex];
+            } while (stop > pointer);
+
+            proportionValues[entityIndex]--;
+
+            return _entityPrefabs[entityIndex];
         }
 
         private GameObject GetRndEntity()
@@ -107,13 +121,7 @@ namespace Entities
                 var pos = new Vector2(dir * (HalfFieldWidth + Random.Range(0, 4f)), Random.Range(-HalfFieldHeight, HalfFieldHeight));
                 var entity = Instantiate(prefab, pos, new Quaternion(), transform).GetComponent<Entity>();
                 entity.AngleDeg = (dir + 1) / 2 * 180 + Random.Range(-10, 10);
-                entity.CrossDrawer = crossDrawer;
             }
-        }
-
-        private void End()
-        {
-            _isGamePlaying = false;
         }
     }
 }

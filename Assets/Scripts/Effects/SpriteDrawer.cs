@@ -95,7 +95,6 @@ public class SpriteDrawer : MonoBehaviour
                         else
                         {
                             newColors[index] = oldPixel;
-                            //newColors[index] = new Color(1, 0, 0, 1);
                         }
                     }
                     else
@@ -113,6 +112,11 @@ public class SpriteDrawer : MonoBehaviour
         texture.SetPixels(pos.x, pos.y, trAvSize.x, trAvSize.y, newColors);
 
         texture.Apply();
+    }
+
+    private void OnDestroy()
+    {
+        Texture2D.Destroy(texture);
     }
 
     public static Vector2 TransformToScreenSpace(Vector3 position)

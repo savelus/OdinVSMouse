@@ -98,13 +98,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1915487935390100662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9712335340550d41b6e84acfe3d5cc4, type: 3}
+  m_Script: {fileID: 11500000, guid: f3661b63953002749817411db1a7e953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Sprites>k__BackingField:
-  - {fileID: 21300000, guid: 1e893dba9ba77134ebebf94de714cc5d, type: 3}
   - {fileID: 21300000, guid: 4a003f2fa4f890146b97ce0422024d24, type: 3}
   - {fileID: 21300000, guid: 276e62c693fa34f419254170a28b6f41, type: 3}
+  - {fileID: 21300000, guid: 1e893dba9ba77134ebebf94de714cc5d, type: 3}
 --- !u!1 &4473531392552257940
 GameObject:
   m_ObjectHideFlags: 0

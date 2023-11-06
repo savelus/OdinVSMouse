@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using Assets.Scripts;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 
@@ -21,7 +22,7 @@ namespace Projectiles
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown((int)MouseButton.Left))
+            if (GameManager.IsGameStarted && Input.GetMouseButtonDown((int)MouseButton.Left))
             {
                 if (Time.timeSinceLevelLoad - lastAttackTime > AttackCooldown)
                 {
@@ -45,7 +46,6 @@ namespace Projectiles
             var projectile = Instantiate(lightningProjectile, pos, transform.rotation, transform).GetComponent<Projectile>();
             projectile.AngleDeg = angleDeg;
             projectile.LiveDistance = liveDistance;
-            projectile.CraterDrawer = craterDrawer;
         }
     }
 }

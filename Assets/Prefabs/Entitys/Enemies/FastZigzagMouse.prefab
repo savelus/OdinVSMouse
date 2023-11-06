@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpeed: 7
   initialAngleDeg: 0
-  <CrossDrawer>k__BackingField: {fileID: 0}
+  timeForKill: 3
 --- !u!114 &6495244193797116461
 MonoBehaviour:
   m_ObjectHideFlags: 0

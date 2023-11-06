@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System;
 using TMPro;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace Core.UI
         {
             _endCallback = endCallback;
             gameObject.SetActive(true);
-            _remainingTime = remainingTime + 1;
+            _remainingTime = remainingTime;
             _isTimerPLaying = true;
             SetupRemainingTimeOnScreen();
         }
@@ -37,13 +38,13 @@ namespace Core.UI
 
             _remainingTime -= Time.deltaTime;
             
-            if (_timeOnScreen == (int)_remainingTime) return;
+            if (_timeOnScreen == (int)Math.Ceiling(_remainingTime)) return;
             SetupRemainingTimeOnScreen();
         }
 
         private void SetupRemainingTimeOnScreen()
         {
-            _timeOnScreen = (int)_remainingTime;
+            _timeOnScreen = (int)Math.Ceiling(_remainingTime);
             _counter.text = _timeOnScreen.ToString();
         }
     }

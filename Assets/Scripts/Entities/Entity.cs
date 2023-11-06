@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using Assets.Scripts;
+using Data;
 using UnityEngine;
 using Utils;
 
@@ -36,11 +37,8 @@ namespace Entities
 
         public static float SpeedModifier = 1;
 
-        [field: SerializeField]
-        public SpriteDrawer CrossDrawer { get; set; }
-
         private new Rigidbody2D rigidbody;
-        private EntityController entityController;
+        protected EntityController entityController;
 
         private void Awake()
         {
@@ -56,12 +54,13 @@ namespace Entities
         {
             rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed * SpeedModifier;
         }
-        
+
+        protected virtual float outOfFieldIndent => 1.3f;
         private void FixedUpdate()
         {
             UpdateDirection();
 
-            if (IsOutOfField(1.3f))
+            if (IsOutOfField(outOfFieldIndent))
             {
                 OnOutOfField();
             }
@@ -88,7 +87,7 @@ namespace Entities
             transform.localScale = new(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
 
-        private void OnOutOfField()
+        protected virtual void OnOutOfField()
         {
             DestroySelf();
         }
@@ -113,10 +112,11 @@ namespace Entities
             {
                 var point = SpriteDrawer.TransformToScreenSpace(transform.position);
                 if (new Rect(0, 0, 1, 1).Contains(point))
-                    CrossDrawer?.DrawOn(point);
+                    GameManager.Singleton.CrossDrawer?.DrawOn(point);
 
                 DestroySelf();
                 StaticGameData.KilledMouseInGame++;
+                Entity.SpeedModifier += 0.005f;
             }
         }
 

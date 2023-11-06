@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Data;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -46,9 +47,9 @@ namespace Core.UI
             _slider.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
             _buffButton.gameObject.SetActive(false);
 
-            _currentCheckPoint++;
-            MouseKilled(_killedMouse);
+            //MouseKilled(_killedMouse);
             UpdateColorsOnSlider();
+            _currentCheckPoint++;
         }
 
         private void UpdateColorsOnSlider()
@@ -59,12 +60,29 @@ namespace Core.UI
 
         private void MouseKilled(int countKilledMoused)
         {
-            _killedMouse = countKilledMoused;
-            _counterText.text = $"{countKilledMoused} / {_checkPoints[_currentCheckPoint]}";
-            _slider.value = (float) countKilledMoused / _checkPoints[_currentCheckPoint];
+            if (_currentCheckPoint < _checkPoints.Count)
+            {
+                _killedMouse = countKilledMoused;
+                _counterText.text = $"{countKilledMoused} / {_checkPoints[_currentCheckPoint]}";
+                _slider.value = (float)countKilledMoused / _checkPoints[_currentCheckPoint];
 
-            if (countKilledMoused >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
-                ViewBuffButton();
+                if (_buffButton.IsDestroyed())
+                {
+                    Debug.LogWarning("Buff button destroyed!");
+                    if (transform.IsDestroyed())
+                        Debug.LogWarning("Progress bar destroyed!");
+                    _buffButton = transform.Find("BuffButton").GetComponent<Button>();
+                }
+
+                if (countKilledMoused >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
+                {
+                    ViewBuffButton();
+                }
+            }
+            else
+            {
+                //todo: прокачка закончилась
+            }
         }
 
         private void ViewBuffButton()

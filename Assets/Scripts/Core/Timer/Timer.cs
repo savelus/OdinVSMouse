@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -7,7 +8,19 @@ namespace Core.Timer
     public class Timer : MonoBehaviour
     {
         public string TimeString { get; private set; }
-        public float RemainingTime{ get; private set; }
+        private float _remainingTime;
+        public float RemainingTime 
+        {
+            get => _remainingTime;
+            set
+            {
+                if (value >= 0)
+                {
+                    _remainingTime = value;
+                    OnTimeChanged();
+                }
+            }
+        }
         public bool TimerIsRunning { get; private set; }
 
         private float _startSeconds;
@@ -18,27 +31,29 @@ namespace Core.Timer
         private const float SecondsInOneDay = 86400;
         private const float SecondsInOneHour = 3600;
         private const float SecondsInOneMinute = 60;
+
+        private void Awake()
+        {
+            SubscribeOnTimerEnd(_ => GameManager.IsGameStarted = false);
+        }
+
         private void Update()
         {
             if(!TimerIsRunning) return;
             var currentTime = GetCurrentTime();
-            ChangeTime(currentTime);
+            RemainingTime = currentTime;
             if (RemainingTime < 0.01f)
                 EndTimer();
         }
 
         private void EndTimer()
         {
-            ChangeTime(0);
+            RemainingTime = 0;
             StopTimer();
         }
 
-        private void ChangeTime(float time)
+        private void OnTimeChanged()
         {
-            if(time < 0) return;
-            
-            RemainingTime = time;
-
             var worldSeconds = RemainingTime * SecondsInOneDay / _startSeconds;
 
             var hours = (int)Math.Truncate(worldSeconds / SecondsInOneHour);
