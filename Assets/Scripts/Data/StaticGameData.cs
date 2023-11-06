@@ -5,6 +5,7 @@ namespace Data
     public static class StaticGameData
     {
         public static string Username = "";
+        public static bool IsFirstOpenGame = true;
         public static int KilledMouseInGame
         {
             get => _killedMouseInGame;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Data;
+using MainMenu.Leaderboard;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,6 +31,8 @@ namespace Core.UI
             var killedMouse = StaticGameData.KilledMouseInGame;
             _countKilledMouse.text = killedMouse.ToString();
             _message.text = SetMessage(killedMouse);
+            
+            Leaderboard.SetLeaderboardEntry();
         }
 
         private string SetMessage(int killedMouse)

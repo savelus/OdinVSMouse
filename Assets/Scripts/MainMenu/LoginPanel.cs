@@ -1,4 +1,6 @@
+using System;
 using Data;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,7 @@ namespace MainMenu
     {
         [SerializeField] private InputField _inputField;
         [SerializeField] private Button _button;
+        private Action _onCloseAction;
 
         private void Awake()
         {
@@ -15,15 +18,18 @@ namespace MainMenu
             _button.onClick.AddListener(AddLogin);
         }
 
+        public void OpenWindow(Action closeAction)
+        {
+            _onCloseAction += closeAction;
+        }
         private void AddLogin()
         {
-            StaticGameData.Username = _inputField.text ?? "Crying mouse";
-            CloseWindow();
-        }
-
-        private void CloseWindow()
-        {
-        
+            var userName = _inputField.text;
+            if (string.IsNullOrEmpty(userName))
+                userName = "Crying mouse";
+            
+            PlayerPrefs.SetString("username", userName);
+            _onCloseAction?.Invoke();
         }
     }
 }

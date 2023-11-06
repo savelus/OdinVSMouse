@@ -43,7 +43,7 @@ namespace Entities
         public float HalfFieldHeight => field.localScale.y / 2;
 
         private float _elapsedTime;
-        private bool _isGamePlaying = true;
+        private bool _isGamePlaying;
 
 
         private void Awake()

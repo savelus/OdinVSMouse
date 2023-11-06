@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,14 +11,22 @@ namespace MainMenu
     {
         [SerializeField] private GameObject MenuScreen;
         [SerializeField] private GameObject RulesScreen;
+        [SerializeField] private LoginPanel LoginPanel;
+        [SerializeField] private Leaderboard.Leaderboard Leaderboard;
 
         [SerializeField] private Button PlayButton;
+        
         [SerializeField] private Button OpenRuleButton;
         [SerializeField] private Button CloseRuleButton;
+        
+        [SerializeField] private Button LeaderBoardButton;
+        [SerializeField] private Button CloseLeaderBoardButton;
+        
 
         [SerializeField] private List<Sprite> PreloadGameImages;
         [SerializeField] private Button PreloadGameImagesButton;
-    
+
+
         private AsyncOperation _loadGameSceneOperation;
         private int _currentNumberImage;
         private Vector3 _ruleInvisiblePosition;
@@ -28,18 +37,38 @@ namespace MainMenu
             _loadGameSceneOperation = null;
 
             MenuScreen.SetActive(true);
-            SetupRule();
-
+            
+            _ruleInvisiblePosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, -Screen.height/2, 0));
+            
+            SetupInvisibleScreen(RulesScreen);
+            SetupInvisibleScreen(LoginPanel.gameObject);
+            SetupInvisibleScreen(Leaderboard.gameObject);
+            
             PlayButton.onClick.RemoveAllListeners();
             PlayButton.onClick.AddListener(StartGame);
         
             OpenRuleButton.onClick.RemoveAllListeners();
-            OpenRuleButton.onClick.AddListener(OpenRule);
-        
+            OpenRuleButton.onClick.AddListener(() => OpenInvisibleScreen(RulesScreen));
+            
             CloseRuleButton.onClick.RemoveAllListeners();
-            CloseRuleButton.onClick.AddListener(CloseRule);
-
+            CloseRuleButton.onClick.AddListener(() => CloseInvisibleScreen(RulesScreen));
+            
+            LeaderBoardButton.onClick.RemoveAllListeners();
+            LeaderBoardButton.onClick.AddListener(() => OpenInvisibleScreen(Leaderboard.gameObject));
+            LeaderBoardButton.onClick.AddListener(() => Leaderboard.ShowTable());
+        
+            CloseLeaderBoardButton.onClick.RemoveAllListeners();
+            CloseLeaderBoardButton.onClick.AddListener(() => CloseInvisibleScreen(Leaderboard.gameObject));
+            
             SetupPreloadGameButton();
+
+            var userName = PlayerPrefs.GetString("username");
+            if (userName is "Плачущая мышь" or "" && StaticGameData.IsFirstOpenGame)
+            {
+                LoginPanel.OpenWindow(() => CloseInvisibleScreen(LoginPanel.gameObject));
+                OpenInvisibleScreen(LoginPanel.gameObject);
+                StaticGameData.IsFirstOpenGame = false;
+            }
         }
 
         private void SetupPreloadGameButton()
@@ -74,23 +103,22 @@ namespace MainMenu
             NextImage();
         }
 
-        private void SetupRule()
+        private void SetupInvisibleScreen(GameObject screen)
         {
-            _ruleInvisiblePosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, -Screen.height/2, 0));
-            RulesScreen.transform.position = _ruleInvisiblePosition;
-            RulesScreen.SetActive(false);
+            screen.transform.position = _ruleInvisiblePosition;
+            screen.SetActive(false);
         }
 
-        private void OpenRule() {
-            RulesScreen.SetActive(true);
-            RulesScreen.transform.DOMove(MenuScreen.transform.position, _moveTimeRuleScreen);
+        private void OpenInvisibleScreen(GameObject screen) {
+            screen.SetActive(true);
+            screen.transform.DOMove(MenuScreen.transform.position, _moveTimeRuleScreen);
         }
 
-        private void CloseRule()
+        private void CloseInvisibleScreen(GameObject screen)
         {
             DOTween.Sequence()
-                .Append(RulesScreen.transform.DOMove(_ruleInvisiblePosition, _moveTimeRuleScreen))
-                .AppendCallback(() => RulesScreen.SetActive(false));
+                .Append(screen.transform.DOMove(_ruleInvisiblePosition, _moveTimeRuleScreen))
+                .AppendCallback(() => screen.SetActive(false));
         }
     }
 }
