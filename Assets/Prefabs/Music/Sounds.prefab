@@ -154,6 +154,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8838942887519915667, guid: b2ba19f5fdd60cf4ab58b8d8755ee200, type: 3}
+      propertyPath: m_Volume
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -344,6 +348,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7403071669865828812, guid: d48329f025fac3d4c83187da8296a6ea, type: 3}
+      propertyPath: m_Volume
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 7896131091550735474, guid: d48329f025fac3d4c83187da8296a6ea, type: 3}
       propertyPath: m_Name
       value: MisClickSound
@@ -369,6 +377,10 @@ PrefabInstance:
     - target: {fileID: 858216011067254129, guid: 30346dc91e099da408e18dae585cb9cb, type: 3}
       propertyPath: m_Name
       value: KillSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796456919599791757, guid: 30346dc91e099da408e18dae585cb9cb, type: 3}
+      propertyPath: m_Volume
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 7979100075387123679, guid: 30346dc91e099da408e18dae585cb9cb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -529,6 +541,10 @@ PrefabInstance:
     - target: {fileID: 728880282962409708, guid: 2025fe14b8789af4382a6df4cf24e62d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408301420593546709, guid: 2025fe14b8789af4382a6df4cf24e62d, type: 3}
+      propertyPath: m_Volume
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 8906378525304546556, guid: 2025fe14b8789af4382a6df4cf24e62d, type: 3}
       propertyPath: m_Name
