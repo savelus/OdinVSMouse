@@ -36,7 +36,7 @@ namespace Entities
         }
 
         public static float SpeedModifier = 1;
-
+        
         private new Rigidbody2D rigidbody;
         protected EntityController entityController;
 
@@ -116,7 +116,9 @@ namespace Entities
 
                 DestroySelf();
                 StaticGameData.KilledMouseInGame++;
-                Entity.SpeedModifier += 0.005f;
+                SpeedModifier += 0.005f;
+                
+                GameManager.Singleton.MouseKilledSound.Play();
             }
         }
 

@@ -14,24 +14,26 @@ namespace Core.UI
         [SerializeField] private Countdown _countdown;
         [SerializeField] private EndGame _endGame;
         [SerializeField] private float _influenceLastGame = 1;
+
+        [SerializeField] private AudioSource _backgroundGameMusic;
         private void Start()
         {
             _countdown.ViewCountdown(3, StartGame);
-            InitGame();
-        }
-
-        private void InitGame()
-        {
-            Entity.SpeedModifier = _influenceLastGame * (1 + StaticGameData.KilledMouseInGame / 200f) * 0.5f;
         }
 
         private void StartGame()
         {
             GameManager.IsGameStarted = true;
             _timer.SubscribeOnTimerChange(timer => _timerText.text = timer.TimeString);
-            _timer.SubscribeOnTimerEnd(_ => _endGame.ViewEndGameScreen());
+            _timer.SubscribeOnTimerEnd(_ =>
+            {
+                _endGame.ViewEndGameScreen();
+                _backgroundGameMusic.Stop();
+            });
+            Entity.SpeedModifier = _influenceLastGame * (1 + StaticGameData.KilledMouseInGame / 200f) * 0.5f;
             StaticGameData.KilledMouseInGame = 0;
             _timer.StartTimer(20);
+            _backgroundGameMusic.Play();
         }
         
     }

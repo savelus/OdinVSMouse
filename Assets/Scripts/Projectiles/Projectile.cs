@@ -106,6 +106,7 @@ namespace Projectiles
                 if (new Rect(0, 0, 1, 1).Contains(point))
                     GameManager.Singleton.CraterDrawer.DrawOn(point);
                 GameManager.Singleton.EffectManager.DrawExplosion(transform.position);
+                GameManager.Singleton.MisClickSound.Play();
                 Destroy(gameObject);
             }
         }
