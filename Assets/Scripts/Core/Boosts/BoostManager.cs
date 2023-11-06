@@ -25,8 +25,8 @@ namespace Assets.Scripts.Core.Boosts
         {
             boostActions = new Action[]
             {
-                ActivateMouseHorde,
-                ActivateAllMouseDie,
+                ActivateEagles,
+                ActivateOwls,
                 ActivateMouseHorde,
                 ActivateAllMouseDie,
             };
@@ -47,9 +47,15 @@ namespace Assets.Scripts.Core.Boosts
             }
 
             if (Input.GetKeyUp(KeyCode.Alpha1))
-                ActivateMouseHorde();
+                ActivateEagles();
             if (Input.GetKeyUp(KeyCode.Alpha2))
+                ActivateOwls();
+            if (Input.GetKeyUp(KeyCode.Alpha3))
+                ActivateMouseHorde();
+            if (Input.GetKeyUp(KeyCode.Alpha4))
                 ActivateAllMouseDie();
+            if (Input.GetKeyUp(KeyCode.Alpha0))
+                GameManager.Singleton.Timer.RemainingTime += 10;
         }
 
         public void ActivateNextBoost()
@@ -76,6 +82,16 @@ namespace Assets.Scripts.Core.Boosts
                     mousesToDie.Add(mouse);
                 }
             });
+        }
+
+        public void ActivateEagles()
+        {
+            entityController.StawnEgles(3);
+        }
+
+        public void ActivateOwls()
+        {
+            entityController.StawnOwls(3);
         }
     }
 }

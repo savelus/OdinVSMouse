@@ -26,6 +26,7 @@ namespace Assets.Scripts
         public EffectManager EffectManager { get; private set; }
 
         public static bool IsGameStarted { get; set; }
+        public static bool IsGameEnded { get; set; } //for spawn
 
         private void Awake()
         {

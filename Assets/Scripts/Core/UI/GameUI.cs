@@ -22,6 +22,7 @@ namespace Core.UI
 
         private void InitGame()
         {
+            GameManager.IsGameEnded = false;
             Entity.SpeedModifier = _influenceLastGame * (1 + StaticGameData.KilledMouseInGame / 200f) * 0.5f;
         }
 
@@ -33,6 +34,5 @@ namespace Core.UI
             StaticGameData.KilledMouseInGame = 0;
             _timer.StartTimer(20);
         }
-        
     }
 }

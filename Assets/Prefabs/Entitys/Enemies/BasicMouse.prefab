@@ -133,7 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpeed: 4
   initialAngleDeg: 0
-  <CrossDrawer>k__BackingField: {fileID: 0}
+  <CanBeCaptured>k__BackingField: 1
+  timeForKill: 0
 --- !u!58 &6100475792915303112
 CircleCollider2D:
   m_ObjectHideFlags: 0

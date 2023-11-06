@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpeed: 7
   initialAngleDeg: 0
+  <CanBeCaptured>k__BackingField: 1
   timeForKill: 3
 --- !u!114 &6495244193797116461
 MonoBehaviour:
