@@ -746,12 +746,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2579669316160685548}
     - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
-      propertyPath: _checkPoints.Array.data[2]
-      value: 130
+      propertyPath: _colorsForProgresBar.Array.data[7].a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
-      propertyPath: _checkPoints.Array.data[3]
-      value: 200
+      propertyPath: _colorsForProgresBar.Array.data[7].b
+      value: 0.91409147
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[7].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[7].r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6782358485144400038, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: m_Name

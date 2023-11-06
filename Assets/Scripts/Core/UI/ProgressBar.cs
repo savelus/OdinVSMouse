@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Utils;
 
 namespace Core.UI
 {
@@ -14,6 +15,8 @@ namespace Core.UI
     {
         [SerializeField] private List<int> _checkPoints;
         [SerializeField] private List<Color> _colorsForProgresBar;
+        [SerializeField] private GameObject[] _buffIcons;
+        [SerializeField] private Transform _buffIconHolder;
         [SerializeField] private Slider _slider;
         [SerializeField] private Image _sliderBackground;
         [SerializeField] private Image _sliderFillAreaBackground;
@@ -30,6 +33,7 @@ namespace Core.UI
             _currentCheckPoint = 0;
             SetupBuffButton();
             UpdateColorsOnSlider();
+            UpdateBuffIcon();
         }
 
         private void OnDestroy()
@@ -54,11 +58,18 @@ namespace Core.UI
             _slider.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
             _buffButton.gameObject.SetActive(false);
 
-            UpdateColorsOnSlider();
             _currentCheckPoint++;
+            UpdateColorsOnSlider();
+            UpdateBuffIcon();
             UpdateView();
             
             _buffIsCompleteSound.Play();
+        }
+
+        private void UpdateBuffIcon()
+        {
+            _buffIconHolder.ForEachChield(chield => Destroy(chield.gameObject));
+            Instantiate(_buffIcons[_currentCheckPoint], _buffIconHolder);
         }
 
         private void UpdateColorsOnSlider()
@@ -75,7 +86,8 @@ namespace Core.UI
 
         private void UpdateView()
         {
-            _counterText.text = $"{_killedMouse} / {_checkPoints[_currentCheckPoint]}";
+            var postfix = GetPostfix(_killedMouse, "мышей", "мышь", "мыши", "мышей");
+            _counterText.text = $"{_killedMouse} / {_checkPoints[_currentCheckPoint]} {postfix}";
             _slider.value = (float)_killedMouse / _checkPoints[_currentCheckPoint];
             
             if (_killedMouse >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
@@ -89,7 +101,16 @@ namespace Core.UI
             
             _buffIsCompleteSound.Play();
         }
+
+        private string GetPostfix(int count, string normal, string for1, string from2to4, string others)
+        {
+            if (count is >= 5 and <= 20 || count % 10 == 0 || count % 10 >= 5 && count % 10 <= 9)
+                return normal;
+            if (count % 10 == 1)
+                return for1;
+            if (count % 10 >= 2 && count % 10 <= 4)
+                return from2to4;
+            return others;
+        }
     }
-    
-    
 }

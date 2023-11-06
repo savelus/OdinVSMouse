@@ -54,7 +54,7 @@ namespace Core.Timer
         {
             var worldSeconds = RemainingTime * SecondsInOneDay / _startSeconds;
 
-            var hours = (int)Math.Truncate(worldSeconds / SecondsInOneHour);
+            var hours = (int)Math.Ceiling(worldSeconds / SecondsInOneHour);
             if (hours == _previousHours)
             {
                 _previousHours = hours;

@@ -38,7 +38,7 @@ namespace Entities
 
         private void Update()
         {
-            //if (!GameManager.IsGameStarted) return;
+            if (GameManager.IsGameEnded) return;
 
             _elapsedTime += Time.deltaTime;
             if (_elapsedTime <= SpawnCooldown / Entity.SpeedModifier) return;

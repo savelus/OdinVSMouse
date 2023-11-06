@@ -22,7 +22,7 @@ namespace Projectiles
 
         private void Update()
         {
-            if (!GameManager.IsGameEnded && Input.GetMouseButtonDown((int)MouseButton.Left))
+            if (GameManager.IsGameStarted && Input.GetMouseButtonDown((int)MouseButton.Left))
             {
                 if (Time.timeSinceLevelLoad - lastAttackTime > AttackCooldown)
                 {

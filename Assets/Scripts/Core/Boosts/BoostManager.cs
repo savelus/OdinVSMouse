@@ -24,9 +24,11 @@ namespace Core.Boosts
         {
             boostActions = new Action[]
             {
+                ActivateAllMouseDie,
                 ActivateEagles,
                 ActivateMouseHorde,
                 ActivateOwls,
+                ActivateMouseHorde,
                 ActivateAllMouseDie,
             };
         }
@@ -45,6 +47,7 @@ namespace Core.Boosts
                 }
             }
 
+#if UNITY_EDITOR //cheets
             if (Input.GetKeyUp(KeyCode.Alpha1))
                 ActivateEagles();
             if (Input.GetKeyUp(KeyCode.Alpha2))
@@ -54,7 +57,8 @@ namespace Core.Boosts
             if (Input.GetKeyUp(KeyCode.Alpha4))
                 ActivateAllMouseDie();
             if (Input.GetKeyUp(KeyCode.Alpha0))
-                GameManager.Singleton.Timer.RemainingTime += 10;
+                GameManager.Singleton.Timer.RemainingTime += 10; 
+#endif
         }
 
         public void ActivateNextBoost()

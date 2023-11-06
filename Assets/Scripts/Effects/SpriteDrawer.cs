@@ -72,15 +72,13 @@ namespace Effects
             Vector2 scale = new((float)asSize.x / appyingSprite.texture.width, (float)asSize.y / appyingSprite.texture.height);
             Vector2Int trAvSize = new(Math.Min(asSize.x + pos.x, texture.width) - pos.x, Math.Min(asSize.y + pos.y, texture.height) - pos.y);
 
-        Color[] oldColors = texture.GetPixels(pos.x, pos.y, trAvSize.x, trAvSize.y);
-        Color[] newColors = new Color[trAvSize.x * trAvSize.y];
-        var appyingTextureOriginWidth = appyingSprite.texture.width;
-        float texureHeight = texture.height;
-        int curDepth = pos.y;
-        ///Parallel.For(0, trAvSize.y, y => {
-        for (int y = 0; y < trAvSize.y; y++) 
-        {
-            for (int x = 0; x < trAvSize.x; x++)
+            Color[] oldColors = texture.GetPixels(pos.x, pos.y, trAvSize.x, trAvSize.y);
+            Color[] newColors = new Color[trAvSize.x * trAvSize.y];
+            var appyingTextureOriginWidth = appyingSprite.texture.width;
+            float texureHeight = texture.height;
+            int curDepth = pos.y;
+            ///Parallel.For(0, trAvSize.y, y => {
+            for (int y = 0; y < trAvSize.y; y++) 
             {
                 for (int x = 0; x < trAvSize.x; x++)
                 {
@@ -114,7 +112,6 @@ namespace Effects
                     }
                 }
             }
-        }
 
             texture.SetPixels(pos.x, pos.y, trAvSize.x, trAvSize.y, newColors);
 
