@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using Assets.Scripts;
-using Core.Timer;
+﻿using System;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
-using static UnityEngine.EventSystems.EventTrigger;
+using Random = UnityEngine.Random;
 
 namespace Entities
 {
@@ -12,27 +12,11 @@ namespace Entities
         [field: SerializeField]
         public float SpawnCooldown { get; private set; }
 
-        [SerializeField]
-        private GameObject basicMouse;
-        [SerializeField]
-        private GameObject fastMouse;
-        [SerializeField]
-        private GameObject zigzagMouse;
-        [SerializeField]
-        private GameObject fastZigzagMouse;
-        private GameObject[] _entityPrefabs;
-
+        [FormerlySerializedAs("_entities")] [SerializeField] 
+        private MouseConfiguration[] _mouseConfigurations;
+        
         [SerializeField]
         private SpriteDrawer crossDrawer;
-
-        private float[] _entitySpawnChanceProportions;
-
-        public float GetEntitySpawnChanceProportion(EntityType type) => 
-            _entitySpawnChanceProportions[(int)type];
-
-        public void SetEntitySpawnChanceProportion(EntityType type, float proportion) => 
-            _entitySpawnChanceProportions[(int)type] = proportion;
-
 
         public float HalfFieldWidth => Camera.main.ViewportToWorldPoint(new(1, 0)).x - transform.position.x;
         public float HalfFieldHeight => Camera.main.ViewportToWorldPoint(new(0, 1)).y - transform.position.y;
@@ -44,10 +28,7 @@ namespace Entities
             Debug.Log("Info:");
             Debug.Log("Screen width: " + Screen.width);
             Debug.Log("World pos x:" + Camera.main.ViewportToWorldPoint(new(1, 0)));
-
-            _entityPrefabs = new GameObject[4] { basicMouse, fastMouse, zigzagMouse, fastZigzagMouse };
             proportionValues = new float[4];
-            _entitySpawnChanceProportions = new float[4] { 10, 2, 2, 1 };
             Entity.SpeedModifier = 0.7f;
         }
 
@@ -71,18 +52,18 @@ namespace Entities
 
             var prefab = GetRndEntityFair();
 
-            var entity = Instantiate(prefab, pos, transform.rotation, transform).GetComponent<Entity>();
+            var entity = Instantiate(prefab, pos, transform.rotation, transform);
 
             entity.AngleDeg = MathUtils.DirectionToAngle(transform.position - entity.transform.position) + 
                 Mathf.Sign(Random.value - 0.5f) * (10 + Random.Range(0, 35));
         }
 
         private float[] proportionValues;
-        private GameObject GetRndEntityFair()
+        private Entity GetRndEntityFair()
         {
             if (proportionValues.All(value => value <= 0))
                 for (int i = 0; i < proportionValues.Length; i++)
-                    proportionValues[i] += _entitySpawnChanceProportions[i];
+                    proportionValues[i] += _mouseConfigurations[i].Chance;
 
             var stop = Random.Range(0, proportionValues.Sum());
             int entityIndex = -1;
@@ -95,21 +76,21 @@ namespace Entities
 
             proportionValues[entityIndex]--;
 
-            return _entityPrefabs[entityIndex];
+            return _mouseConfigurations[entityIndex].Mouse;
         }
 
-        private GameObject GetRndEntity()
+        private Entity GetRndEntity()
         {
-            var stop = Random.Range(0, _entitySpawnChanceProportions.Sum());
+            var stop = Random.Range(0, _mouseConfigurations.Sum(x=>x.Chance));
             int i = 0;
             float pointer = 0;
             do
             {
-                pointer += _entitySpawnChanceProportions[i];
+                pointer +=  _mouseConfigurations[i].Chance;
                 i++;
             } while (stop > pointer);
 
-            return _entityPrefabs[i - 1];
+            return _mouseConfigurations[i - 1].Mouse;
         }
 
         public void SpawnHorde(int mouseCount)
@@ -119,9 +100,18 @@ namespace Entities
                 var prefab = GetRndEntity();
                 var dir = Mathf.Sign(Random.value - 0.5f);
                 var pos = new Vector2(dir * (HalfFieldWidth + Random.Range(0, 4f)), Random.Range(-HalfFieldHeight, HalfFieldHeight));
-                var entity = Instantiate(prefab, pos, new Quaternion(), transform).GetComponent<Entity>();
+                var entity = Instantiate(prefab, pos, new Quaternion(), transform);
                 entity.AngleDeg = (dir + 1) / 2 * 180 + Random.Range(-10, 10);
             }
         }
+    }
+
+    [Serializable]
+    public class MouseConfiguration
+    {
+        public EntityType TypeMouse;
+        public Entity Mouse;
+        public float Chance;
+        
     }
 }

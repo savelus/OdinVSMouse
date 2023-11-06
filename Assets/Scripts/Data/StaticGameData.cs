@@ -4,6 +4,8 @@ namespace Data
 {
     public static class StaticGameData
     {
+        public static string Username = "";
+        public static bool IsFirstOpenGame = true;
         public static int KilledMouseInGame
         {
             get => _killedMouseInGame;
@@ -22,6 +24,10 @@ namespace Data
         public static void SubscribeOnKillMouseInGame(Action<int> killedMouse)
         {
             _onMouseKill += killedMouse;
+        }
+        public static void UnsubscribeOnKillMouseInGame(Action<int> killedMouse)
+        {
+            _onMouseKill -= killedMouse;
         }
     }
 }
