@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using UnityEngine;
 using Utils;
 
 namespace Projectiles
@@ -35,9 +36,6 @@ namespace Projectiles
         private float elapsedDistance;
         private Vector3 lastPos;
 
-        [SerializeField]
-        private GameObject explosionPrefab;
-
         private void UpdateDirection()
         {
             rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed;
@@ -48,8 +46,6 @@ namespace Projectiles
         private float afterHitLiveDistance;
 
         private new Rigidbody2D rigidbody;
-
-        public SpriteDrawer CraterDrawer { get; set; }
 
         private void Awake()
         {
@@ -108,8 +104,8 @@ namespace Projectiles
 
                 var point = SpriteDrawer.TransformToScreenSpace(transform.position);
                 if (new Rect(0, 0, 1, 1).Contains(point))
-                    CraterDrawer?.DrawOn(point);
-                Instantiate(explosionPrefab, transform.position, new Quaternion());
+                    GameManager.Singleton.CraterDrawer.DrawOn(point);
+                GameManager.Singleton.EffectManager.DrawExplosion(transform.position);
                 Destroy(gameObject);
             }
         }
