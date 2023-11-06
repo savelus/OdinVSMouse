@@ -259,9 +259,10 @@ MonoBehaviour:
   LeaderBoardButton: {fileID: 1411647846}
   CloseLeaderBoardButton: {fileID: 4075179856673057357}
   PreloadGameImages:
-  - {fileID: 21300000, guid: 1fb904d8743877848b94a0659d26e037, type: 3}
-  - {fileID: 21300000, guid: 2a7bedd82c991ba47af03db4f0a86211, type: 3}
-  - {fileID: 21300000, guid: 9809026fcf8fb944f8471a5d331d54c1, type: 3}
+  - {fileID: 21300000, guid: 0ab725ddf94ce474ea69bc88a6f623d9, type: 3}
+  - {fileID: 21300000, guid: 042cbf75d293f684295c27e2c5703de3, type: 3}
+  - {fileID: 21300000, guid: 7b4e9ec5eefddd64d9c293371180094f, type: 3}
+  - {fileID: 21300000, guid: 85c01ff726ae9c248b21a8d2e1c4357b, type: 3}
   PreloadGameImagesButton: {fileID: 502567684}
   ButtonSource: {fileID: 91777142}
 --- !u!1 &179404394
