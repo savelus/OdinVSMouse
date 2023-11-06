@@ -1,34 +1,37 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class SpriteSwapper : MonoBehaviour
+namespace Effects
 {
-    [field: SerializeField]
-    public Sprite[] Sprites { get; private set; }
-    private int curSpriteIndex;
-
-    [field: SerializeField]
-    public float SwapCooldown { get; private set; }
-    private float lastSwapTime;
-
-    private SpriteRenderer spriteRenderer;
-
-    private void Awake()
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class SpriteSwapper : MonoBehaviour
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        lastSwapTime = Time.timeSinceLevelLoad;
-        curSpriteIndex = Random.Range(0, Sprites.Length);
-    }
+        [field: SerializeField]
+        public Sprite[] Sprites { get; private set; }
+        private int curSpriteIndex;
 
-    private void Update()
-    {
-        if (Time.timeSinceLevelLoad - lastSwapTime > SwapCooldown)
+        [field: SerializeField]
+        public float SwapCooldown { get; private set; }
+        private float lastSwapTime;
+
+        private SpriteRenderer spriteRenderer;
+
+        private void Awake()
         {
+            spriteRenderer = GetComponent<SpriteRenderer>();
             lastSwapTime = Time.timeSinceLevelLoad;
+            curSpriteIndex = Random.Range(0, Sprites.Length);
+        }
 
-            spriteRenderer.sprite = Sprites[curSpriteIndex];
+        private void Update()
+        {
+            if (Time.timeSinceLevelLoad - lastSwapTime > SwapCooldown)
+            {
+                lastSwapTime = Time.timeSinceLevelLoad;
 
-            curSpriteIndex = (curSpriteIndex + 1) % Sprites.Length;
+                spriteRenderer.sprite = Sprites[curSpriteIndex];
+
+                curSpriteIndex = (curSpriteIndex + 1) % Sprites.Length;
+            }
         }
     }
 }

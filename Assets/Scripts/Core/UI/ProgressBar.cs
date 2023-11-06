@@ -19,6 +19,8 @@ namespace Core.UI
         [SerializeField] private Image _sliderFillAreaBackground;
         [SerializeField] private TMP_Text _counterText;
         [SerializeField] private Button _buffButton;
+
+        [SerializeField] private AudioSource _buffIsCompleteSound;
         private int _currentCheckPoint;
         private Tweener _sliderTweener;
         private int _killedMouse;
@@ -52,9 +54,11 @@ namespace Core.UI
             _slider.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
             _buffButton.gameObject.SetActive(false);
 
-            //MouseKilled(_killedMouse);
             UpdateColorsOnSlider();
             _currentCheckPoint++;
+            UpdateView();
+            
+            _buffIsCompleteSound.Play();
         }
 
         private void UpdateColorsOnSlider()
@@ -65,39 +69,25 @@ namespace Core.UI
 
         private void MouseKilled(int countKilledMoused)
         {
-            if (_currentCheckPoint < _checkPoints.Count)
-            {
-                _killedMouse = countKilledMoused;
-                _counterText.text = $"{countKilledMoused} / {_checkPoints[_currentCheckPoint]}";
-                _slider.value = (float)countKilledMoused / _checkPoints[_currentCheckPoint];
+            _killedMouse = countKilledMoused;
+            UpdateView();
+        }
 
-                if (_buffButton.IsDestroyed())
-                {
-                    Debug.LogWarning("Buff button destroyed!");
-                    if (transform.IsDestroyed())
-                    {
-                        Debug.LogWarning("Progress bar destroyed!");
-                        _slider = transform.Find("Slider").GetComponent<Slider>();
-                    }
-
-                    _buffButton = transform.Find("BuffButton").GetComponent<Button>();
-                }
-
-                if (countKilledMoused >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
-                {
-                    ViewBuffButton();
-                }
-            }
-            else
-            {
-                //todo: прокачка закончилась
-            }
+        private void UpdateView()
+        {
+            _counterText.text = $"{_killedMouse} / {_checkPoints[_currentCheckPoint]}";
+            _slider.value = (float)_killedMouse / _checkPoints[_currentCheckPoint];
+            
+            if (_killedMouse >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
+                ViewBuffButton();
         }
 
         private void ViewBuffButton()
         {
             _buffButton.gameObject.SetActive(true);
             _sliderTweener?.Play();
+            
+            _buffIsCompleteSound.Play();
         }
     }
     

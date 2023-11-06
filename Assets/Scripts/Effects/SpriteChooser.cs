@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class SpriteChooser : MonoBehaviour
+namespace Effects
 {
-    [field: SerializeField]
-    public Sprite[] Sprites { get; private set; }
-
-    private void Awake()
+    public class SpriteChooser : MonoBehaviour
     {
-        var sprite = Sprites[Random.Range(0, Sprites.Length)];
-        var image = GetComponent<Image>();
-        if (image != null)
-            image.sprite = sprite;
-        else
-            GetComponent<SpriteRenderer>().sprite = sprite;
+        [field: SerializeField]
+        public Sprite[] Sprites { get; private set; }
+
+        private void Awake()
+        {
+            var sprite = Sprites[Random.Range(0, Sprites.Length)];
+            var image = GetComponent<Image>();
+            if (image != null)
+                image.sprite = sprite;
+            else
+                GetComponent<SpriteRenderer>().sprite = sprite;
+        }
     }
 }

@@ -26,7 +26,8 @@ namespace MainMenu
         [SerializeField] private List<Sprite> PreloadGameImages;
         [SerializeField] private Button PreloadGameImagesButton;
 
-
+        [SerializeField] private AudioSource ButtonSource;
+        
         private AsyncOperation _loadGameSceneOperation;
         private int _currentNumberImage;
         private Vector3 _ruleInvisiblePosition;
@@ -46,19 +47,24 @@ namespace MainMenu
             
             PlayButton.onClick.RemoveAllListeners();
             PlayButton.onClick.AddListener(StartGame);
+            PlayButton.onClick.AddListener(ButtonSource.Play);
         
             OpenRuleButton.onClick.RemoveAllListeners();
             OpenRuleButton.onClick.AddListener(() => OpenInvisibleScreen(RulesScreen));
+            OpenRuleButton.onClick.AddListener(ButtonSource.Play);
             
             CloseRuleButton.onClick.RemoveAllListeners();
             CloseRuleButton.onClick.AddListener(() => CloseInvisibleScreen(RulesScreen));
+            CloseRuleButton.onClick.AddListener(ButtonSource.Play);
             
             LeaderBoardButton.onClick.RemoveAllListeners();
             LeaderBoardButton.onClick.AddListener(() => OpenInvisibleScreen(Leaderboard.gameObject));
             LeaderBoardButton.onClick.AddListener(() => Leaderboard.ShowTable());
+            LeaderBoardButton.onClick.AddListener(ButtonSource.Play);
         
             CloseLeaderBoardButton.onClick.RemoveAllListeners();
             CloseLeaderBoardButton.onClick.AddListener(() => CloseInvisibleScreen(Leaderboard.gameObject));
+            CloseLeaderBoardButton.onClick.AddListener(ButtonSource.Play);
             
             SetupPreloadGameButton();
 
@@ -76,6 +82,7 @@ namespace MainMenu
             _currentNumberImage = 0;
             PreloadGameImagesButton.onClick.RemoveAllListeners();
             PreloadGameImagesButton.onClick.AddListener(NextImage);
+            PreloadGameImagesButton.onClick.AddListener(ButtonSource.Play);
             PreloadGameImagesButton.gameObject.SetActive(false);
         }
 

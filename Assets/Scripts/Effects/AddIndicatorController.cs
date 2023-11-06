@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using Utils;
 
-namespace Assets.Scripts.Effects
+namespace Effects
 {
     [RequireComponent(typeof(TextMeshPro))]
     public class AddIndicatorController : MonoBehaviour

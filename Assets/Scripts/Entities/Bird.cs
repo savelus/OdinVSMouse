@@ -1,11 +1,9 @@
-﻿using Entities;
-using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 
-namespace Assets.Scripts.Entities
+namespace Entities
 {
     public class Bird : Entity
     {
@@ -22,6 +20,9 @@ namespace Assets.Scripts.Entities
         private int GetFirstFreeSlot() => Enumerable.Range(1, capturedEnemies.Length).FirstOrDefault(i => capturedEnemies[i - 1] == null) - 1;
 
         private float lastAngleChangeTime;
+        
+        protected override void UpdateDirection() => 
+            Rigidbody.velocity = MathUtils.AngleToDirection(AngleDeg) * Speed * 0.25f;
         protected override void OnOutOfField()
         {
             if (Time.timeSinceLevelLoad - lastAngleChangeTime > 0.5f)

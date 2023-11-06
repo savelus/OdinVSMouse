@@ -1,4 +1,4 @@
-﻿using Assets.Scripts;
+﻿using Effects;
 using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
@@ -37,6 +37,7 @@ namespace Projectiles
                     var angle = MathUtils.DirectionToAngle(targetPos - originPos);
                     var distanceToMouse = Vector2.Distance(targetPos, originPos);
                     SpawnProjectile(originPos, angle, distanceToMouse + Random.Range(0.5f, 1.5f));
+                    GameManager.Singleton.ShootingSound.Play();
                 }
             }
         }

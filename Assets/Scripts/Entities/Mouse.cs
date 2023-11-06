@@ -1,5 +1,4 @@
-﻿using Assets.Scripts;
-using Data;
+﻿using Data;
 using UnityEngine;
 using Utils;
 

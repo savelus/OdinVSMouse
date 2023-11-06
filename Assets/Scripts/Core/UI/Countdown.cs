@@ -1,15 +1,14 @@
-using Assets.Scripts;
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Core.UI
 {
     public class Countdown : MonoBehaviour
     {
         [SerializeField] private TMP_Text _counter;
-
+        [SerializeField] private AudioSource _timerSound;
+        
         private float _remainingTime;
         private bool _isTimerPLaying;
 
@@ -23,6 +22,7 @@ namespace Core.UI
             _remainingTime = remainingTime;
             _isTimerPLaying = true;
             SetupRemainingTimeOnScreen();
+            
         }
 
         private void Update()
@@ -46,6 +46,8 @@ namespace Core.UI
         {
             _timeOnScreen = (int)Math.Ceiling(_remainingTime);
             _counter.text = _timeOnScreen.ToString();
+            
+            _timerSound.Play();
         }
     }
 }

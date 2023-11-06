@@ -1,5 +1,5 @@
-﻿using Assets.Scripts;
-using Data;
+﻿using Data;
+using Effects;
 using UnityEngine;
 using Utils;
 
@@ -40,22 +40,20 @@ namespace Entities
         [field: SerializeField]
         public bool CanBeCaptured { get; set; }
 
-        private new Rigidbody2D rigidbody;
+        protected Rigidbody2D Rigidbody;
         protected EntityController entityController;
 
         protected virtual void Awake()
         {
-            rigidbody = GetComponent<Rigidbody2D>();
+            Rigidbody = GetComponent<Rigidbody2D>();
             entityController = GetComponentInParent<EntityController>();
 
             Speed = initialSpeed;
             AngleDeg = initialAngleDeg;
         }
 
-        private void UpdateDirection()
-        {
-            rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed * SpeedModifier;
-        }
+        protected virtual void UpdateDirection() => 
+            Rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed * SpeedModifier;
 
         protected virtual float outOfFieldIndent => 1.3f;
         private void FixedUpdate()
@@ -106,7 +104,9 @@ namespace Entities
 
                 DestroySelf();
                 StaticGameData.KilledMouseInGame++;
-                Entity.SpeedModifier += 0.005f;
+                SpeedModifier += 0.005f;
+                
+                GameManager.Singleton.MouseKilledSound.Play();
             }
         }
 

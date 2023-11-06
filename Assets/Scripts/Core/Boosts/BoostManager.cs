@@ -1,11 +1,10 @@
-﻿using Entities;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using Entities;
 using UnityEngine;
 using Utils;
 
-namespace Assets.Scripts.Core.Boosts
+namespace Core.Boosts
 {
     public class BoostManager : MonoBehaviour
     {
@@ -26,8 +25,8 @@ namespace Assets.Scripts.Core.Boosts
             boostActions = new Action[]
             {
                 ActivateEagles,
-                ActivateOwls,
                 ActivateMouseHorde,
+                ActivateOwls,
                 ActivateAllMouseDie,
             };
         }
@@ -86,12 +85,12 @@ namespace Assets.Scripts.Core.Boosts
 
         public void ActivateEagles()
         {
-            entityController.StawnEgles(3);
+            entityController.StawnEgles(2);
         }
 
         public void ActivateOwls()
         {
-            entityController.StawnOwls(3);
+            entityController.StawnOwls(1);
         }
     }
 }

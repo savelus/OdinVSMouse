@@ -5,6 +5,7 @@ using MainMenu.Leaderboard;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Core.UI
@@ -18,14 +19,30 @@ namespace Core.UI
         [SerializeField] private Button _mainMenuButton;
 
         [SerializeField] private List<Message> _messages;
+
+        [SerializeField] private AudioSource _openWindowMusic;
+        [SerializeField] private AudioSource _backgroundMusic;
+        [SerializeField] private AudioSource _clickButtonSound;
+        
         private void Awake()
         {
-            _mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("Scenes/MainMenuScene"));
-            _restartGameButton.onClick.AddListener(StartGame);
+            _mainMenuButton.onClick.AddListener(() =>
+            {
+                _clickButtonSound.Play();
+                SceneManager.LoadScene("Scenes/MainMenuScene");
+            });
+            _restartGameButton.onClick.AddListener(() =>
+            {
+                _clickButtonSound.Play();
+                StartGame();
+            });
         }
 
         public void ViewEndGameScreen()
         {
+            _openWindowMusic.Play();
+            _backgroundMusic.Play();
+            
             gameObject.SetActive(true);
 
             var killedMouse = StaticGameData.KilledMouseInGame;
@@ -44,10 +61,7 @@ namespace Core.UI
             return "";
         }
 
-        private void StartGame()
-        {
-        
-        }
+        private void StartGame() => SceneManager.LoadScene("Scenes/GameScene");
     }
 
     [Serializable]
