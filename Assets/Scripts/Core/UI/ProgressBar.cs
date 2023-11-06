@@ -64,14 +64,11 @@ namespace Core.UI
             _slider.value = (float) countKilledMoused / _checkPoints[_currentCheckPoint];
 
             if (countKilledMoused >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
-            {
                 ViewBuffButton();
-            }
         }
 
         private void ViewBuffButton()
         {
-            //_buffButton.image.color = _colorsForProgresBar[_currentCheckPoint];
             _buffButton.gameObject.SetActive(true);
             _sliderTweener?.Play();
         }

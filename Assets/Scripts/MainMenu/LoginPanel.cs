@@ -26,7 +26,7 @@ namespace MainMenu
         {
             var userName = _inputField.text;
             if (string.IsNullOrEmpty(userName))
-                userName = "Crying mouse";
+                userName = "Плачущая мышь";
             
             PlayerPrefs.SetString("username", userName);
             _onCloseAction?.Invoke();
