@@ -77,7 +77,8 @@ namespace Effects
             var appyingTextureOriginWidth = appyingSprite.texture.width;
             float texureHeight = texture.height;
             int curDepth = pos.y;
-            Parallel.For(0, trAvSize.y, y => {
+            for (int y = 0; y < trAvSize.y; y++)
+            {
                 for (int x = 0; x < trAvSize.x; x++)
                 {
                     var index = x + y * trAvSize.x;
@@ -109,7 +110,7 @@ namespace Effects
                         newColors[index] = oldPixel;
                     }
                 }
-            });
+            }
 
             texture.SetPixels(pos.x, pos.y, trAvSize.x, trAvSize.y, newColors);
 
