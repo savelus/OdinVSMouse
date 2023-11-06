@@ -13,8 +13,11 @@ namespace Entities
         public float SpawnCooldown { get; private set; }
 
         [FormerlySerializedAs("_entities")] [SerializeField] 
-        private MouseConfiguration[] _mouseConfigurations;
-        
+        private EntityConfiguration[] _mouseConfigurations;
+
+        [FormerlySerializedAs("_entities")] [SerializeField]
+        private EntityConfiguration[] _allyConfigurations;
+
         [SerializeField]
         private SpriteDrawer crossDrawer;
 
@@ -76,7 +79,7 @@ namespace Entities
 
             proportionValues[entityIndex]--;
 
-            return _mouseConfigurations[entityIndex].Mouse;
+            return _mouseConfigurations[entityIndex].Prefab;
         }
 
         private Entity GetRndEntity()
@@ -90,7 +93,7 @@ namespace Entities
                 i++;
             } while (stop > pointer);
 
-            return _mouseConfigurations[i - 1].Mouse;
+            return _mouseConfigurations[i - 1].Prefab;
         }
 
         public void SpawnHorde(int mouseCount)
@@ -104,14 +107,33 @@ namespace Entities
                 entity.AngleDeg = (dir + 1) / 2 * 180 + Random.Range(-10, 10);
             }
         }
+
+        public void StawnEgles(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                var prefab = _allyConfigurations.Single(ally => ally.Type == EntityType.Egle).Prefab;
+                var entity = Instantiate(prefab, transform.position, new Quaternion(), transform);
+                entity.AngleDeg = Random.Range(0, 360);
+            }
+        }
+
+        public void StawnOwls(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                var prefab = _allyConfigurations.Single(ally => ally.Type == EntityType.Owl).Prefab;
+                var entity = Instantiate(prefab, transform.position, new Quaternion(), transform);
+                entity.AngleDeg = Random.Range(0, 360);
+            }
+        }
     }
 
     [Serializable]
-    public class MouseConfiguration
+    public class EntityConfiguration
     {
-        public EntityType TypeMouse;
-        public Entity Mouse;
+        public EntityType Type;
+        public Entity Prefab;
         public float Chance;
-        
     }
 }

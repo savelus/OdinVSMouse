@@ -1,11 +1,10 @@
-﻿using Entities;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using Entities;
 using UnityEngine;
 using Utils;
 
-namespace Assets.Scripts.Core.Boosts
+namespace Core.Boosts
 {
     public class BoostManager : MonoBehaviour
     {
@@ -25,9 +24,9 @@ namespace Assets.Scripts.Core.Boosts
         {
             boostActions = new Action[]
             {
+                ActivateEagles,
                 ActivateMouseHorde,
-                ActivateAllMouseDie,
-                ActivateMouseHorde,
+                ActivateOwls,
                 ActivateAllMouseDie,
             };
         }
@@ -47,9 +46,15 @@ namespace Assets.Scripts.Core.Boosts
             }
 
             if (Input.GetKeyUp(KeyCode.Alpha1))
-                ActivateMouseHorde();
+                ActivateEagles();
             if (Input.GetKeyUp(KeyCode.Alpha2))
+                ActivateOwls();
+            if (Input.GetKeyUp(KeyCode.Alpha3))
+                ActivateMouseHorde();
+            if (Input.GetKeyUp(KeyCode.Alpha4))
                 ActivateAllMouseDie();
+            if (Input.GetKeyUp(KeyCode.Alpha0))
+                GameManager.Singleton.Timer.RemainingTime += 10;
         }
 
         public void ActivateNextBoost()
@@ -76,6 +81,16 @@ namespace Assets.Scripts.Core.Boosts
                     mousesToDie.Add(mouse);
                 }
             });
+        }
+
+        public void ActivateEagles()
+        {
+            entityController.StawnEgles(2);
+        }
+
+        public void ActivateOwls()
+        {
+            entityController.StawnOwls(1);
         }
     }
 }

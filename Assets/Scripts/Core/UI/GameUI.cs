@@ -19,6 +19,14 @@ namespace Core.UI
         private void Start()
         {
             _countdown.ViewCountdown(3, StartGame);
+            InitGame();
+        }
+
+        private void InitGame()
+        {
+            GameManager.IsGameEnded = false;
+            Entity.SpeedModifier = _influenceLastGame * (1 + StaticGameData.KilledMouseInGame / 200f) * 0.5f;
+            StaticGameData.KilledMouseInGame = 0;
         }
 
         private void StartGame()
@@ -30,11 +38,9 @@ namespace Core.UI
                 _endGame.ViewEndGameScreen();
                 _backgroundGameMusic.Stop();
             });
-            Entity.SpeedModifier = _influenceLastGame * (1 + StaticGameData.KilledMouseInGame / 200f) * 0.5f;
-            StaticGameData.KilledMouseInGame = 0;
+            
             _timer.StartTimer(20);
             _backgroundGameMusic.Play();
         }
-        
     }
 }

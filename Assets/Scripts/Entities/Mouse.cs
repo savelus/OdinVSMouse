@@ -16,6 +16,17 @@ namespace Entities
             Die();
         }
 
+        protected override void OnOutOfField()
+        {
+            base.OnOutOfField();
+
+            if (!CanBeCaptured)
+            {
+                GameManager.Singleton.Timer.RemainingTime += timeForKill;
+                StaticGameData.KilledMouseInGame++;
+            }
+        }
+
         public override void Die()
         {
             if (timeForKill > 0)
@@ -36,6 +47,20 @@ namespace Entities
                 var angle = MathUtils.DirectionToAngle(transform.position - collision.transform.position);
                 AngleDeg = angle + Random.Range(-90, 90);
             }
+        }
+
+        protected override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            TryFlip();
+        }
+
+        protected override void OnAngleChanged()
+        {
+            base.OnAngleChanged();
+
+            Flip();
         }
     }
 }

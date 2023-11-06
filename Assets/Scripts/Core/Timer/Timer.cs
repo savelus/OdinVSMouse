@@ -34,7 +34,7 @@ namespace Core.Timer
 
         private void Awake()
         {
-            SubscribeOnTimerEnd(_ => GameManager.IsGameStarted = false);
+            SubscribeOnTimerEnd(_ => { GameManager.IsGameStarted = false; GameManager.IsGameEnded = true; });
         }
 
         private void Update()

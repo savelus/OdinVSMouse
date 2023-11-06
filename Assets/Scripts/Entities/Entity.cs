@@ -31,29 +31,29 @@ namespace Entities
             {
                 angleDeg = value;
                 UpdateDirection();
-                Flip();
+                OnAngleChanged();
             }
         }
 
         public static float SpeedModifier = 1;
-        
-        private new Rigidbody2D rigidbody;
+
+        [field: SerializeField]
+        public bool CanBeCaptured { get; set; }
+
+        protected new Rigidbody2D Rigidbody;
         protected EntityController entityController;
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            rigidbody = GetComponent<Rigidbody2D>();
+            Rigidbody = GetComponent<Rigidbody2D>();
             entityController = GetComponentInParent<EntityController>();
 
             Speed = initialSpeed;
             AngleDeg = initialAngleDeg;
-            lastFlipTime = Time.timeSinceLevelLoad;
         }
 
-        private void UpdateDirection()
-        {
-            rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed * SpeedModifier;
-        }
+        protected virtual void UpdateDirection() => 
+            Rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed * SpeedModifier;
 
         protected virtual float outOfFieldIndent => 1.3f;
         private void FixedUpdate()
@@ -69,23 +69,11 @@ namespace Entities
                 Mathf.Abs(transform.position.x - entityController.transform.position.x) > entityController.HalfFieldWidth * indent ||
                 Mathf.Abs(transform.position.y - entityController.transform.position.y) > entityController.HalfFieldHeight * indent;
 
-            TryFlip();
+            OnUpdate();
         }
 
-        private float flipCooldown = 0.2f;
-        private float lastFlipTime;
-        private void TryFlip()
-        {
-            if (Time.timeSinceLevelLoad - lastFlipTime > flipCooldown)
-            {
-                lastFlipTime = Time.timeSinceLevelLoad;
-                Flip();
-            }
-        }
-        private void Flip()
-        {
-            transform.localScale = new(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        }
+        protected virtual void OnUpdate() { }
+        protected virtual void OnAngleChanged() { }
 
         protected virtual void OnOutOfField()
         {
@@ -122,6 +110,21 @@ namespace Entities
             }
         }
 
+        private float flipCooldown = 0.2f;
+        private float lastFlipTime;
+        protected void TryFlip()
+        {
+            if (Time.timeSinceLevelLoad - lastFlipTime > flipCooldown)
+            {
+                lastFlipTime = Time.timeSinceLevelLoad;
+                Flip();
+            }
+        }
+        protected void Flip()
+        {
+            transform.localScale = new(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+
         private void DestroySelf()
         {
             IsDestroyed = true;
@@ -134,6 +137,8 @@ namespace Entities
         BasicMouse,
         FastMouse,
         ZigzagMouse,
-        FastZigzagMouse
+        FastZigzagMouse,
+        Egle,
+        Owl,
     }
 }

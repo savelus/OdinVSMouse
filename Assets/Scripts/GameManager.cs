@@ -28,8 +28,12 @@ public class GameManager : MonoBehaviour
     
     [field: SerializeField]
     public AudioSource ShootingSound { get; private set; }
+        
+    public static bool IsGameEnded { get; set; } //for spawn
+
     private void Awake()
     {
         Singleton = this;
     }
+    
 }

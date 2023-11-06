@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpeed: 7
   initialAngleDeg: 0
+  <CanBeCaptured>k__BackingField: 1
   timeForKill: 2
 --- !u!58 &7560549744675857788
 CircleCollider2D:
