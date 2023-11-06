@@ -1,5 +1,5 @@
-﻿using Assets.Scripts;
-using Data;
+﻿using Data;
+using Effects;
 using UnityEngine;
 using Utils;
 
@@ -40,7 +40,7 @@ namespace Entities
         [field: SerializeField]
         public bool CanBeCaptured { get; set; }
 
-        protected new Rigidbody2D Rigidbody;
+        protected Rigidbody2D Rigidbody;
         protected EntityController entityController;
 
         protected virtual void Awake()

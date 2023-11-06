@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.Effects;
-using Core.Timer;
+﻿using Core.Timer;
+using Effects;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour

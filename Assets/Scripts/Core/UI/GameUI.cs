@@ -1,4 +1,3 @@
-using Assets.Scripts;
 using Data;
 using Entities;
 using TMPro;

@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Effects
+namespace Effects
 {
     public class PositionMover : MonoBehaviour
     {

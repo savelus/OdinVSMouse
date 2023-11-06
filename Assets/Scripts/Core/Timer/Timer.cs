@@ -1,7 +1,5 @@
-﻿using Assets.Scripts;
-using System;
+﻿using System;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace Core.Timer
 {

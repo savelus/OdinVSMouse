@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
+using Utils;
 
-namespace Assets.Scripts.Projectiles
+namespace Projectiles
 {
     public class Explosion : MonoBehaviour
     {

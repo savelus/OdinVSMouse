@@ -1,8 +1,6 @@
-using Assets.Scripts;
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Core.UI
 {

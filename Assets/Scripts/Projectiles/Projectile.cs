@@ -1,4 +1,4 @@
-﻿using Assets.Scripts;
+﻿using Effects;
 using UnityEngine;
 using Utils;
 

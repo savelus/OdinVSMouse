@@ -1,11 +1,9 @@
-﻿using Entities;
-using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 
-namespace Assets.Scripts.Entities
+namespace Entities
 {
     public class Bird : Entity
     {
