@@ -24,7 +24,7 @@ namespace Core.Timer
         public bool TimerIsRunning { get; private set; }
 
         private float _startSeconds;
-        private int _previousMinutes;
+        private int _previousHours;
         private Action<Timer> _onTimerChanged;
         private Action<Timer> _onTimerEnd;
 
@@ -57,16 +57,27 @@ namespace Core.Timer
             var worldSeconds = RemainingTime * SecondsInOneDay / _startSeconds;
 
             var hours = (int)Math.Truncate(worldSeconds / SecondsInOneHour);
-            var minutes = (int)Math.Truncate((worldSeconds - hours * SecondsInOneHour)/ SecondsInOneMinute);
-            if (minutes == _previousMinutes)
+            if (hours == _previousHours)
             {
-                _previousMinutes = minutes;
+                _previousHours = hours;
                 return;
             }
-
-            _previousMinutes = minutes;
-            TimeString = $"{hours:D2}h {minutes:D2}m";
+            _previousHours = hours;
+            
+            var postfix = GetPostfix(hours);
+            TimeString = $"{hours:D2} {postfix}";
             _onTimerChanged?.Invoke(this);
+        }
+
+        private string GetPostfix(int hours)
+        {
+            if (hours is >= 5 and <= 20 || hours % 10 == 0 || hours %10 >= 5 && hours % 10 <= 9)
+                return "часов";
+            if (hours % 10 == 1)
+                return "час";
+            if (hours % 10 >= 2 && hours % 10 <= 4)
+                return "часа";
+            return "Ч";
         }
 
         private float GetCurrentTime()

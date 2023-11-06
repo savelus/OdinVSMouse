@@ -56,7 +56,7 @@ namespace Core.UI
 
             UpdateColorsOnSlider();
             _currentCheckPoint++;
-            UpdateTextView();
+            UpdateView();
             
             _buffIsCompleteSound.Play();
         }
@@ -70,17 +70,16 @@ namespace Core.UI
         private void MouseKilled(int countKilledMoused)
         {
             _killedMouse = countKilledMoused;
-            UpdateTextView();
-
-            if (countKilledMoused >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
-                ViewBuffButton();
-
+            UpdateView();
         }
 
-        private void UpdateTextView()
+        private void UpdateView()
         {
             _counterText.text = $"{_killedMouse} / {_checkPoints[_currentCheckPoint]}";
             _slider.value = (float)_killedMouse / _checkPoints[_currentCheckPoint];
+            
+            if (_killedMouse >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
+                ViewBuffButton();
         }
 
         private void ViewBuffButton()
