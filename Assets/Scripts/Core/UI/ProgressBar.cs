@@ -13,7 +13,7 @@ namespace Core.UI
     public class ProgressBar : MonoBehaviour
     {
         [SerializeField] private List<int> _checkPoints;
-        [FormerlySerializedAs("_colorsForProgrssBar")] [SerializeField] private List<Color> _colorsForProgresBar;
+        [SerializeField] private List<Color> _colorsForProgresBar;
         [SerializeField] private Slider _slider;
         [SerializeField] private Image _sliderBackground;
         [SerializeField] private Image _sliderFillAreaBackground;
@@ -28,6 +28,11 @@ namespace Core.UI
             _currentCheckPoint = 0;
             SetupBuffButton();
             UpdateColorsOnSlider();
+        }
+
+        private void OnDestroy()
+        {
+            StaticGameData.UnsubscribeOnKillMouseInGame(MouseKilled);
         }
 
         private void SetupBuffButton()
@@ -70,7 +75,11 @@ namespace Core.UI
                 {
                     Debug.LogWarning("Buff button destroyed!");
                     if (transform.IsDestroyed())
+                    {
                         Debug.LogWarning("Progress bar destroyed!");
+                        _slider = transform.Find("Slider").GetComponent<Slider>();
+                    }
+
                     _buffButton = transform.Find("BuffButton").GetComponent<Button>();
                 }
 

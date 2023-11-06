@@ -25,5 +25,9 @@ namespace Data
         {
             _onMouseKill += killedMouse;
         }
+        public static void UnsubscribeOnKillMouseInGame(Action<int> killedMouse)
+        {
+            _onMouseKill -= killedMouse;
+        }
     }
 }
