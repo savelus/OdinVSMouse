@@ -53,7 +53,7 @@ namespace Entities
         }
 
         protected virtual void UpdateDirection() => 
-            Rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * Speed * SpeedModifier;
+            Rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * (Speed +(SpeedModifier - 1) * 2);
 
         protected virtual float outOfFieldIndent => 1.3f;
         private void FixedUpdate()

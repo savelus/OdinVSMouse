@@ -55,7 +55,7 @@ namespace Entities
             for (int i = 0; i < SlotCount; i++)
             {
                 if (capturedEnemies[i] != null)
-                    capturedEnemies[i].position = Vector3.Lerp(capturedEnemies[i].position, attachmentPoints[i].position, Speed * 2 / 100);
+                    capturedEnemies[i].position = Vector3.Lerp(capturedEnemies[i].position, attachmentPoints[i].position, 1);
             }
         }
 

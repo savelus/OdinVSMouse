@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3791420769779539978}
   - component: {fileID: 468666765759072701}
-  - component: {fileID: 7059091981506604485}
   m_Layer: 0
   m_Name: ReadyBuffSound
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3688649350206600680}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.2084846, y: 2.6009412, z: 10.037706}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,9 +42,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3169398559651752501, guid: c1bda0f5c3b02bd418f08bebb50b9b2b, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a10490ac230735e4a95aa71dfa401f27, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b83c49107d3805f4ab045088167aa76e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.853
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -129,16 +128,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7059091981506604485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3688649350206600680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a0d18500f943584e83abfa8cd21d64e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _source: {fileID: 468666765759072701}
