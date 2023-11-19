@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 using Dan.Main;
 using Dan.Models;
 using Data;
 using UnityEngine;
+using YG;
 
 namespace MainMenu.Leaderboard
 {
@@ -18,21 +16,23 @@ namespace MainMenu.Leaderboard
         public void ShowTable()
         {
             LeaderboardCreator.GetLeaderboard(PublicKey, FillTable);
+            //var f = YandexGame.GetLeaderboard("LeaderboardOdin", 20, );
         }
 
         public static void SetLeaderboardEntry()
         {
-            LeaderboardCreator.UploadNewEntry(PublicKey, PlayerPrefs.GetString("username"), StaticGameData.KilledMouseInGame);
+            //LeaderboardCreator.UploadNewEntry(PublicKey, PlayerPrefs.GetString("username"), StaticGameData.KilledMouseInGame);
+            YandexGame.NewLeaderboardScores("LeaderboardOdin", StaticGameData.KilledMouseInGame);
         }
         private void FillTable(Entry[] msg)
         {
-            for (int i = 0; i < _cells.Count; i++)
-            {
-                if (i < msg.Length)
-                    _cells[i].FillCell(msg[i].Rank.ToString(), msg[i].Username, msg[i].Score.ToString());
-                else
-                    _cells[i].FillCell((i + 1).ToString(), "------", "--");
-            }
+            // for (int i = 0; i < _cells.Count; i++)
+            // {
+            //     if (i < msg.Length)
+            //         _cells[i].FillCell(msg[i].Rank.ToString(), msg[i].Username, msg[i].Score.ToString());
+            //     else
+            //         _cells[i].FillCell((i + 1).ToString(), "------", "--");
+            // }
         }
     }
 }

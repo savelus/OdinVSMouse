@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Data;
 using Data;
+using DataBase;
 using DG.Tweening;
+using PUSHKA.MySQL;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,7 +15,7 @@ namespace MainMenu
         [SerializeField] private GameObject MenuScreen;
         [SerializeField] private GameObject RulesScreen;
         [SerializeField] private LoginPanel LoginPanel;
-        [SerializeField] private Leaderboard.Leaderboard Leaderboard;
+        [SerializeField] private GameObject Leaderboard;
 
         [SerializeField] private Button PlayButton;
         
@@ -58,12 +61,11 @@ namespace MainMenu
             CloseRuleButton.onClick.AddListener(ButtonSource.Play);
             
             LeaderBoardButton.onClick.RemoveAllListeners();
-            LeaderBoardButton.onClick.AddListener(() => OpenInvisibleScreen(Leaderboard.gameObject));
-            LeaderBoardButton.onClick.AddListener(() => Leaderboard.ShowTable());
+            LeaderBoardButton.onClick.AddListener(() => OpenInvisibleScreen(Leaderboard));
             LeaderBoardButton.onClick.AddListener(ButtonSource.Play);
         
             CloseLeaderBoardButton.onClick.RemoveAllListeners();
-            CloseLeaderBoardButton.onClick.AddListener(() => CloseInvisibleScreen(Leaderboard.gameObject));
+            CloseLeaderBoardButton.onClick.AddListener(() => CloseInvisibleScreen(Leaderboard));
             CloseLeaderBoardButton.onClick.AddListener(ButtonSource.Play);
             
             SetupPreloadGameButton();

@@ -5,8 +5,8 @@ using MainMenu.Leaderboard;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using YG;
 
 namespace Core.UI
 {
@@ -50,6 +50,8 @@ namespace Core.UI
             _message.text = SetMessage(killedMouse);
             
             Leaderboard.SetLeaderboardEntry();
+            
+            YandexGame.FullscreenShow();
         }
 
         private string SetMessage(int killedMouse)
