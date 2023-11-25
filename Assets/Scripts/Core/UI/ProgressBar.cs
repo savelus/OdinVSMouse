@@ -27,6 +27,7 @@ namespace Core.UI
         private int _currentCheckPoint;
         private Tweener _sliderTweener;
         private int _killedMouse;
+
         private void Start()
         {
             StaticGameData.SubscribeOnKillMouseInGame(MouseKilled);
@@ -62,7 +63,7 @@ namespace Core.UI
             UpdateColorsOnSlider();
             UpdateBuffIcon();
             UpdateView();
-            
+
             _buffIsCompleteSound.Play();
         }
 
@@ -89,7 +90,7 @@ namespace Core.UI
             var postfix = GetPostfix(_killedMouse, "мышей", "мышь", "мыши", "мышей");
             _counterText.text = $"{_killedMouse} / {_checkPoints[_currentCheckPoint]} {postfix}";
             _slider.value = (float)_killedMouse / _checkPoints[_currentCheckPoint];
-            
+
             if (_killedMouse >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
                 ViewBuffButton();
         }
@@ -98,7 +99,7 @@ namespace Core.UI
         {
             _buffButton.gameObject.SetActive(true);
             _sliderTweener?.Play();
-            
+
             _buffIsCompleteSound.Play();
         }
 

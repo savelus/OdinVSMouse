@@ -10,21 +10,16 @@ namespace Effects
     [RequireComponent(typeof(Image))]
     public class SpriteDrawer : MonoBehaviour
     {
-        [SerializeField] 
-        private Sprite spriteToGetSize;
+        [SerializeField] private Sprite spriteToGetSize;
 
-        [SerializeField]
-        private Sprite appyingSprite;
-        [SerializeField]
-        private int applyinSpriteWidth = 150;
+        [SerializeField] private Sprite appyingSprite;
+        [SerializeField] private int applyinSpriteWidth = 150;
 
         private Texture2D texture;
 
-        [SerializeField]
-        private bool useDepth;
+        [SerializeField] private bool useDepth;
         private int[] depth;
-        [SerializeField]
-        private bool useDarkReplace;
+        [SerializeField] private bool useDarkReplace;
 
         private Color[] applyinTextureColors;
 
@@ -36,7 +31,8 @@ namespace Effects
         {
             ratio = (float)appyingSprite.texture.height / appyingSprite.texture.width;
             asSize = new(applyinSpriteWidth, (int)(applyinSpriteWidth * ratio));
-            expandedSize = new(spriteToGetSize.texture.width + asSize.x / 2, spriteToGetSize.texture.height + asSize.y / 2);
+            expandedSize = new(spriteToGetSize.texture.width + asSize.x / 2,
+                spriteToGetSize.texture.height + asSize.y / 2);
 
 
             var rectTransform = GetComponent<RectTransform>();
@@ -49,8 +45,8 @@ namespace Effects
             texture.Apply();
             var image = GetComponent<Image>();
             image.sprite = Sprite.Create(
-                texture, 
-                new Rect(0, 0, texture.width, texture.height), 
+                texture,
+                new Rect(0, 0, texture.width, texture.height),
                 new Vector2(texture.width / 2, texture.height / 2)
             );
             image.color = Color.white;
@@ -64,13 +60,17 @@ namespace Effects
         /// <param name="posInTexture"> Position limited in 0 to 1 </param>
         public void DrawOn(Vector2 posInTexture)
         {
-            Vector2Int pos = new((int)(posInTexture.x * texture.width - asSize.x / 2), (int)(posInTexture.y * texture.height - asSize.y / 2));
+            Vector2Int pos = new((int)(posInTexture.x * texture.width - asSize.x / 2),
+                (int)(posInTexture.y * texture.height - asSize.y / 2));
             pos += new Vector2Int(asSize.x / 2, asSize.y / 2);
-            pos = new Vector2Int((int)(pos.x / (1 + (float)asSize.x / 2 / spriteToGetSize.texture.width)), (int)(pos.y / (1 + (float)asSize.y / 2 / spriteToGetSize.texture.height)));
+            pos = new Vector2Int((int)(pos.x / (1 + (float)asSize.x / 2 / spriteToGetSize.texture.width)),
+                (int)(pos.y / (1 + (float)asSize.y / 2 / spriteToGetSize.texture.height)));
             Vector2Int size = new(appyingSprite.texture.width, appyingSprite.texture.height);
 
-            Vector2 scale = new((float)asSize.x / appyingSprite.texture.width, (float)asSize.y / appyingSprite.texture.height);
-            Vector2Int trAvSize = new(Math.Min(asSize.x + pos.x, texture.width) - pos.x, Math.Min(asSize.y + pos.y, texture.height) - pos.y);
+            Vector2 scale = new((float)asSize.x / appyingSprite.texture.width,
+                (float)asSize.y / appyingSprite.texture.height);
+            Vector2Int trAvSize = new(Math.Min(asSize.x + pos.x, texture.width) - pos.x,
+                Math.Min(asSize.y + pos.y, texture.height) - pos.y);
 
             Color[] oldColors = texture.GetPixels(pos.x, pos.y, trAvSize.x, trAvSize.y);
             Color[] newColors = new Color[trAvSize.x * trAvSize.y];
@@ -78,15 +78,18 @@ namespace Effects
             float texureHeight = texture.height;
             int curDepth = pos.y;
             ///Parallel.For(0, trAvSize.y, y => {
-            for (int y = 0; y < trAvSize.y; y++) 
+            for (int y = 0; y < trAvSize.y; y++)
             {
                 for (int x = 0; x < trAvSize.x; x++)
                 {
                     var index = x + y * trAvSize.x;
                     var depthIndex = pos.x + x + (pos.y + y) * expandedSize.x;
                     var oldPixel = oldColors[index];
-                    var newPixel = applyinTextureColors[(int)((x / scale.x) + (int)(y / scale.y) * (appyingTextureOriginWidth))];
-                    if (!useDarkReplace || (oldPixel.a < 0.95f || (newPixel.a >= 0.95f && newPixel.maxColorComponent < oldPixel.maxColorComponent)))
+                    var newPixel =
+                        applyinTextureColors[(int)((x / scale.x) + (int)(y / scale.y) * (appyingTextureOriginWidth))];
+                    if (!useDarkReplace || (oldPixel.a < 0.95f ||
+                                            (newPixel.a >= 0.95f &&
+                                             newPixel.maxColorComponent < oldPixel.maxColorComponent)))
                     {
                         if (useDepth)
                         {
@@ -94,7 +97,8 @@ namespace Effects
                             {
                                 if (newPixel.a > 0.90f)
                                     depth[depthIndex] = curDepth;
-                                newColors[index] = Color.Lerp(oldPixel, newPixel, newPixel.a).WithAlpha(oldPixel.a + newPixel.a);
+                                newColors[index] = Color.Lerp(oldPixel, newPixel, newPixel.a)
+                                    .WithAlpha(oldPixel.a + newPixel.a);
                             }
                             else
                             {
@@ -103,7 +107,8 @@ namespace Effects
                         }
                         else
                         {
-                            newColors[index] = Color.Lerp(oldPixel, newPixel, newPixel.a).WithAlpha(oldPixel.a + newPixel.a);
+                            newColors[index] = Color.Lerp(oldPixel, newPixel, newPixel.a)
+                                .WithAlpha(oldPixel.a + newPixel.a);
                         }
                     }
                     else

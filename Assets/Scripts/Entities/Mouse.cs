@@ -6,8 +6,7 @@ namespace Entities
 {
     public class Mouse : Entity
     {
-        [SerializeField]
-        private float timeForKill;
+        [SerializeField] private float timeForKill;
 
         protected override void Hit(Transform hitter)
         {

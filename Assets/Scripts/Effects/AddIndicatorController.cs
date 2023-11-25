@@ -7,20 +7,22 @@ namespace Effects
     [RequireComponent(typeof(TextMeshPro))]
     public class AddIndicatorController : MonoBehaviour
     {
-        [SerializeField]
-        private string text;
-        public string Text 
+        [SerializeField] private string text;
+
+        public string Text
         {
             get => text;
-            set { text = value; textMeshPro.text = value; }
+            set
+            {
+                text = value;
+                textMeshPro.text = value;
+            }
         }
 
-        [SerializeField]
-        private float duration = 0.5f;
+        [SerializeField] private float duration = 0.5f;
         private float elapsedTime;
 
-        [SerializeField]
-        private float distance = 0.5f;
+        [SerializeField] private float distance = 0.5f;
 
         private TextMeshPro textMeshPro;
 

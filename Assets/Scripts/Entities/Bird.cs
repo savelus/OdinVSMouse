@@ -7,8 +7,7 @@ namespace Entities
 {
     public class Bird : Entity
     {
-        [SerializeField]
-        private Transform[] attachmentPoints;
+        [SerializeField] private Transform[] attachmentPoints;
         private int SlotCount => attachmentPoints.Length;
 
         private float _outOfFieldIndent = 1f;
@@ -17,18 +16,22 @@ namespace Entities
         private Transform[] capturedEnemies;
         private int CountOfCapturedEnemies => capturedEnemies.Count(e => e != null);
         private int CountOfFreeSlots => capturedEnemies.Count(e => e == null);
-        private int GetFirstFreeSlot() => Enumerable.Range(1, capturedEnemies.Length).FirstOrDefault(i => capturedEnemies[i - 1] == null) - 1;
+
+        private int GetFirstFreeSlot() => Enumerable.Range(1, capturedEnemies.Length)
+            .FirstOrDefault(i => capturedEnemies[i - 1] == null) - 1;
 
         private float lastAngleChangeTime;
-        
-        protected override void UpdateDirection() => 
+
+        protected override void UpdateDirection() =>
             Rigidbody.velocity = MathUtils.AngleToDirection(AngleDeg) * Speed * 0.25f;
+
         protected override void OnOutOfField()
         {
             if (Time.timeSinceLevelLoad - lastAngleChangeTime > 0.5f)
             {
                 lastAngleChangeTime = Time.timeSinceLevelLoad;
-                var angleToCenter = MathUtils.DirectionToAngle(entityController.transform.position - transform.position);
+                var angleToCenter =
+                    MathUtils.DirectionToAngle(entityController.transform.position - transform.position);
                 AngleDeg = angleToCenter + Random.Range(-45, 45);
 
                 if (_outOfFieldIndent > 1)
@@ -55,7 +58,8 @@ namespace Entities
             for (int i = 0; i < SlotCount; i++)
             {
                 if (capturedEnemies[i] != null)
-                    capturedEnemies[i].position = Vector3.Lerp(capturedEnemies[i].position, attachmentPoints[i].position, 1);
+                    capturedEnemies[i].position =
+                        Vector3.Lerp(capturedEnemies[i].position, attachmentPoints[i].position, 1);
             }
         }
 
@@ -85,7 +89,9 @@ namespace Entities
         {
             base.OnAngleChanged();
 
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(Mathf.Cos(AngleDeg * Mathf.Deg2Rad)), transform.localScale.y, transform.localScale.z);
+            transform.localScale =
+                new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(Mathf.Cos(AngleDeg * Mathf.Deg2Rad)),
+                    transform.localScale.y, transform.localScale.z);
         }
     }
 }

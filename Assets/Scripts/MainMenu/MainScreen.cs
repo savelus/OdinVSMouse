@@ -14,23 +14,22 @@ namespace MainMenu
     {
         [SerializeField] private GameObject MenuScreen;
         [SerializeField] private GameObject RulesScreen;
-        [SerializeField] private LoginPanel LoginPanel;
         [SerializeField] private GameObject Leaderboard;
 
         [SerializeField] private Button PlayButton;
-        
+
         [SerializeField] private Button OpenRuleButton;
         [SerializeField] private Button CloseRuleButton;
-        
+
         [SerializeField] private Button LeaderBoardButton;
         [SerializeField] private Button CloseLeaderBoardButton;
-        
+
 
         [SerializeField] private List<Sprite> PreloadGameImages;
         [SerializeField] private Button PreloadGameImagesButton;
 
         [SerializeField] private AudioSource ButtonSource;
-        
+
         private AsyncOperation _loadGameSceneOperation;
         private int _currentNumberImage;
         private Vector3 _ruleInvisiblePosition;
@@ -41,42 +40,34 @@ namespace MainMenu
             _loadGameSceneOperation = null;
 
             MenuScreen.SetActive(true);
-            
-            _ruleInvisiblePosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, -Screen.height/2, 0));
-            
+
+            _ruleInvisiblePosition =
+                Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, -Screen.height / 2, 0));
+
             SetupInvisibleScreen(RulesScreen);
-            SetupInvisibleScreen(LoginPanel.gameObject);
             SetupInvisibleScreen(Leaderboard.gameObject);
-            
+
             PlayButton.onClick.RemoveAllListeners();
             PlayButton.onClick.AddListener(StartGame);
             PlayButton.onClick.AddListener(ButtonSource.Play);
-        
+
             OpenRuleButton.onClick.RemoveAllListeners();
             OpenRuleButton.onClick.AddListener(() => OpenInvisibleScreen(RulesScreen));
             OpenRuleButton.onClick.AddListener(ButtonSource.Play);
-            
+
             CloseRuleButton.onClick.RemoveAllListeners();
             CloseRuleButton.onClick.AddListener(() => CloseInvisibleScreen(RulesScreen));
             CloseRuleButton.onClick.AddListener(ButtonSource.Play);
-            
+
             LeaderBoardButton.onClick.RemoveAllListeners();
             LeaderBoardButton.onClick.AddListener(() => OpenInvisibleScreen(Leaderboard));
             LeaderBoardButton.onClick.AddListener(ButtonSource.Play);
-        
+
             CloseLeaderBoardButton.onClick.RemoveAllListeners();
             CloseLeaderBoardButton.onClick.AddListener(() => CloseInvisibleScreen(Leaderboard));
             CloseLeaderBoardButton.onClick.AddListener(ButtonSource.Play);
-            
-            SetupPreloadGameButton();
 
-            var userName = PlayerPrefs.GetString("username");
-            if (userName is "Плачущая мышь" or "" && StaticGameData.IsFirstOpenGame)
-            {
-                LoginPanel.OpenWindow(() => CloseInvisibleScreen(LoginPanel.gameObject));
-                OpenInvisibleScreen(LoginPanel.gameObject);
-                StaticGameData.IsFirstOpenGame = false;
-            }
+            SetupPreloadGameButton();
         }
 
         private void SetupPreloadGameButton()
@@ -95,16 +86,17 @@ namespace MainMenu
                 OpenGameScene();
                 return;
             }
+
             PreloadGameImagesButton.image.sprite = PreloadGameImages[_currentNumberImage];
             _currentNumberImage++;
         }
 
-        private void OpenGameScene() => 
+        private void OpenGameScene() =>
             _loadGameSceneOperation.allowSceneActivation = true;
 
         private void StartGame()
         {
-            _loadGameSceneOperation =  SceneManager.LoadSceneAsync("GameScene");
+            _loadGameSceneOperation = SceneManager.LoadSceneAsync("GameScene");
             _loadGameSceneOperation.allowSceneActivation = false;
             PreloadGameImagesButton.gameObject.SetActive(true);
             MenuScreen.SetActive(false);
@@ -118,7 +110,8 @@ namespace MainMenu
             screen.SetActive(false);
         }
 
-        private void OpenInvisibleScreen(GameObject screen) {
+        private void OpenInvisibleScreen(GameObject screen)
+        {
             screen.SetActive(true);
             screen.transform.DOMove(MenuScreen.transform.position, _moveTimeRuleScreen);
         }

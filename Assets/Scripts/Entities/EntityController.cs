@@ -10,17 +10,15 @@ namespace Entities
 {
     public class EntityController : MonoBehaviour
     {
-        [field: SerializeField]
-        public float SpawnCooldown { get; private set; }
+        [field: SerializeField] public float SpawnCooldown { get; private set; }
 
-        [FormerlySerializedAs("_entities")] [SerializeField] 
+        [FormerlySerializedAs("_entities")] [SerializeField]
         private EntityConfiguration[] _mouseConfigurations;
 
         [FormerlySerializedAs("_entities")] [SerializeField]
         private EntityConfiguration[] _allyConfigurations;
 
-        [SerializeField]
-        private SpriteDrawer crossDrawer;
+        [SerializeField] private SpriteDrawer crossDrawer;
 
         public float HalfFieldWidth => Camera.main.ViewportToWorldPoint(new(1, 0)).x - transform.position.x;
         public float HalfFieldHeight => Camera.main.ViewportToWorldPoint(new(0, 1)).y - transform.position.y;
@@ -49,20 +47,23 @@ namespace Entities
 
         private void SpawnEntity()
         {
-            var pos = Random.value > 0.5f ?
-                new Vector3(Random.Range(-HalfFieldWidth, HalfFieldWidth), Mathf.Sign(Random.value - 0.5f) * HalfFieldHeight) :
-                new Vector3(Mathf.Sign(Random.value - 0.5f) * HalfFieldWidth, Random.Range(-HalfFieldHeight, HalfFieldHeight));
+            var pos = Random.value > 0.5f
+                ? new Vector3(Random.Range(-HalfFieldWidth, HalfFieldWidth),
+                    Mathf.Sign(Random.value - 0.5f) * HalfFieldHeight)
+                : new Vector3(Mathf.Sign(Random.value - 0.5f) * HalfFieldWidth,
+                    Random.Range(-HalfFieldHeight, HalfFieldHeight));
             pos += transform.position;
 
             var prefab = GetRndEntityFair();
 
             var entity = Instantiate(prefab, pos, transform.rotation, transform);
 
-            entity.AngleDeg = MathUtils.DirectionToAngle(transform.position - entity.transform.position) + 
-                Mathf.Sign(Random.value - 0.5f) * (10 + Random.Range(0, 35));
+            entity.AngleDeg = MathUtils.DirectionToAngle(transform.position - entity.transform.position) +
+                              Mathf.Sign(Random.value - 0.5f) * (10 + Random.Range(0, 35));
         }
 
         private float[] proportionValues;
+
         private Entity GetRndEntityFair()
         {
             if (proportionValues.All(value => value <= 0))
@@ -85,12 +86,12 @@ namespace Entities
 
         private Entity GetRndEntity()
         {
-            var stop = Random.Range(0, _mouseConfigurations.Sum(x=>x.Chance));
+            var stop = Random.Range(0, _mouseConfigurations.Sum(x => x.Chance));
             int i = 0;
             float pointer = 0;
             do
             {
-                pointer +=  _mouseConfigurations[i].Chance;
+                pointer += _mouseConfigurations[i].Chance;
                 i++;
             } while (stop > pointer);
 
@@ -103,7 +104,8 @@ namespace Entities
             {
                 var prefab = GetRndEntity();
                 var dir = Mathf.Sign(Random.value - 0.5f);
-                var pos = new Vector2(dir * (HalfFieldWidth + Random.Range(0, 4f)), Random.Range(-HalfFieldHeight, HalfFieldHeight));
+                var pos = new Vector2(dir * (HalfFieldWidth + Random.Range(0, 4f)),
+                    Random.Range(-HalfFieldHeight, HalfFieldHeight));
                 var entity = Instantiate(prefab, pos, new Quaternion(), transform);
                 entity.AngleDeg = (dir + 1) / 2 * 180 + Random.Range(-10, 10);
             }

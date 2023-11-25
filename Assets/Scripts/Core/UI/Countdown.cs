@@ -8,7 +8,7 @@ namespace Core.UI
     {
         [SerializeField] private TMP_Text _counter;
         [SerializeField] private AudioSource _timerSound;
-        
+
         private float _remainingTime;
         private bool _isTimerPLaying;
 
@@ -22,12 +22,11 @@ namespace Core.UI
             _remainingTime = remainingTime;
             _isTimerPLaying = true;
             SetupRemainingTimeOnScreen();
-            
         }
 
         private void Update()
         {
-            if(!_isTimerPLaying) return;
+            if (!_isTimerPLaying) return;
 
             if (_remainingTime - Time.deltaTime <= 0)
             {
@@ -37,7 +36,7 @@ namespace Core.UI
             }
 
             _remainingTime -= Time.deltaTime;
-            
+
             if (_timeOnScreen == (int)Math.Ceiling(_remainingTime)) return;
             SetupRemainingTimeOnScreen();
         }
@@ -46,7 +45,7 @@ namespace Core.UI
         {
             _timeOnScreen = (int)Math.Ceiling(_remainingTime);
             _counter.text = _timeOnScreen.ToString();
-            
+
             _timerSound.Play();
         }
     }

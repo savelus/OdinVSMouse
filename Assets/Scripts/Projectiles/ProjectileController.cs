@@ -7,18 +7,14 @@ namespace Projectiles
 {
     public class ProjectileController : MonoBehaviour
     {
-        [field: SerializeField]
-        public float AttackCooldown { get; private set; }
+        [field: SerializeField] public float AttackCooldown { get; private set; }
         private float lastAttackTime;
 
-        [SerializeField]
-        private GameObject lightningProjectile;
+        [SerializeField] private GameObject lightningProjectile;
 
-        [SerializeField]
-        private Player.Player player;
+        [SerializeField] private Player.Player player;
 
-        [SerializeField]
-        private SpriteDrawer craterDrawer;
+        [SerializeField] private SpriteDrawer craterDrawer;
 
         private void Update()
         {
@@ -44,7 +40,8 @@ namespace Projectiles
 
         private void SpawnProjectile(Vector3 pos, float angleDeg, float liveDistance)
         {
-            var projectile = Instantiate(lightningProjectile, pos, transform.rotation, transform).GetComponent<Projectile>();
+            var projectile = Instantiate(lightningProjectile, pos, transform.rotation, transform)
+                .GetComponent<Projectile>();
             projectile.AngleDeg = angleDeg;
             projectile.LiveDistance = liveDistance;
         }

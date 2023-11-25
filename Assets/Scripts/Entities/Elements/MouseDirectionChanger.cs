@@ -5,8 +5,7 @@ namespace Entities.Elements
     [RequireComponent(typeof(Mouse))]
     public class MouseDirectionChanger : MonoBehaviour
     {
-        [field: SerializeField]
-        public float DirChangeCooldown { get; private set; }
+        [field: SerializeField] public float DirChangeCooldown { get; private set; }
 
         private Mouse mouse;
 
@@ -16,6 +15,7 @@ namespace Entities.Elements
         }
 
         private float elapsedTime;
+
         private void FixedUpdate()
         {
             elapsedTime += Time.deltaTime;

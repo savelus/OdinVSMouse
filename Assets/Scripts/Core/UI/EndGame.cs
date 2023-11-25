@@ -14,8 +14,7 @@ namespace Core.UI
     {
         [SerializeField] private TMP_Text _countKilledMouse;
         [SerializeField] private TMP_Text _message;
-        [Space]
-        [SerializeField] private Button _restartGameButton;
+        [Space] [SerializeField] private Button _restartGameButton;
         [SerializeField] private Button _mainMenuButton;
 
         [SerializeField] private List<Message> _messages;
@@ -23,14 +22,17 @@ namespace Core.UI
         [SerializeField] private AudioSource _openWindowMusic;
         [SerializeField] private AudioSource _backgroundMusic;
         [SerializeField] private AudioSource _clickButtonSound;
-        
+
         private void Awake()
         {
+            _mainMenuButton.onClick.RemoveAllListeners();
             _mainMenuButton.onClick.AddListener(() =>
             {
                 _clickButtonSound.Play();
                 SceneManager.LoadScene("Scenes/MainMenuScene");
             });
+
+            _restartGameButton.onClick.RemoveAllListeners();
             _restartGameButton.onClick.AddListener(() =>
             {
                 _clickButtonSound.Play();
@@ -42,15 +44,15 @@ namespace Core.UI
         {
             _openWindowMusic.Play();
             _backgroundMusic.Play();
-            
+
             gameObject.SetActive(true);
 
             var killedMouse = StaticGameData.KilledMouseInGame;
             _countKilledMouse.text = killedMouse.ToString();
             _message.text = SetMessage(killedMouse);
-            
+
             Leaderboard.SetLeaderboardEntry();
-            
+
             YandexGame.FullscreenShow();
         }
 
@@ -71,6 +73,5 @@ namespace Core.UI
     {
         public int KilledMouse;
         public string Text;
-    
     }
 }

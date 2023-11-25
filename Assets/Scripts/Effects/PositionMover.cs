@@ -4,15 +4,12 @@ namespace Effects
 {
     public class PositionMover : MonoBehaviour
     {
-        [SerializeField]
-        private float duration;
+        [SerializeField] private float duration;
         private float elapsedTime;
-        
-        [SerializeField]
-        private float delay;
 
-        [SerializeField]
-        private Vector3 targetPosShift;
+        [SerializeField] private float delay;
+
+        [SerializeField] private Vector3 targetPosShift;
         private Vector3 initialPos;
 
 

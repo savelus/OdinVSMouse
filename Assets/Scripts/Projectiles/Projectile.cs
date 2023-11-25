@@ -7,32 +7,33 @@ namespace Projectiles
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Projectile : MonoBehaviour
     {
-        [SerializeField]
-        private float initialSpeed;
+        [SerializeField] private float initialSpeed;
         private float speed;
+
         public float Speed
         {
             get => speed;
-            private set { 
+            private set
+            {
                 speed = value;
                 UpdateDirection();
             }
         }
 
-        [SerializeField]
-        private float initialAngleDeg;
+        [SerializeField] private float initialAngleDeg;
         private float angleDeg;
+
         public float AngleDeg
         {
             get => angleDeg;
-            set {
+            set
+            {
                 angleDeg = value;
                 UpdateDirection();
             }
         }
 
-        [field: SerializeField]
-        public float LiveDistance { get; set; }
+        [field: SerializeField] public float LiveDistance { get; set; }
         private float elapsedDistance;
         private Vector3 lastPos;
 
@@ -42,8 +43,7 @@ namespace Projectiles
             transform.localEulerAngles = new(0, 0, angleDeg);
         }
 
-        [SerializeField]
-        private float afterHitLiveDistance;
+        [SerializeField] private float afterHitLiveDistance;
 
         private new Rigidbody2D rigidbody;
 
@@ -85,6 +85,7 @@ namespace Projectiles
         }
 
         private bool isHitted;
+
         private void OnHit()
         {
             if (!isHitted)
@@ -96,6 +97,7 @@ namespace Projectiles
         }
 
         private bool isDestroyed;
+
         private void DestroySelf()
         {
             if (!isDestroyed)

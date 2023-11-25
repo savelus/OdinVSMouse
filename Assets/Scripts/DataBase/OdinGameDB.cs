@@ -12,13 +12,13 @@ namespace DataBase
         private const string DataBaseUser = "USERNAME";
         private const string DataBasePassword = "Password1!";
 
-        private static readonly SqlDataBase Base = new(IP, BaseName, DataBaseUser,DataBasePassword);
+        private static readonly SqlDataBase Base = new(IP, BaseName, DataBaseUser, DataBasePassword);
 
         public static List<ReadOnlyUser> GetUsersList()
         {
             var rawData = SelectQuery($"SELECT * FROM {BaseName}.{TableName}");
             if (rawData is null || rawData.Rows.Count == 0) return null;
-            
+
             var readonlyUsers = new List<ReadOnlyUser>();
             for (var i = 0; i < rawData.Rows.Count; i++)
             {
@@ -29,10 +29,11 @@ namespace DataBase
 
             return readonlyUsers;
         }
-        
+
         public static CurrentUser CreateNewUser(CurrentUser currentUser)
         {
-            RunQuery($"INSERT INTO {BaseName}.{TableName} (`LOGIN`, `SCORE`, `MONEY`) VALUES ({currentUser.Login}, '0', '0')");
+            RunQuery(
+                $"INSERT INTO {BaseName}.{TableName} (`LOGIN`, `SCORE`, `MONEY`) VALUES ({currentUser.Login}, '0', '0')");
             return currentUser;
         }
 
@@ -47,10 +48,11 @@ namespace DataBase
 
         public static void UpdateUser(CurrentUser currentUser)
         {
-            RunQuery($"UPDATE {BaseName}.{TableName} SET `SCORE` = {currentUser.Score}, `MONEY` = {currentUser.Money} WHERE (`LOGIN` = {currentUser.Login})");
+            RunQuery(
+                $"UPDATE {BaseName}.{TableName} SET `SCORE` = {currentUser.Score}, `MONEY` = {currentUser.Money} WHERE (`LOGIN` = {currentUser.Login})");
         }
 
-        private static void RunQuery(string query) => 
+        private static void RunQuery(string query) =>
             Base.RunQuery(query);
 
         private static DataTable SelectQuery(string query)

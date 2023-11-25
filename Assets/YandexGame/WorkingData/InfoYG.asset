@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: InfoYG
   m_EditorClassIdentifier: 
   scopes: 1
-  playerPhotoSize: 0
+  playerPhotoSize: 2
   autoGameReadyAPI: 1
   playerInfoSimulation:
     authorized: 1
@@ -26,7 +26,7 @@ MonoBehaviour:
   showFirstAd: 1
   rewardedAfterClosing: 1
   adDisplayCalls: 0
-  fullscreenAdInterval: 180
+  fullscreenAdInterval: 120
   durationOfAdSimulation: 1
   loadAdWithDelaySimulation: 0
   testErrorOfRewardedAdsInEditor: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
     objectName: YandexGame
     methodName: _SaveProgress
   leaderboardEnable: 1
-  saveScoreAnonymousPlayers: 1
+  saveScoreAnonymousPlayers: 0
   leaderboardSimulation:
   - technoName: advanced
     entries: 'Test LeaderBoard
@@ -53,7 +53,7 @@ MonoBehaviour:
 
       3. Tanya: 23'
     isDefault: 0
-    isInvertSortOrder: 0
+    isInvertSortOrder: 1
     decimalOffset: 0
     type: numeric
     players:
@@ -180,7 +180,7 @@ MonoBehaviour:
     thisPlayer:
       rank: 2
       score: 10
-  LocalizationEnable: 1
+  LocalizationEnable: 0
   callingLanguageCheck: 1
   translateMethod: 0
   domainAutoLocalization: com

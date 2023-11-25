@@ -24,6 +24,7 @@ namespace MainMenu.Leaderboard
             //LeaderboardCreator.UploadNewEntry(PublicKey, PlayerPrefs.GetString("username"), StaticGameData.KilledMouseInGame);
             YandexGame.NewLeaderboardScores("LeaderboardOdin", StaticGameData.KilledMouseInGame);
         }
+
         private void FillTable(Entry[] msg)
         {
             // for (int i = 0; i < _cells.Count; i++)

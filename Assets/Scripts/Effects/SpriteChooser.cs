@@ -5,8 +5,7 @@ namespace Effects
 {
     public class SpriteChooser : MonoBehaviour
     {
-        [field: SerializeField]
-        public Sprite[] Sprites { get; private set; }
+        [field: SerializeField] public Sprite[] Sprites { get; private set; }
 
         private void Awake()
         {

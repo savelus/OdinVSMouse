@@ -22,12 +22,13 @@ namespace MainMenu
         {
             _onCloseAction += closeAction;
         }
+
         private void AddLogin()
         {
             var userName = _inputField.text;
             if (string.IsNullOrEmpty(userName))
                 userName = "Плачущая мышь";
-            
+
             PlayerPrefs.SetString("username", userName);
             _onCloseAction?.Invoke();
         }

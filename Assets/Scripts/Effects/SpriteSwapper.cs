@@ -5,12 +5,10 @@ namespace Effects
     [RequireComponent(typeof(SpriteRenderer))]
     public class SpriteSwapper : MonoBehaviour
     {
-        [field: SerializeField]
-        public Sprite[] Sprites { get; private set; }
+        [field: SerializeField] public Sprite[] Sprites { get; private set; }
         private int curSpriteIndex;
 
-        [field: SerializeField]
-        public float SwapCooldown { get; private set; }
+        [field: SerializeField] public float SwapCooldown { get; private set; }
         private float lastSwapTime;
 
         private SpriteRenderer spriteRenderer;

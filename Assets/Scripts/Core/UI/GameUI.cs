@@ -8,13 +8,14 @@ namespace Core.UI
     public class GameUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text _timerText;
-        [SerializeField] private Timer.Timer _timer; 
+        [SerializeField] private Timer.Timer _timer;
         [SerializeField] private EntityController _entityController;
         [SerializeField] private Countdown _countdown;
         [SerializeField] private EndGame _endGame;
         [SerializeField] private float _influenceLastGame = 1;
 
         [SerializeField] private AudioSource _backgroundGameMusic;
+
         private void Start()
         {
             _countdown.ViewCountdown(3, StartGame);
@@ -38,7 +39,7 @@ namespace Core.UI
                 _endGame.ViewEndGameScreen();
                 _backgroundGameMusic.Stop();
             });
-            
+
             _timer.StartTimer(5);
             _backgroundGameMusic.Play();
         }

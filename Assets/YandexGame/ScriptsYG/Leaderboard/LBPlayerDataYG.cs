@@ -11,8 +11,7 @@ namespace YG
     public class LBPlayerDataYG : MonoBehaviour
     {
         public ImageLoadYG imageLoad;
-        public MonoBehaviour[] topPlayerActivityComponents = new MonoBehaviour[0];
-        public MonoBehaviour[] thisPlayerActivityComponents = new MonoBehaviour[0];
+        public Image highlightedComponent;
 
         [Serializable]
         public struct TextLegasy
@@ -42,20 +41,23 @@ namespace YG
         }
 
         [HideInInspector]
-        public Data data = new Data();
+        public Data data = new();
 
+
+        private static readonly Color TopColor = new(255/255f, 231/255f, 109/255f, 255/255f);
+        private static readonly Color PlayerColor = new(132/255f, 0/255f, 255/255f, 255/255f);
 
         [ContextMenu(nameof(UpdateEntries))]
         public void UpdateEntries()
         {
-            if (textLegasy.rank && data.rank != null) textLegasy.rank.text = data.rank.ToString();
+            if (textLegasy.rank && data.rank != null) textLegasy.rank.text = data.rank;
             if (textLegasy.name && data.name != null) textLegasy.name.text = data.name;
-            if (textLegasy.score && data.score != null) textLegasy.score.text = data.score.ToString();
+            if (textLegasy.score && data.score != null) textLegasy.score.text = data.score;
 
 #if YG_TEXT_MESH_PRO
-            if (textMP.rank && data.rank != null) textMP.rank.text = data.rank.ToString();
+            if (textMP.rank && data.rank != null) textMP.rank.text = data.rank;
             if (textMP.name && data.name != null) textMP.name.text = data.name;
-            if (textMP.score && data.score != null) textMP.score.text = data.score.ToString();
+            if (textMP.score && data.score != null) textMP.score.text = data.score;
 #endif
             if (imageLoad)
             {
@@ -73,37 +75,25 @@ namespace YG
                 }
             }
 
-            if (topPlayerActivityComponents.Length > 0)
-            {
-                if (data.inTop)
-                {
-                    ActivityMomoObjects(topPlayerActivityComponents, true);
-                }
-                else
-                {
-                    ActivityMomoObjects(topPlayerActivityComponents, false);
-                }
-            }
+            SetBackground();
+        }
 
-            if (thisPlayerActivityComponents.Length > 0)
-            {
-                if (data.thisPlayer)
-                {
-                    ActivityMomoObjects(thisPlayerActivityComponents, true);
-                }
-                else
-                {
-                    ActivityMomoObjects(thisPlayerActivityComponents, false);
-                }
-            }
+        private void SetBackground()
+        {
+            if(highlightedComponent == null) return;
 
-            void ActivityMomoObjects(MonoBehaviour[] objects, bool activity)
-            {
-                for (int i = 0; i < objects.Length; i++)
-                {
-                    objects[i].enabled = activity;
-                }
-            }
+            if (data.inTop)
+                EnableBackground(TopColor);
+            if (data.thisPlayer)
+                EnableBackground(PlayerColor);
+            if(!data.inTop && !data.thisPlayer)
+                highlightedComponent.enabled = false;
+        }
+
+        private void EnableBackground(Color backgroundColor)
+        {
+            highlightedComponent.enabled = true;
+            highlightedComponent.color = backgroundColor;
         }
     }
 }

@@ -7,7 +7,8 @@ namespace Core.Timer
     {
         public string TimeString { get; private set; }
         private float _remainingTime;
-        public float RemainingTime 
+
+        public float RemainingTime
         {
             get => _remainingTime;
             set
@@ -19,6 +20,7 @@ namespace Core.Timer
                 }
             }
         }
+
         public bool TimerIsRunning { get; private set; }
 
         private float _startSeconds;
@@ -32,12 +34,16 @@ namespace Core.Timer
 
         private void Awake()
         {
-            SubscribeOnTimerEnd(_ => { GameManager.IsGameStarted = false; GameManager.IsGameEnded = true; });
+            SubscribeOnTimerEnd(_ =>
+            {
+                GameManager.IsGameStarted = false;
+                GameManager.IsGameEnded = true;
+            });
         }
 
         private void Update()
         {
-            if(!TimerIsRunning) return;
+            if (!TimerIsRunning) return;
             var currentTime = GetCurrentTime();
             RemainingTime = currentTime;
             if (RemainingTime < 0.01f)
@@ -60,8 +66,9 @@ namespace Core.Timer
                 _previousHours = hours;
                 return;
             }
+
             _previousHours = hours;
-            
+
             var postfix = GetPostfix(hours);
             TimeString = $"{hours:D2} {postfix}";
             _onTimerChanged?.Invoke(this);
@@ -69,7 +76,7 @@ namespace Core.Timer
 
         private string GetPostfix(int hours)
         {
-            if (hours is >= 5 and <= 20 || hours % 10 == 0 || hours %10 >= 5 && hours % 10 <= 9)
+            if (hours is >= 5 and <= 20 || hours % 10 == 0 || hours % 10 >= 5 && hours % 10 <= 9)
                 return "часов";
             if (hours % 10 == 1)
                 return "час";
@@ -83,20 +90,20 @@ namespace Core.Timer
             return RemainingTime - Time.deltaTime;
         }
 
-        
+
         public void StartTimer(float seconds)
         {
             if (seconds <= 0) throw new ArgumentException("seconds can not 0");
-            
+
             _startSeconds = seconds;
             RemainingTime = seconds;
             TimerIsRunning = true;
         }
 
-        public void PauseTimer() => 
+        public void PauseTimer() =>
             TimerIsRunning = false;
 
-        public void ResumeTimer() => 
+        public void ResumeTimer() =>
             TimerIsRunning = true;
 
         public void StopTimer()
@@ -106,16 +113,16 @@ namespace Core.Timer
             TimerIsRunning = false;
         }
 
-        public void SubscribeOnTimerChange(Action<Timer> action) => 
+        public void SubscribeOnTimerChange(Action<Timer> action) =>
             _onTimerChanged += action;
 
-        public void UnsubscribeOnTimerChanged(Action<Timer> action) => 
+        public void UnsubscribeOnTimerChanged(Action<Timer> action) =>
             _onTimerChanged -= action;
 
-        public void SubscribeOnTimerEnd(Action<Timer> action) => 
+        public void SubscribeOnTimerEnd(Action<Timer> action) =>
             _onTimerEnd += action;
 
-        public void UnsubscribeOnTimerEnd(Action<Timer> action) => 
+        public void UnsubscribeOnTimerEnd(Action<Timer> action) =>
             _onTimerEnd -= action;
     }
 }

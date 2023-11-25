@@ -8,14 +8,11 @@ namespace Core.Boosts
 {
     public class BoostManager : MonoBehaviour
     {
-        [SerializeField]
-        private int hordeSize = 60;
+        [SerializeField] private int hordeSize = 60;
 
-        [SerializeField]
-        private EntityController entityController;
+        [SerializeField] private EntityController entityController;
 
-        [SerializeField]
-        private GameObject explosionPrefab;
+        [SerializeField] private GameObject explosionPrefab;
 
         private Action[] boostActions;
         private int currentBoost;
@@ -57,7 +54,7 @@ namespace Core.Boosts
             if (Input.GetKeyUp(KeyCode.Alpha4))
                 ActivateAllMouseDie();
             if (Input.GetKeyUp(KeyCode.Alpha0))
-                GameManager.Singleton.Timer.RemainingTime += 10; 
+                GameManager.Singleton.Timer.RemainingTime += 10;
 #endif
         }
 
@@ -76,9 +73,11 @@ namespace Core.Boosts
         }
 
         List<Mouse> mousesToDie = new();
+
         public void ActivateAllMouseDie()
         {
-            entityController.transform.ForEachChield(chield => {
+            entityController.transform.ForEachChield(chield =>
+            {
                 var mouse = chield.GetComponent<Mouse>();
                 if (mouse != null)
                 {

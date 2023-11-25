@@ -8,9 +8,9 @@ namespace Entities
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Entity : MonoBehaviour
     {
-        [SerializeField]
-        private float initialSpeed;
+        [SerializeField] private float initialSpeed;
         private float speed;
+
         public float Speed
         {
             get => speed;
@@ -21,9 +21,9 @@ namespace Entities
             }
         }
 
-        [SerializeField]
-        private float initialAngleDeg;
+        [SerializeField] private float initialAngleDeg;
         private float angleDeg;
+
         public float AngleDeg
         {
             get => angleDeg;
@@ -37,8 +37,7 @@ namespace Entities
 
         public static float SpeedModifier = 1;
 
-        [field: SerializeField]
-        public bool CanBeCaptured { get; set; }
+        [field: SerializeField] public bool CanBeCaptured { get; set; }
 
         protected Rigidbody2D Rigidbody;
         protected EntityController entityController;
@@ -52,10 +51,11 @@ namespace Entities
             AngleDeg = initialAngleDeg;
         }
 
-        protected virtual void UpdateDirection() => 
-            Rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * (Speed +(SpeedModifier - 1) * 2);
+        protected virtual void UpdateDirection() =>
+            Rigidbody.velocity = MathUtils.AngleToDirection(angleDeg) * (Speed + (SpeedModifier - 1) * 2);
 
         protected virtual float outOfFieldIndent => 1.3f;
+
         private void FixedUpdate()
         {
             UpdateDirection();
@@ -66,14 +66,21 @@ namespace Entities
             }
 
             bool IsOutOfField(float indent) =>
-                Mathf.Abs(transform.position.x - entityController.transform.position.x) > entityController.HalfFieldWidth * indent ||
-                Mathf.Abs(transform.position.y - entityController.transform.position.y) > entityController.HalfFieldHeight * indent;
+                Mathf.Abs(transform.position.x - entityController.transform.position.x) >
+                entityController.HalfFieldWidth * indent ||
+                Mathf.Abs(transform.position.y - entityController.transform.position.y) >
+                entityController.HalfFieldHeight * indent;
 
             OnUpdate();
         }
 
-        protected virtual void OnUpdate() { }
-        protected virtual void OnAngleChanged() { }
+        protected virtual void OnUpdate()
+        {
+        }
+
+        protected virtual void OnAngleChanged()
+        {
+        }
 
         protected virtual void OnOutOfField()
         {
@@ -90,10 +97,10 @@ namespace Entities
 
         protected virtual void Hit(Transform hitter)
         {
-            
         }
 
         public bool IsDestroyed { get; private set; }
+
         public virtual void Die()
         {
             if (!IsDestroyed)
@@ -105,13 +112,14 @@ namespace Entities
                 DestroySelf();
                 StaticGameData.KilledMouseInGame++;
                 SpeedModifier += 0.005f;
-                
+
                 GameManager.Singleton.MouseKilledSound.Play();
             }
         }
 
         private float flipCooldown = 0.2f;
         private float lastFlipTime;
+
         protected void TryFlip()
         {
             if (Time.timeSinceLevelLoad - lastFlipTime > flipCooldown)
@@ -120,6 +128,7 @@ namespace Entities
                 Flip();
             }
         }
+
         protected void Flip()
         {
             transform.localScale = new(-transform.localScale.x, transform.localScale.y, transform.localScale.z);

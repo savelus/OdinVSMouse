@@ -4,11 +4,9 @@ namespace Effects
 {
     public class EffectManager : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject explosionPrefab;
+        [SerializeField] private GameObject explosionPrefab;
 
-        [SerializeField]
-        private AddIndicatorController effectPrefab;
+        [SerializeField] private AddIndicatorController effectPrefab;
 
         public void DrawExplosion(Vector3 position)
         {

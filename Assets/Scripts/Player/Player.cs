@@ -6,23 +6,16 @@ namespace Player
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField]
-        private Transform attackPointsHolder;
+        [SerializeField] private Transform attackPointsHolder;
 
-        [SerializeField]
-        private Transform head;
+        [SerializeField] private Transform head;
 
-        [SerializeField]
-        private Transform cloud;
-        [SerializeField]
-        private SpriteRenderer cloudFlash;
-        [SerializeField]
-        private Color cloudFlashColor;
-        [SerializeField]
-        private float cloudFlashDuration;
+        [SerializeField] private Transform cloud;
+        [SerializeField] private SpriteRenderer cloudFlash;
+        [SerializeField] private Color cloudFlashColor;
+        [SerializeField] private float cloudFlashDuration;
 
-        [SerializeField]
-        private SpriteRenderer stroke;
+        [SerializeField] private SpriteRenderer stroke;
 
         private Vector3 initialPos;
         private Vector3 initialCloudPos;
@@ -36,19 +29,21 @@ namespace Player
             initialCloudPos = cloud.transform.localPosition;
 
             var points = new List<Transform>();
-                attackPointsHolder.ForEachChield(point => points.Add(point.transform));
+            attackPointsHolder.ForEachChield(point => points.Add(point.transform));
             attackPoints = points.ToArray();
         }
 
         private void FixedUpdate()
         {
-            cloud.transform.localPosition = initialCloudPos + new Vector3(0, Mathf.Sin(Time.timeSinceLevelLoad * 1.2f) * 0.03f, 0);
-            targetPos = initialPos + new Vector3(0, Mathf.Sin(Time.timeSinceLevelLoad*1.0f) * 0.06f, 0);
+            cloud.transform.localPosition =
+                initialCloudPos + new Vector3(0, Mathf.Sin(Time.timeSinceLevelLoad * 1.2f) * 0.03f, 0);
+            targetPos = initialPos + new Vector3(0, Mathf.Sin(Time.timeSinceLevelLoad * 1.0f) * 0.06f, 0);
             transform.position = Vector3.Lerp(transform.position, targetPos, 0.01f);
             flashElapsedTime = Mathf.Max(0, flashElapsedTime - Time.deltaTime);
             cloudFlash.color = Color.Lerp(Color.clear, cloudFlashColor, flashElapsedTime / cloudFlashDuration);
 
-            stroke.color = Color.white.WithAlpha(Mathf.Lerp(0.1f, 0.25f, (Mathf.Sin(Time.timeSinceLevelLoad * 0.8f + 1) + 1) / 2));
+            stroke.color =
+                Color.white.WithAlpha(Mathf.Lerp(0.1f, 0.25f, (Mathf.Sin(Time.timeSinceLevelLoad * 0.8f + 1) + 1) / 2));
         }
 
         public Vector3 GetRndAttackPoint() => attackPoints[Random.Range(0, attackPoints.Length)].position;
@@ -67,10 +62,10 @@ namespace Player
         }
 
         private float flashElapsedTime;
+
         public void FlashCloud()
         {
             flashElapsedTime = cloudFlashDuration;
         }
     }
 }
-
