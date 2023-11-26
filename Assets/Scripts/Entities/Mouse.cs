@@ -20,7 +20,7 @@ namespace Entities
 
             if (!CanBeCaptured)
             {
-                GameManager.Singleton.Timer.RemainingTime += timeForKill;
+                GameManager.Singleton.Timer.AddTime(timeForKill);
                 StaticGameData.KilledMouseInGame++;
             }
         }
@@ -29,7 +29,7 @@ namespace Entities
         {
             if (timeForKill > 0)
             {
-                GameManager.Singleton.Timer.RemainingTime += timeForKill;
+                GameManager.Singleton.Timer.AddTime(timeForKill);
                 GameManager.Singleton.EffectManager.DrawAddIndicator("+" + timeForKill, transform.position);
             }
 

@@ -6,34 +6,18 @@ namespace Core.Timer
     public class Timer : MonoBehaviour
     {
         public string TimeString { get; private set; }
-        private float _remainingTime;
-
-        public float RemainingTime
-        {
-            get => _remainingTime;
-            set
-            {
-                if (value >= 0)
-                {
-                    _remainingTime = value;
-                    OnTimeChanged();
-                }
-            }
-        }
-
         public bool TimerIsRunning { get; private set; }
 
-        private float _startSeconds;
-        private int _previousHours;
         private Action<Timer> _onTimerChanged;
         private Action<Timer> _onTimerEnd;
-
-        private const float SecondsInOneDay = 86400;
-        private const float SecondsInOneHour = 3600;
-        private const float SecondsInOneMinute = 60;
+        private float _remainingTime;
+        private uint _intRemainingTime;
 
         private void Awake()
         {
+            _onTimerEnd = null;
+            _onTimerChanged = null;
+            
             SubscribeOnTimerEnd(_ =>
             {
                 GameManager.IsGameStarted = false;
@@ -43,38 +27,55 @@ namespace Core.Timer
 
         private void Update()
         {
-            if (!TimerIsRunning) return;
-            var currentTime = GetCurrentTime();
-            RemainingTime = currentTime;
-            if (RemainingTime < 0.01f)
+            if(!TimerIsRunning) return;
+
+            ChangeTime();
+        }
+
+        public void StartTimer(uint seconds)
+        {
+            if (seconds <= 0) throw new ArgumentException("seconds can not 0");
+            
+            _remainingTime = seconds;
+            _intRemainingTime = seconds;
+            TimerIsRunning = true;
+            
+        }
+
+        public void AddTime(float seconds)
+        {
+            _remainingTime += seconds;
+            ChangeTime();
+        }
+        
+        private void ChangeTime()
+        {
+            var deltaTime = Time.deltaTime;
+
+            _remainingTime -= deltaTime;
+            OnTimeChanged();
+            
+            if(_remainingTime <= 0)
                 EndTimer();
         }
 
         private void EndTimer()
         {
-            RemainingTime = 0;
-            StopTimer();
+            TimerIsRunning = false;
+            TimeString = $"0 {GetHoursPostfix(0)}";
+            _onTimerEnd?.Invoke(this);
         }
 
         private void OnTimeChanged()
         {
-            var worldSeconds = RemainingTime * SecondsInOneDay / _startSeconds;
+            if((uint)_remainingTime == _intRemainingTime) return;
 
-            var hours = (int)Math.Ceiling(worldSeconds / SecondsInOneHour);
-            if (hours == _previousHours)
-            {
-                _previousHours = hours;
-                return;
-            }
-
-            _previousHours = hours;
-
-            var postfix = GetPostfix(hours);
-            TimeString = $"{hours:D2} {postfix}";
+            _intRemainingTime = (uint)_remainingTime;
+            TimeString = $"{_intRemainingTime} {GetHoursPostfix(_intRemainingTime)}";
             _onTimerChanged?.Invoke(this);
         }
 
-        private string GetPostfix(int hours)
+        private string GetHoursPostfix(uint hours)
         {
             if (hours is >= 5 and <= 20 || hours % 10 == 0 || hours % 10 >= 5 && hours % 10 <= 9)
                 return "часов";
@@ -83,21 +84,6 @@ namespace Core.Timer
             if (hours % 10 >= 2 && hours % 10 <= 4)
                 return "часа";
             return "Ч";
-        }
-
-        private float GetCurrentTime()
-        {
-            return RemainingTime - Time.deltaTime;
-        }
-
-
-        public void StartTimer(float seconds)
-        {
-            if (seconds <= 0) throw new ArgumentException("seconds can not 0");
-
-            _startSeconds = seconds;
-            RemainingTime = seconds;
-            TimerIsRunning = true;
         }
 
         public void PauseTimer() =>

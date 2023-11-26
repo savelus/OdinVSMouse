@@ -53,8 +53,6 @@ namespace Core.Boosts
                 ActivateMouseHorde();
             if (Input.GetKeyUp(KeyCode.Alpha4))
                 ActivateAllMouseDie();
-            if (Input.GetKeyUp(KeyCode.Alpha0))
-                GameManager.Singleton.Timer.RemainingTime += 10;
 #endif
         }
 

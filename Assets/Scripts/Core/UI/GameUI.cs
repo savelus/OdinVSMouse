@@ -40,7 +40,7 @@ namespace Core.UI
                 _backgroundGameMusic.Stop();
             });
 
-            _timer.StartTimer(5);
+            _timer.StartTimer(24);
             _backgroundGameMusic.Play();
         }
     }
