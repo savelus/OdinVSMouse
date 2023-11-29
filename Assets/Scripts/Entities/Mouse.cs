@@ -60,5 +60,11 @@ namespace Entities
 
             Flip();
         }
+
+        protected override void UpdateDirection()
+        {
+            base.UpdateDirection();
+            transform.localEulerAngles = new(0, 0, AngleDeg + 90);
+        }
     }
 }

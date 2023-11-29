@@ -1231,7 +1231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164710322515809449, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -248.33499
+      value: -248.33496
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2204,7 +2204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteToGetSize: {fileID: 21300000, guid: 3a700a4d72d649044a177870d92024a9, type: 3}
-  appyingSprite: {fileID: 21300000, guid: 73d042a0d85dbdc4596feb7b7c7ac6ef, type: 3}
+  appyingSprite: {fileID: 21300000, guid: 9f17ae72e0361e2428ec580f40159abd, type: 3}
   applyinSpriteWidth: 100
   useDepth: 1
   useDarkReplace: 0
@@ -2465,7 +2465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteToGetSize: {fileID: 21300000, guid: 3a700a4d72d649044a177870d92024a9, type: 3}
-  appyingSprite: {fileID: 21300000, guid: e28fa6d237de4784ea8bbdfe61300e86, type: 3}
+  appyingSprite: {fileID: 21300000, guid: ba87ebe9abccdcd4b89ed5f09d5e7c8d, type: 3}
   applyinSpriteWidth: 100
   useDepth: 0
   useDarkReplace: 1
