@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using Data;
@@ -7,6 +8,7 @@ using PUSHKA.MySQL;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YG;
 
 namespace MainMenu
 {
@@ -68,6 +70,16 @@ namespace MainMenu
             CloseLeaderBoardButton.onClick.AddListener(ButtonSource.Play);
 
             SetupPreloadGameButton();
+        }
+
+        private void OnEnable() => YandexGame.GetDataEvent += GetData;
+
+        private void OnDisable() => YandexGame.GetDataEvent -= GetData;
+
+        private void GetData()
+        {
+            var userLogin = YandexGame.playerId;
+            StaticGameData.CurrentUser = new CurrentUser(userLogin);
         }
 
         private void SetupPreloadGameButton()

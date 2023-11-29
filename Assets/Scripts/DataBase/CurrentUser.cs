@@ -1,4 +1,6 @@
-﻿namespace DataBase
+﻿using Unity.VisualScripting;
+
+namespace DataBase
 {
     public class CurrentUser
     {
@@ -30,6 +32,11 @@
             OdinGameDB.UpdateUser(this);
         }
 
+        public void AddMoney(int money)
+        {
+            Money += money;
+            OdinGameDB.UpdateUser(this);
+        }
         public void SetMoney(int money)
         {
             if (money == Money) return;

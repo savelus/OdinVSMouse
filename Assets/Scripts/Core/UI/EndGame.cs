@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Data;
+using DataBase;
 using MainMenu.Leaderboard;
 using TMPro;
 using UnityEngine;
@@ -52,7 +53,8 @@ namespace Core.UI
             _message.text = SetMessage(killedMouse);
 
             Leaderboard.SetLeaderboardEntry();
-
+            StaticGameData.CurrentUser.AddMoney(StaticGameData.MoneyInGame);
+            
             YandexGame.FullscreenShow();
         }
 

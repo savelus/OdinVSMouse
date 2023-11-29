@@ -42,8 +42,15 @@ namespace DataBase
             var rawData = SelectQuery($"SELECT * FROM {BaseName}.{TableName} WHERE LOGIN = {currentUser.Login}");
             if (rawData == null || rawData.Rows.Count == 0) return null;
             var rawUserInfo = rawData.Rows[0];
-            ReadOnlyUser user = new ReadOnlyUser(currentUser.Login, (int)rawUserInfo[1], (int)rawUserInfo[2]);
-            return user;
+            return new ReadOnlyUser(currentUser.Login, (int)rawUserInfo[1], (int)rawUserInfo[2]);
+        }
+        
+        public static ReadOnlyUser? GetUser(string login)
+        {
+            var rawData = SelectQuery($"SELECT * FROM {BaseName}.{TableName} WHERE LOGIN = {login}");
+            if (rawData == null || rawData.Rows.Count == 0) return null;
+            var rawUserInfo = rawData.Rows[0];
+            return new ReadOnlyUser(login, (int)rawUserInfo[1], (int)rawUserInfo[2]);
         }
 
         public static void UpdateUser(CurrentUser currentUser)
