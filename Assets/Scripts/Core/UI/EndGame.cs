@@ -53,7 +53,7 @@ namespace Core.UI
             _message.text = SetMessage(killedMouse);
 
             Leaderboard.SetLeaderboardEntry();
-            StaticGameData.CurrentUser.AddMoney(StaticGameData.MoneyInGame);
+            //StaticGameData.CurrentUser.AddMoney(StaticGameData.MoneyInGame);
             
             YandexGame.FullscreenShow();
         }

@@ -22,6 +22,7 @@ namespace Core.UI
             _remainingTime = remainingTime;
             _isTimerPLaying = true;
             SetupRemainingTimeOnScreen();
+            _timerSound.Play();
         }
 
         private void Update()
@@ -46,7 +47,7 @@ namespace Core.UI
             _timeOnScreen = (int)Math.Ceiling(_remainingTime);
             _counter.text = _timeOnScreen.ToString();
 
-            _timerSound.Play();
+           // _timerSound.Play();
         }
     }
 }

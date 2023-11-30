@@ -1,4 +1,5 @@
-﻿using Core.Timer;
+﻿using System.Collections.Generic;
+using Core.Timer;
 using Effects;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     public static bool IsGameStarted { get; set; }
 
-    [field: SerializeField] public AudioSource MouseKilledSound { get; private set; }
+    [field: SerializeField] public List<AudioSource> MouseKilledSounds { get; private set; }
 
     [field: SerializeField] public AudioSource MisClickSound { get; private set; }
 
@@ -27,5 +28,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Singleton = this;
+    }
+
+    public void KillMouseSoundPlay()
+    {
+        var number = Random.Range(0, MouseKilledSounds.Count);
+        MouseKilledSounds[number].Play();
     }
 }

@@ -4,7 +4,7 @@ namespace DataBase
 {
     public class CurrentUser
     {
-        public string Login { get; private set; }
+        /*public string Login { get; private set; }
 
         public int Score { get; private set; }
         public int Money { get; private set; }
@@ -47,7 +47,7 @@ namespace DataBase
         public override string ToString()
         {
             return $"{Login} score: {Score} money: {Money}";
-        }
+        }*/
     }
 
     public struct ReadOnlyUser

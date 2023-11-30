@@ -6,7 +6,7 @@ namespace DataBase
 {
     public static class OdinGameDB
     {
-        private const string IP = "185.139.69.192";
+        /*private const string IP = "185.139.69.192";
         private const string BaseName = "odingame";
         private const string TableName = "USERS";
         private const string DataBaseUser = "USERNAME";
@@ -66,6 +66,6 @@ namespace DataBase
         {
             Base.SelectQuery(query, out var data);
             return data;
-        }
+        }*/
     }
 }

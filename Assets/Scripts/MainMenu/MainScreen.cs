@@ -37,8 +37,24 @@ namespace MainMenu
         private Vector3 _ruleInvisiblePosition;
         private const float _moveTimeRuleScreen = 0.8f;
 
+        private bool _dataLoaded = false;
         private void Start()
         {
+            if (YandexGame.SDKEnabled)
+            {
+                GetData();
+            }
+        }
+
+        private void OnEnable() => YandexGame.GetDataEvent += GetData;
+
+        private void OnDisable() => YandexGame.GetDataEvent -= GetData;
+
+        private void GetData()
+        {
+            if(_dataLoaded) return;
+            _dataLoaded = true;
+            
             _loadGameSceneOperation = null;
 
             MenuScreen.SetActive(true);
@@ -70,16 +86,6 @@ namespace MainMenu
             CloseLeaderBoardButton.onClick.AddListener(ButtonSource.Play);
 
             SetupPreloadGameButton();
-        }
-
-        private void OnEnable() => YandexGame.GetDataEvent += GetData;
-
-        private void OnDisable() => YandexGame.GetDataEvent -= GetData;
-
-        private void GetData()
-        {
-            var userLogin = YandexGame.playerId;
-            StaticGameData.CurrentUser = new CurrentUser(userLogin);
         }
 
         private void SetupPreloadGameButton()

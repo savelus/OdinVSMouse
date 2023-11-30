@@ -2674,7 +2674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041B\u0438\u0434\u0435\u0440\u0431\u043E\u0440\u0434"
+  m_text: "\u0422\u0430\u0431\u043B\u0438\u0446\u0430 \u0440\u0435\u043A\u043E\u0440\u0434\u043E\u0432"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25e79f9733102bf4a8a9ed02658a96a9, type: 2}
   m_sharedMaterial: {fileID: -602233444759366934, guid: 25e79f9733102bf4a8a9ed02658a96a9, type: 2}
@@ -2813,7 +2813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ODIN vs MOUSE
+  m_text: "\u041E\u0414\u0418\u041D vs \u041C\u042B\u0428\u0418"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d240fc612ac64140a605dc39e88552d, type: 2}
   m_sharedMaterial: {fileID: 3370174065683155933, guid: 8d240fc612ac64140a605dc39e88552d, type: 2}
@@ -2840,12 +2840,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 220
+  m_fontSize: 200
   m_fontSizeBase: 250
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 220
+  m_fontSizeMax: 200
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3175,7 +3175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3121673751397710557, guid: fac0ed103d1acd0468263f74ecd821ca, type: 3}
       propertyPath: nameLB
-      value: advanced
+      value: LeaderboardOdin
       objectReference: {fileID: 0}
     - target: {fileID: 3121673751397710557, guid: fac0ed103d1acd0468263f74ecd821ca, type: 3}
       propertyPath: playerPhoto
@@ -3187,7 +3187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3121673751397710557, guid: fac0ed103d1acd0468263f74ecd821ca, type: 3}
       propertyPath: quantityAround
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3121673751397710557, guid: fac0ed103d1acd0468263f74ecd821ca, type: 3}
       propertyPath: timeTypeConvert
