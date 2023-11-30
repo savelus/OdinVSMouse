@@ -111,7 +111,7 @@ namespace Entities
 
                 DestroySelf();
                 StaticGameData.KilledMouseInGame++;
-                SpeedModifier += 0.005f;
+                SpeedModifier += 0.01f;
 
                 GameManager.Singleton.MouseKilledSound.Play();
             }

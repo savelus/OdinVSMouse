@@ -21,12 +21,19 @@ namespace Core.Boosts
         {
             boostActions = new Action[]
             {
-                ActivateAllMouseDie,
-                ActivateEagles,
-                ActivateMouseHorde,
-                ActivateOwls,
-                ActivateMouseHorde,
-                ActivateAllMouseDie,
+                /*0*/ ActivateMouseHorde, 
+                /*1*/ ActivateAllMouseDie, 
+                /*2*/ ActivateEagles,
+                /*3*/ ActivateMouseHorde,
+                /*4*/ ActivateOwls,
+                /*5*/ ActivateMouseHorde,
+                /*6*/ ActivateAllMouseDie,
+                /*7*/ ActivateMouseHorde,
+                /*8*/ ActivateAllMouseDie,
+                /*9*/ ActivateMouseHorde,
+                /*10*/ ActivateAllMouseDie,
+                /*11*/ ActivateMouseHorde,
+                
             };
         }
 

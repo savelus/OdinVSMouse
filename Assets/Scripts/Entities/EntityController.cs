@@ -102,7 +102,7 @@ namespace Entities
         {
             for (int i = 0; i < mouseCount; i++)
             {
-                var prefab = GetRndEntity();
+                var prefab = _mouseConfigurations[0].Prefab;
                 var dir = Mathf.Sign(Random.value - 0.5f);
                 var pos = new Vector2(dir * (HalfFieldWidth + Random.Range(0, 4f)),
                     Random.Range(-HalfFieldHeight, HalfFieldHeight));

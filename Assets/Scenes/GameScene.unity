@@ -172,16 +172,16 @@ MonoBehaviour:
   _mouseConfigurations:
   - Type: 0
     Prefab: {fileID: 4254022511593574156, guid: 50682915432c9354092fb2881555d67c, type: 3}
-    Chance: 15
+    Chance: 20
   - Type: 2
     Prefab: {fileID: 5654325633613801416, guid: ed56c0df4e0cdda4988bb28fa29ce539, type: 3}
     Chance: 5
   - Type: 1
     Prefab: {fileID: 6981185581853068306, guid: 0b11e7ff7e26abd429f083a2c26fc459, type: 3}
-    Chance: 5
+    Chance: 2
   - Type: 3
     Prefab: {fileID: 2316671617490607737, guid: 841698876e1491c41b84d34c41700c0d, type: 3}
-    Chance: 3
+    Chance: 1
   _allyConfigurations:
   - Type: 4
     Prefab: {fileID: 1848878896877082459, guid: d9cd614f76e43824fb5d3ffe6f847b3e, type: 3}
@@ -647,7 +647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2048212108678941142, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -104.17
+      value: -104.17001
       objectReference: {fileID: 0}
     - target: {fileID: 2194842403148731482, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: m_AnchorMax.y
@@ -667,7 +667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2194842403148731482, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 161.42857
+      value: 161.42859
       objectReference: {fileID: 0}
     - target: {fileID: 2194842403148731482, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -986,16 +986,144 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1900968877796116328}
     - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[0]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[1]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[2]
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[3]
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[4]
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[5]
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[6]
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[7]
+      value: 390
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[8]
+      value: 430
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[9]
+      value: 550
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[10]
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _checkPoints.Array.data[11]
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[0].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[0].g
+      value: 0.32839394
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[0].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[1].b
+      value: 0.058823533
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[1].g
+      value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[1].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[2].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[2].g
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[2].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[3].b
+      value: 0.058823533
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[3].g
+      value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[3].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[4].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[4].g
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[4].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[5].b
+      value: 0.058823533
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[5].g
+      value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[5].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: _colorsForProgresBar.Array.data[6].b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: _colorsForProgresBar.Array.data[6].g
-      value: 1
+      value: 0.32941177
       objectReference: {fileID: 0}
     - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: _colorsForProgresBar.Array.data[6].r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: _colorsForProgresBar.Array.data[7].a
@@ -1003,14 +1131,78 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: _colorsForProgresBar.Array.data[7].b
-      value: 0.91409147
+      value: 0.058823533
       objectReference: {fileID: 0}
     - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: _colorsForProgresBar.Array.data[7].g
-      value: 1
+      value: 0.69803923
       objectReference: {fileID: 0}
     - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
       propertyPath: _colorsForProgresBar.Array.data[7].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[8].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[8].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[8].g
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[8].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[9].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[9].b
+      value: 0.058823533
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[9].g
+      value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[9].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[10].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[10].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[10].g
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[10].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[11].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[11].b
+      value: 0.058823533
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[11].g
+      value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493403614773760124, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
+      propertyPath: _colorsForProgresBar.Array.data[11].r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5766552145498799943, guid: 8039e0e54bfb3bf4cbe711f5c50e2617, type: 3}
