@@ -32,6 +32,7 @@ namespace Entities
                 GameManager.Singleton.Timer.AddTime(timeForKill);
                 GameManager.Singleton.EffectManager.DrawAddIndicator("+" + timeForKill, transform.position);
             }
+            GameManager.Singleton.EffectManager.DrawMouseCropse(transform.position);
 
             base.Die();
         }
@@ -59,12 +60,7 @@ namespace Entities
             base.OnAngleChanged();
 
             Flip();
-        }
-
-        protected override void UpdateDirection()
-        {
-            base.UpdateDirection();
-            transform.localEulerAngles = new(0, 0, AngleDeg + 90);
+            transform.localEulerAngles = new(0, 0, AngleDeg);
         }
     }
 }

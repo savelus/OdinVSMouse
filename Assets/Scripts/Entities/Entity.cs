@@ -117,7 +117,7 @@ namespace Entities
             }
         }
 
-        private float flipCooldown = 0.25f;
+        private float flipCooldown = 0.5f;
         private float lastFlipTime;
 
         protected void TryFlip()
@@ -131,7 +131,7 @@ namespace Entities
 
         protected void Flip()
         {
-            transform.localScale = new(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
         }
 
         private void DestroySelf()

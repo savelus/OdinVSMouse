@@ -89,9 +89,11 @@ namespace Entities
         {
             base.OnAngleChanged();
 
-            transform.localScale =
+/*            transform.localScale =
                 new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(Mathf.Cos(AngleDeg * Mathf.Deg2Rad)),
-                    transform.localScale.y, transform.localScale.z);
+                    transform.localScale.y, transform.localScale.z);*/ //для старых страйтов
+
+            transform.localEulerAngles = new(0, 0, AngleDeg);
         }
     }
 }

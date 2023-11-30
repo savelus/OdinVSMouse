@@ -8,6 +8,8 @@ namespace Effects
 
         [SerializeField] private AddIndicatorController effectPrefab;
 
+        [SerializeField] private GameObject mouseCropsePrefab;
+
         public void DrawExplosion(Vector3 position)
         {
             Instantiate(explosionPrefab, position, new Quaternion(), transform);
@@ -17,6 +19,11 @@ namespace Effects
         {
             var indicator = Instantiate(effectPrefab, position, new Quaternion(), transform);
             indicator.Text = text;
+        }
+
+        public void DrawMouseCropse(Vector3 position)
+        {
+            Instantiate(mouseCropsePrefab, position, new Quaternion(), transform);
         }
     }
 }
