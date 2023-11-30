@@ -690,20 +690,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36476daa796c4aa4b71d3e5530cdc0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checkPoints: 1e0000004100000082000000b4000000f00000005e01000088130000
+  _checkPoints: 0f0000001e0000004b00000082000000c80000000e0100002c01000086010000ae0100002602000058020000e8030000
   _colorsForProgresBar:
-  - {r: 0.0603773, g: 1, b: 0.17133076, a: 1}
-  - {r: 0.75263774, g: 1, b: 0.058823526, a: 1}
-  - {r: 1, g: 0.6487016, b: 0.058823526, a: 1}
-  - {r: 1, g: 0.21732993, b: 0.013207495, a: 1}
-  - {r: 1, g: 0.011764705, b: 0.6469028, a: 1}
-  - {r: 0.54669017, g: 0.011764705, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0, g: 0.32839394, b: 1, a: 1}
+  - {r: 1, g: 0.69803923, b: 0.058823533, a: 1}
+  - {r: 0, g: 0.32941177, b: 1, a: 1}
+  - {r: 1, g: 0.69803923, b: 0.058823533, a: 1}
+  - {r: 0, g: 0.32941177, b: 1, a: 1}
+  - {r: 1, g: 0.69803923, b: 0.058823533, a: 1}
+  - {r: 0, g: 0.32941177, b: 1, a: 1}
+  - {r: 1, g: 0.69803923, b: 0.058823533, a: 1}
+  - {r: 0, g: 0.32941177, b: 1, a: 1}
+  - {r: 1, g: 0.69803923, b: 0.058823533, a: 1}
+  - {r: 0, g: 0.32941177, b: 1, a: 1}
+  - {r: 1, g: 0.69803923, b: 0.058823533, a: 1}
   _buffIcons:
+  - {fileID: 350694701721900887, guid: fdb97a107aa1c9848be59b3ad508ee4e, type: 3}
   - {fileID: 5622354205809305550, guid: d0f02c67f41025344b5eea025fce3cc1, type: 3}
   - {fileID: 3250173143089123372, guid: f2a92113e789a63448cfde635a6dd172, type: 3}
   - {fileID: 350694701721900887, guid: fdb97a107aa1c9848be59b3ad508ee4e, type: 3}
   - {fileID: 6692422206647872721, guid: 894efc68f874fcb42ac81c268c2665ba, type: 3}
+  - {fileID: 350694701721900887, guid: fdb97a107aa1c9848be59b3ad508ee4e, type: 3}
+  - {fileID: 5622354205809305550, guid: d0f02c67f41025344b5eea025fce3cc1, type: 3}
+  - {fileID: 350694701721900887, guid: fdb97a107aa1c9848be59b3ad508ee4e, type: 3}
+  - {fileID: 5622354205809305550, guid: d0f02c67f41025344b5eea025fce3cc1, type: 3}
   - {fileID: 350694701721900887, guid: fdb97a107aa1c9848be59b3ad508ee4e, type: 3}
   - {fileID: 5622354205809305550, guid: d0f02c67f41025344b5eea025fce3cc1, type: 3}
   - {fileID: 350694701721900887, guid: fdb97a107aa1c9848be59b3ad508ee4e, type: 3}
@@ -2074,7 +2084,7 @@ RectTransform:
   m_GameObject: {fileID: 6326849571531658622}
   m_LocalRotation: {x: -0, y: -0, z: 0.090111986, w: 0.9959316}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2.1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3507105781983815975}
@@ -2112,7 +2122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dc8de1d74494b6c48880c6fdfbeeb6f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1bc6530711acdf34f9ed9c8975b2b54a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

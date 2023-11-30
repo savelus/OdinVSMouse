@@ -117,12 +117,12 @@ namespace Entities
             }
         }
 
-        private float flipCooldown = 0.5f;
+        private float flipCooldown = 0.2f;
         private float lastFlipTime;
 
         protected void TryFlip()
         {
-            if (Time.timeSinceLevelLoad - lastFlipTime > flipCooldown * (4 / Speed * SpeedModifier))
+            if (Time.timeSinceLevelLoad - lastFlipTime > flipCooldown * (4 / (Speed * (1 + (SpeedModifier - 1) / 2))))
             {
                 lastFlipTime = Time.timeSinceLevelLoad;
                 Flip();
