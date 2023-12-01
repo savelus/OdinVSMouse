@@ -40,16 +40,7 @@ namespace YG
         public static bool SDKEnabled { get => _SDKEnabled; }
         public static bool initializedLB { get => _initializedLB; }
 
-        public static bool nowAdsShow
-        {
-            get
-            {
-                if (nowFullAd || nowVideoAd)
-                    return true;
-                else
-                    return false;
-            }
-        }
+        public static bool nowAdsShow => nowFullAd || nowVideoAd;
 
         private static bool _auth;
         private static bool _SDKEnabled;

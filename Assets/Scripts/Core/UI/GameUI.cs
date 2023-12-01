@@ -18,8 +18,9 @@ namespace Core.UI
 
         private void Start()
         {
-            _countdown.ViewCountdown(3, StartGame);
             InitGame();
+            Debug.Log("game inited");
+            _countdown.ViewCountdown(3, StartGame);
         }
 
         private void InitGame()

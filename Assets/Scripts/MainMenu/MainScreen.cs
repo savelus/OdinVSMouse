@@ -32,7 +32,7 @@ namespace MainMenu
 
         [SerializeField] private AudioSource ButtonSource;
 
-        private AsyncOperation _loadGameSceneOperation;
+        //private AsyncOperation _loadGameSceneOperation;
         private int _currentNumberImage;
         private Vector3 _ruleInvisiblePosition;
         private const float _moveTimeRuleScreen = 0.8f;
@@ -40,6 +40,7 @@ namespace MainMenu
         private bool _dataLoaded = false;
         private void Start()
         {
+            Debug.Log("mainscreen start");
             if (YandexGame.SDKEnabled)
             {
                 GetData();
@@ -52,10 +53,11 @@ namespace MainMenu
 
         private void GetData()
         {
+            Debug.Log("get data start");
             if(_dataLoaded) return;
             _dataLoaded = true;
             
-            _loadGameSceneOperation = null;
+            //_loadGameSceneOperation = null;
 
             MenuScreen.SetActive(true);
 
@@ -101,7 +103,8 @@ namespace MainMenu
         {
             if (_currentNumberImage >= PreloadGameImages.Count)
             {
-                OpenGameScene();
+                SceneManager.LoadScene("GameScene");
+                //OpenGameScene();
                 return;
             }
 
@@ -109,13 +112,13 @@ namespace MainMenu
             _currentNumberImage++;
         }
 
-        private void OpenGameScene() =>
-            _loadGameSceneOperation.allowSceneActivation = true;
+        //private void OpenGameScene() =>
+        //    _loadGameSceneOperation.allowSceneActivation = true;
 
         private void StartGame()
         {
-            _loadGameSceneOperation = SceneManager.LoadSceneAsync("GameScene");
-            _loadGameSceneOperation.allowSceneActivation = false;
+            //_loadGameSceneOperation = SceneManager.LoadSceneAsync("GameScene");
+            //_loadGameSceneOperation.allowSceneActivation = false;
             PreloadGameImagesButton.gameObject.SetActive(true);
             MenuScreen.SetActive(false);
             RulesScreen.SetActive(false);
