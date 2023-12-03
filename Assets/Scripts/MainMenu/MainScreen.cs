@@ -1,10 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Data;
-using Data;
-using DataBase;
 using DG.Tweening;
-using PUSHKA.MySQL;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,12 +27,12 @@ namespace MainMenu
 
         [SerializeField] private AudioSource ButtonSource;
 
-        //private AsyncOperation _loadGameSceneOperation;
         private int _currentNumberImage;
         private Vector3 _ruleInvisiblePosition;
+        private bool _dataLoaded;
         private const float _moveTimeRuleScreen = 0.8f;
 
-        private bool _dataLoaded = false;
+
         private void Start()
         {
             Debug.Log("mainscreen start");
@@ -53,11 +48,8 @@ namespace MainMenu
 
         private void GetData()
         {
-            Debug.Log("get data start");
             if(_dataLoaded) return;
-            _dataLoaded = true;
-            
-            //_loadGameSceneOperation = null;
+            Debug.Log("get data start");
 
             MenuScreen.SetActive(true);
 
@@ -88,6 +80,8 @@ namespace MainMenu
             CloseLeaderBoardButton.onClick.AddListener(ButtonSource.Play);
 
             SetupPreloadGameButton();
+            
+            _dataLoaded = true;
         }
 
         private void SetupPreloadGameButton()
@@ -104,7 +98,6 @@ namespace MainMenu
             if (_currentNumberImage >= PreloadGameImages.Count)
             {
                 SceneManager.LoadScene("GameScene");
-                //OpenGameScene();
                 return;
             }
 
@@ -112,13 +105,8 @@ namespace MainMenu
             _currentNumberImage++;
         }
 
-        //private void OpenGameScene() =>
-        //    _loadGameSceneOperation.allowSceneActivation = true;
-
         private void StartGame()
         {
-            //_loadGameSceneOperation = SceneManager.LoadSceneAsync("GameScene");
-            //_loadGameSceneOperation.allowSceneActivation = false;
             PreloadGameImagesButton.gameObject.SetActive(true);
             MenuScreen.SetActive(false);
             RulesScreen.SetActive(false);

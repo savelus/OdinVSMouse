@@ -1,7 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Data;
-using DataBase;
 using MainMenu.Leaderboard;
 using TMPro;
 using UnityEngine;
@@ -54,7 +54,13 @@ namespace Core.UI
 
             Leaderboard.SetLeaderboardEntry();
             //StaticGameData.CurrentUser.AddMoney(StaticGameData.MoneyInGame);
-            
+            StartCoroutine(ShowFullscreen());
+
+        }
+
+        private IEnumerator ShowFullscreen()
+        {
+            yield return new WaitForSeconds(0.5f);
             YandexGame.FullscreenShow();
         }
 

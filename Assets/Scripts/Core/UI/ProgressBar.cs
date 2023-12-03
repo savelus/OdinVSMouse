@@ -49,6 +49,7 @@ namespace Core.UI
             _sliderTweener = _slider.transform.DOScale(effectScale, 0.5f);
             _sliderTweener.SetLoops(-1, LoopType.Yoyo);
             _sliderTweener.Pause();
+            
             _buffButton.onClick.RemoveAllListeners();
             _buffButton.onClick.AddListener(ClickOnBuffButton);
         }
