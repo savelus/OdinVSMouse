@@ -97,6 +97,7 @@ namespace MainMenu
         {
             if (_currentNumberImage >= PreloadGameImages.Count)
             {
+                DOTween.KillAll();
                 SceneManager.LoadScene("GameScene");
                 return;
             }

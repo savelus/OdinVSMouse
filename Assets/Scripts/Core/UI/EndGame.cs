@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Data;
+using DG.Tweening;
 using MainMenu.Leaderboard;
 using TMPro;
 using UnityEngine;
@@ -30,6 +31,7 @@ namespace Core.UI
             _mainMenuButton.onClick.AddListener(() =>
             {
                 _clickButtonSound.Play();
+                DOTween.KillAll();
                 SceneManager.LoadScene("Scenes/MainMenuScene");
             });
 
@@ -37,6 +39,7 @@ namespace Core.UI
             _restartGameButton.onClick.AddListener(() =>
             {
                 _clickButtonSound.Play();
+                DOTween.KillAll();
                 StartGame();
             });
         }

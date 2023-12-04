@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 namespace YG
 {
@@ -192,6 +193,7 @@ namespace YG
 
         public void SceneButton(int index)
         {
+            DOTween.KillAll();
             SceneManager.LoadScene(index);
         }
 
