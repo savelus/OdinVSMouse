@@ -23,7 +23,7 @@ namespace MainMenu.Leaderboard
             }
             catch 
             {
-                Debug.LogWarning("Error while trying saving score");
+                Debug.Log("Error while trying saving score");
             }
             YandexGame.onGetLeaderboard -= SetEntry;
         }

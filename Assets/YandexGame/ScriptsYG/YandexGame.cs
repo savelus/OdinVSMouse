@@ -329,7 +329,7 @@ namespace YG
 
         public static void NewLeaderboardScores(string nameLB, int score)
         {
-            if (Instance.infoYG.leaderboardEnable && auth)
+            if (Instance.infoYG.leaderboardEnable)
             {
                 if (Instance.infoYG.saveScoreAnonymousPlayers == false &&
                     playerName == "anonymous")
