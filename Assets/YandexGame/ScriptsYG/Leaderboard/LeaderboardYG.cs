@@ -165,6 +165,7 @@ namespace YG
 
                 int rank = lb.players[i].rank;
 
+                Debug.Log(lb.players[i].name);
                 players[i].data.name = LBMethods.AnonimName(lb.players[i].name);
                 players[i].data.rank = rank.ToString();
 
@@ -179,6 +180,7 @@ namespace YG
 
                 if (lb.players[i].uniqueID == YandexGame.playerId)
                 {
+                    Debug.Log("FindThisPlayer");
                     players[i].data.thisPlayer = true;
                 }
                 else

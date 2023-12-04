@@ -40,7 +40,16 @@ namespace YG
         public static bool SDKEnabled { get => _SDKEnabled; }
         public static bool initializedLB { get => _initializedLB; }
 
-        public static bool nowAdsShow => nowFullAd || nowVideoAd;
+        public static bool nowAdsShow
+        {
+            get
+            {
+                if (nowFullAd || nowVideoAd)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
         private static bool _auth;
         private static bool _SDKEnabled;
@@ -329,8 +338,8 @@ namespace YG
 
         public static void NewLeaderboardScores(string nameLB, int score)
         {
-            if (Instance.infoYG.leaderboardEnable)
-            {
+            //if (Instance.infoYG.leaderboardEnable && auth)
+            //{
                 if (Instance.infoYG.saveScoreAnonymousPlayers == false &&
                     playerName == "anonymous")
                     return;
@@ -341,7 +350,7 @@ namespace YG
 #else
                 Message($"New Liderboard '{nameLB}' Record: {score}");
 #endif
-            }
+            //}
         }
 
         public static void NewLBScoreTimeConvert(string nameLB, float secondsScore)
