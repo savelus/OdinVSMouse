@@ -340,17 +340,21 @@ namespace YG
         {
             //if (Instance.infoYG.leaderboardEnable && auth)
             //{
+            if (Instance.infoYG.leaderboardEnable)
+            {
                 if (Instance.infoYG.saveScoreAnonymousPlayers == false &&
                     playerName == "anonymous")
                     return;
-
+                Message("Player name " + playerName);
+                Message("Player id " + playerId);
 #if !UNITY_EDITOR
+
                 Message("New Liderboard Record: " + score);
                 SetLeaderboardScores(nameLB, score);
 #else
                 Message($"New Liderboard '{nameLB}' Record: {score}");
 #endif
-            //}
+            }
         }
 
         public static void NewLBScoreTimeConvert(string nameLB, float secondsScore)
@@ -390,7 +394,7 @@ namespace YG
         }
 
         [DllImport("__Internal")]
-        private static extern void GetLeaderboardScores(string nameLB, int maxQuantityPlayers, int quantityTop, int quantityAround, string photoSizeLB, bool auth);
+        private static extern void SetLeaderboardScores(string nameLB, int maxQuantityPlayers, int quantityTop, int quantityAround, string photoSizeLB, bool auth);
 
         public static void GetLeaderboard(string nameLB, int maxQuantityPlayers, int quantityTop, int quantityAround, string photoSizeLB)
         {
@@ -416,6 +420,14 @@ namespace YG
             if (Instance.infoYG.leaderboardEnable)
             {
                 Message("Get Leaderboard");
+
+                Message(nameLB);
+                Message(maxQuantityPlayers.ToString());
+                Message(quantityTop.ToString());
+                Message(quantityAround.ToString());
+                Message(_auth.ToString());
+                Message("----");
+
                 GetLeaderboardScores(nameLB, maxQuantityPlayers, quantityTop, quantityAround, photoSizeLB, _auth);
             }
             else

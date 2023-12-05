@@ -157,6 +157,7 @@ namespace YG
         private void SpawnPlayersList(LBData lb)
         {
             players = new LBPlayerDataYG[lb.players.Length];
+            Debug.Log(players.Length);
             for (int i = 0; i < players.Length; i++)
             {
                 GameObject playerObj = Instantiate(playerDataPrefab, rootSpawnPlayersData);
@@ -166,6 +167,8 @@ namespace YG
                 int rank = lb.players[i].rank;
 
                 Debug.Log(lb.players[i].name);
+                Debug.Log(lb.players[i].uniqueID);
+                
                 players[i].data.name = LBMethods.AnonimName(lb.players[i].name);
                 players[i].data.rank = rank.ToString();
 
@@ -223,6 +226,7 @@ namespace YG
 
         public void UpdateLB()
         {
+            Debug.Log("Start update leaderboard");
             YandexGame.GetLeaderboard(nameLB, maxQuantityPlayers, quantityTop, quantityAround, photoSize);
         }
 
