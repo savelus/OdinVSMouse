@@ -17,24 +17,34 @@ namespace Core.Boosts
         private Action[] boostActions;
         private int currentBoost;
 
+        private Dictionary<BoostType, Action> boostWithActions = new Dictionary<BoostType, Action>();
+        
+        [SerializeField] private Dictionary<BoostType, GameObject> _imagesOnBoosts;
         private void Awake()
         {
-            boostActions = new Action[]
+            boostWithActions = new Dictionary<BoostType, Action>()
             {
-                /*0*/ ActivateMouseHorde, 
-                /*1*/ ActivateAllMouseDie, 
-                /*2*/ ActivateEagles,
-                /*3*/ ActivateMouseHorde,
-                /*4*/ ActivateOwls,
-                /*5*/ ActivateMouseHorde,
-                /*6*/ ActivateAllMouseDie,
-                /*7*/ ActivateMouseHorde,
-                /*8*/ ActivateAllMouseDie,
-                /*9*/ ActivateMouseHorde,
-                /*10*/ ActivateAllMouseDie,
-                /*11*/ ActivateMouseHorde,
-                
+                { BoostType.Eagle, ActivateEagles },
+                { BoostType.Owl, ActivateOwls },
+                { BoostType.Horde, ActivateMouseHorde },
+                { BoostType.Die, ActivateAllMouseDie }
             };
+            // boostActions = new Action[]
+            // {
+            //     /*0*/ ActivateMouseHorde, 
+            //     /*1*/ ActivateAllMouseDie, 
+            //     /*2*/ ActivateEagles,
+            //     /*3*/ ActivateMouseHorde,
+            //     /*4*/ ActivateOwls,
+            //     /*5*/ ActivateMouseHorde,
+            //     /*6*/ ActivateAllMouseDie,
+            //     /*7*/ ActivateMouseHorde,
+            //     /*8*/ ActivateAllMouseDie,
+            //     /*9*/ ActivateMouseHorde,
+            //     /*10*/ ActivateAllMouseDie,
+            //     /*11*/ ActivateMouseHorde,
+            //     
+            // };
         }
 
         private void Update()
@@ -65,13 +75,17 @@ namespace Core.Boosts
 
         public void ActivateNextBoost()
         {
-            if (boostActions.Length > currentBoost)
-            {
-                boostActions[currentBoost].Invoke();
-                currentBoost++;
-            }
+            // if (boostActions.Length > currentBoost)
+            // {
+            //     boostActions[currentBoost].Invoke();
+            //     currentBoost++;
+            // }
         }
 
+        public void ActivateBoost(BoostType type)
+        {
+            boostWithActions[type].Invoke();
+        }
         public void ActivateMouseHorde()
         {
             entityController.SpawnHorde(hordeSize);
@@ -101,4 +115,6 @@ namespace Core.Boosts
             entityController.StawnOwls(1);
         }
     }
+
+    
 }
