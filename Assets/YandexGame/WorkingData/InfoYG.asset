@@ -16,7 +16,7 @@ MonoBehaviour:
   playerPhotoSize: 2
   autoGameReadyAPI: 1
   playerInfoSimulation:
-    authorized: 1
+    authorized: 0
     isMobile: 0
     language: ru
     name: Player this

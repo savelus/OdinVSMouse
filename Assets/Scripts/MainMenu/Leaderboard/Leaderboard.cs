@@ -22,8 +22,6 @@ namespace MainMenu.Leaderboard
             {
                 Debug.Log("Error while trying saving score");
             }
-           // Debug.Log("текущий игрок - " + obj.thisPlayer.score);
-            Debug.Log("killedMouseInGame - " + StaticGameData.KilledMouseInGame);
             YandexGame.onGetLeaderboard -= SetEntry;
         }
 

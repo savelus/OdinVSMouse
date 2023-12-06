@@ -121,7 +121,6 @@ namespace YG
                 if (infoYG.leaderboardEnable)
                 {
 #if !UNITY_EDITOR
-                    Debug.Log("Init Leaderbords inGame");
                     _InitLeaderboard();
 #else
                     InitializedLB();
@@ -140,8 +139,8 @@ namespace YG
 
         static void Message(string message)
         {
-            if (Instance.infoYG.debug) 
-                Debug.Log(message);
+            //if (Instance.infoYG.debug) 
+                //Debug.Log(message);
         }
 
         public static void GetDataInvoke()
@@ -392,9 +391,9 @@ namespace YG
                 NewLeaderboardScores(nameLB, result);
             }
         }
-
+        
         [DllImport("__Internal")]
-        private static extern void SetLeaderboardScores(string nameLB, int maxQuantityPlayers, int quantityTop, int quantityAround, string photoSizeLB, bool auth);
+        private static extern void GetLeaderboardScores(string nameLB, int maxQuantityPlayers, int quantityTop, int quantityAround, string photoSizeLB, bool auth);
 
         public static void GetLeaderboard(string nameLB, int maxQuantityPlayers, int quantityTop, int quantityAround, string photoSizeLB)
         {
