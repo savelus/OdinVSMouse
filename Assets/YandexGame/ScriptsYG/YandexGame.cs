@@ -40,7 +40,16 @@ namespace YG
         public static bool SDKEnabled { get => _SDKEnabled; }
         public static bool initializedLB { get => _initializedLB; }
 
-        public static bool nowAdsShow => nowFullAd || nowVideoAd;
+        public static bool nowAdsShow
+        {
+            get
+            {
+                if (nowFullAd || nowVideoAd)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
         private static bool _auth;
         private static bool _SDKEnabled;
@@ -112,7 +121,6 @@ namespace YG
                 if (infoYG.leaderboardEnable)
                 {
 #if !UNITY_EDITOR
-                    Debug.Log("Init Leaderbords inGame");
                     _InitLeaderboard();
 #else
                     InitializedLB();
@@ -131,8 +139,8 @@ namespace YG
 
         static void Message(string message)
         {
-            if (Instance.infoYG.debug) 
-                Debug.Log(message);
+            //if (Instance.infoYG.debug) 
+                //Debug.Log(message);
         }
 
         public static void GetDataInvoke()
@@ -329,13 +337,17 @@ namespace YG
 
         public static void NewLeaderboardScores(string nameLB, int score)
         {
+            //if (Instance.infoYG.leaderboardEnable && auth)
+            //{
             if (Instance.infoYG.leaderboardEnable)
             {
                 if (Instance.infoYG.saveScoreAnonymousPlayers == false &&
                     playerName == "anonymous")
                     return;
-
+                Message("Player name " + playerName);
+                Message("Player id " + playerId);
 #if !UNITY_EDITOR
+
                 Message("New Liderboard Record: " + score);
                 SetLeaderboardScores(nameLB, score);
 #else
@@ -379,7 +391,7 @@ namespace YG
                 NewLeaderboardScores(nameLB, result);
             }
         }
-
+        
         [DllImport("__Internal")]
         private static extern void GetLeaderboardScores(string nameLB, int maxQuantityPlayers, int quantityTop, int quantityAround, string photoSizeLB, bool auth);
 
@@ -407,6 +419,14 @@ namespace YG
             if (Instance.infoYG.leaderboardEnable)
             {
                 Message("Get Leaderboard");
+
+                Message(nameLB);
+                Message(maxQuantityPlayers.ToString());
+                Message(quantityTop.ToString());
+                Message(quantityAround.ToString());
+                Message(_auth.ToString());
+                Message("----");
+
                 GetLeaderboardScores(nameLB, maxQuantityPlayers, quantityTop, quantityAround, photoSizeLB, _auth);
             }
             else

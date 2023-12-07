@@ -12,6 +12,17 @@ namespace MainMenu.Leaderboard
         {
             YandexGame.GetLeaderboard("LeaderboardOdin", 10, 3, 3, "large");
             YandexGame.onGetLeaderboard += SetEntry;
+            /*
+            try
+            {
+                if(obj.thisPlayer.score < StaticGameData.KilledMouseInGame)
+                    YandexGame.NewLeaderboardScores("LeaderboardOdin", StaticGameData.KilledMouseInGame);
+            }
+            catch 
+            {
+                Debug.Log("Error while trying saving score");
+            }
+            YandexGame.onGetLeaderboard -= SetEntry;*/
         }
 
         private static void SetEntry(LBData obj)

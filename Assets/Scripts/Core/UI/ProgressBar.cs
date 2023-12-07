@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Boosts;
 using Data;
 using DG.Tweening;
 using TMPro;
@@ -13,9 +14,10 @@ namespace Core.UI
 {
     public class ProgressBar : MonoBehaviour
     {
-        [SerializeField] private List<int> _checkPoints;
         [SerializeField] private List<Color> _colorsForProgresBar;
-        [SerializeField] private GameObject[] _buffIcons;
+        [SerializeField] private List<Boost> _boostsList;
+        [Tooltip("ОБЯЗАТЕЛЬНО В ТОМ ПОРЯДКЕ, КОТОРЫЙ В ENUM/ НЕ ТРОГАТЬ")]
+        [SerializeField] private List<GameObject> _buffIcons;
         [SerializeField] private Transform _buffIconHolder;
         [SerializeField] private Slider _slider;
         [SerializeField] private Image _sliderBackground;
@@ -24,14 +26,32 @@ namespace Core.UI
         [SerializeField] private Button _buffButton;
 
         [SerializeField] private AudioSource _buffIsCompleteSound;
+
+        [SerializeField] private BoostManager _boostManager;
+
+        private Dictionary<BoostType, GameObject> _boostIconByType;
         private int _currentCheckPoint;
+        private int _nextCheckPoint;
         private Tweener _sliderTweener;
         private int _killedMouse;
+        private BoostType _nextBoostType;
+
+        private void Awake()
+        {
+            _boostIconByType = new();
+            for (var i = 0; i < _buffIcons.Count; i++)
+            {
+                var icon = _buffIcons[i];
+                _boostIconByType.TryAdd((BoostType)i, icon);
+            }
+        }
 
         private void Start()
         {
             StaticGameData.SubscribeOnKillMouseInGame(MouseKilled);
             _currentCheckPoint = 0;
+            _nextBoostType = _boostsList[0].type;
+            _nextCheckPoint = _boostsList[0].checkPoint;
             SetupBuffButton();
             UpdateColorsOnSlider();
             UpdateBuffIcon();
@@ -61,23 +81,39 @@ namespace Core.UI
             _buffButton.gameObject.SetActive(false);
 
             _currentCheckPoint++;
+
+            _nextCheckPoint = _boostsList.Count > _currentCheckPoint
+                ? _boostsList[_currentCheckPoint].checkPoint
+                : _nextCheckPoint + 400 + _currentCheckPoint * 10;
+            
             UpdateColorsOnSlider();
-            UpdateBuffIcon();
             UpdateView();
 
             _buffIsCompleteSound.Play();
+
+            _boostManager.ActivateBoost(_nextBoostType);
+
+            _nextBoostType = _boostsList.Count > _currentCheckPoint
+                ? _boostsList[_currentCheckPoint].type
+                : BoostType.Horde;
+            UpdateBuffIcon();
         }
 
         private void UpdateBuffIcon()
         {
-            _buffIconHolder.ForEachChield(chield => Destroy(chield.gameObject));
-            Instantiate(_buffIcons[_currentCheckPoint], _buffIconHolder);
+            foreach (var icon in _boostIconByType)
+            {
+                icon.Value.SetActive(_nextBoostType == icon.Key);
+            }
+            //_buffIconHolder.ForEachChield(chield => Destroy(chield.gameObject));
+            // if(_currentCheckPoint >= _checkPoints.Count)
+            //     Instantiate(_buffIcons[_currentCheckPoint], _buffIconHolder);
         }
 
         private void UpdateColorsOnSlider()
         {
             _sliderBackground.color = _sliderFillAreaBackground.color;
-            _sliderFillAreaBackground.color = _colorsForProgresBar[_currentCheckPoint];
+            _sliderFillAreaBackground.color = _colorsForProgresBar[_currentCheckPoint % 2];
         }
 
         private void MouseKilled(int countKilledMoused)
@@ -89,10 +125,10 @@ namespace Core.UI
         private void UpdateView()
         {
             var postfix = GetPostfix(_killedMouse, "мышей", "мышь", "мыши", "мышей");
-            _counterText.text = $"{_killedMouse} / {_checkPoints[_currentCheckPoint]} {postfix}";
-            _slider.value = (float)_killedMouse / _checkPoints[_currentCheckPoint];
+            _counterText.text = $"{_killedMouse} / {_nextCheckPoint} {postfix}";
+            _slider.value = (float)_killedMouse / _nextCheckPoint;
 
-            if (_killedMouse >= _checkPoints[_currentCheckPoint] && !_buffButton.gameObject.activeSelf)
+            if (_killedMouse >= _nextCheckPoint && !_buffButton.gameObject.activeSelf)
                 ViewBuffButton();
         }
 

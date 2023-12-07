@@ -1,4 +1,5 @@
 ﻿using System;
+using Data;
 using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.UI;
@@ -164,27 +165,13 @@ namespace YG
                 players[i] = playerObj.GetComponent<LBPlayerDataYG>();
 
                 int rank = lb.players[i].rank;
-
+                
                 players[i].data.name = LBMethods.AnonimName(lb.players[i].name);
                 players[i].data.rank = rank.ToString();
 
-                if (rank <= quantityTop)
-                {
-                    players[i].data.inTop = true;
-                }
-                else
-                {
-                    players[i].data.inTop = false;
-                }
+                players[i].data.inTop = rank <= quantityTop;
 
-                if (lb.players[i].uniqueID == YandexGame.playerId)
-                {
-                    players[i].data.thisPlayer = true;
-                }
-                else
-                {
-                    players[i].data.thisPlayer = false;
-                }
+                players[i].data.thisPlayer = lb.players[i].uniqueID == YandexGame.playerId;
 
                 if (timeTypeConvert)
                 {
@@ -201,21 +188,35 @@ namespace YG
                     if (lb.players[i].photo == "nonePhoto")
                     {
                         if (isHiddenPlayerPhoto)
-                        {
                             players[i].data.photoSprite = isHiddenPlayerPhoto;
-                        }
                         else
-                        {
                             players[i].data.photoUrl = null;
-                        }
                     }
                     else
-                    {
                         players[i].data.photoUrl = lb.players[i].photo;
-                    }
                 }
 
                 players[i].UpdateEntries();
+            }
+
+            if (YandexGame.playerId == "unauthorized" || YandexGame.playerId == "anonymous" || !YandexGame.auth)
+            {
+                GameObject playerObj = Instantiate(playerDataPrefab, rootSpawnPlayersData);
+
+                var endPlayer = playerObj.GetComponent<LBPlayerDataYG>();
+                var savedScores = PlayerPrefs.GetInt("scores", -1);
+                if (savedScores <= StaticGameData.KilledMouseInGame)
+                {
+                    PlayerPrefs.SetInt("scores", StaticGameData.KilledMouseInGame);
+                    savedScores = StaticGameData.KilledMouseInGame;
+                }
+
+                endPlayer.data.name = "Ваш рекорд";
+                endPlayer.data.thisPlayer = true;
+                endPlayer.data.score = savedScores.ToString();
+                endPlayer.data.photoSprite = isHiddenPlayerPhoto;
+                endPlayer.data.rank = "-";
+                endPlayer.UpdateEntries();
             }
         }
 

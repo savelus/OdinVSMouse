@@ -35,7 +35,6 @@ namespace MainMenu
 
         private void Start()
         {
-            Debug.Log("mainscreen start");
             if (YandexGame.SDKEnabled)
             {
                 GetData();
@@ -49,7 +48,6 @@ namespace MainMenu
         private void GetData()
         {
             if(_dataLoaded) return;
-            Debug.Log("get data start");
 
             MenuScreen.SetActive(true);
 
