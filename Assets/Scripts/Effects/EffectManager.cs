@@ -10,6 +10,8 @@ namespace Effects
 
         [SerializeField] private GameObject mouseCropsePrefab;
 
+        [SerializeField] private GameObject birdCropsePrefab;
+
         public void DrawExplosion(Vector3 position)
         {
             Instantiate(explosionPrefab, position, new Quaternion(), transform);
@@ -24,6 +26,11 @@ namespace Effects
         public void DrawMouseCropse(Vector3 position)
         {
             Instantiate(mouseCropsePrefab, position, new Quaternion(), transform);
+        }
+
+        public void DrawBirdCropse(Vector3 position)
+        {
+            Instantiate(birdCropsePrefab, position, new Quaternion(), transform);
         }
     }
 }

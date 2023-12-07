@@ -61,6 +61,8 @@ namespace Entities
                     capturedEnemies[i].position =
                         Vector3.Lerp(capturedEnemies[i].position, attachmentPoints[i].position, 1);
             }
+
+            invulnerabilityCooldown -= Time.deltaTime;
         }
 
         protected override void OnTriggerEnter2D(Collider2D collision)
@@ -94,6 +96,28 @@ namespace Entities
                     transform.localScale.y, transform.localScale.z);*/ //для старых страйтов
 
             transform.localEulerAngles = new(0, 0, AngleDeg);
+        }
+
+        private float invulnerabilityCooldown = 1;
+        protected override void Hit(Transform hitter)
+        {
+            if (invulnerabilityCooldown <= 0)
+            {
+                base.Hit(hitter);
+                Die();
+            }
+        }
+
+        public override void Die()
+        {
+            if (timeForKill > 0)
+            {
+                GameManager.Singleton.Timer.AddTime(timeForKill);
+                GameManager.Singleton.EffectManager.DrawAddIndicator(timeForKill > 0 ? "+" : "" + timeForKill, transform.position);
+            }
+            GameManager.Singleton.EffectManager.DrawBirdCropse(transform.position);
+
+            base.Die();
         }
     }
 }

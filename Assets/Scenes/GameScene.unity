@@ -1835,6 +1835,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 4473531392552257940, guid: 5d89db8ab3593034683642141095dd24, type: 3}
   effectPrefab: {fileID: 5621292422931672819, guid: 93d307007fd0a494a9faa54562a5afa0, type: 3}
   mouseCropsePrefab: {fileID: 2225265685066652733, guid: c45566447e23b4b439f9b3fe9f8dc75f, type: 3}
+  birdCropsePrefab: {fileID: 2225265685066652733, guid: 440c5a788456ed3448fa642db44fd3a5, type: 3}
 --- !u!4 &1285333577
 Transform:
   m_ObjectHideFlags: 0

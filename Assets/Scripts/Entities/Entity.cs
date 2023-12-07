@@ -11,6 +11,8 @@ namespace Entities
         [SerializeField] private float initialSpeed;
         private float speed;
 
+        [SerializeField] protected float timeForKill;
+
         public float Speed
         {
             get => speed;
