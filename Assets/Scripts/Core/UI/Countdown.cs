@@ -46,8 +46,6 @@ namespace Core.UI
         {
             _timeOnScreen = (int)Math.Ceiling(_remainingTime);
             _counter.text = _timeOnScreen.ToString();
-
-           // _timerSound.Play();
         }
     }
 }

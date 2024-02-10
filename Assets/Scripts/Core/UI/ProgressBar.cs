@@ -26,6 +26,7 @@ namespace Core.UI
         [SerializeField] private Button _buffButton;
 
         [SerializeField] private AudioSource _buffIsCompleteSound;
+        [SerializeField] private AudioSource _buffSpentSound;
 
         [SerializeField] private BoostManager _boostManager;
 
@@ -89,7 +90,7 @@ namespace Core.UI
             UpdateColorsOnSlider();
             UpdateView();
 
-            _buffIsCompleteSound.Play();
+            _buffSpentSound.Play();
 
             _boostManager.ActivateBoost(_nextBoostType);
 
@@ -105,9 +106,6 @@ namespace Core.UI
             {
                 icon.Value.SetActive(_nextBoostType == icon.Key);
             }
-            //_buffIconHolder.ForEachChield(chield => Destroy(chield.gameObject));
-            // if(_currentCheckPoint >= _checkPoints.Count)
-            //     Instantiate(_buffIcons[_currentCheckPoint], _buffIconHolder);
         }
 
         private void UpdateColorsOnSlider()

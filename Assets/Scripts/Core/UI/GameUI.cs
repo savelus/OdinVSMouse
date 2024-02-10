@@ -15,6 +15,7 @@ namespace Core.UI
         [SerializeField] private float _influenceLastGame = 1;
 
         [SerializeField] private AudioSource _backgroundGameMusic;
+        [SerializeField] private AudioSource _timerEndSound;
 
         private void Start()
         {
@@ -34,7 +35,12 @@ namespace Core.UI
         private void StartGame()
         {
             GameManager.IsGameStarted = true;
-            _timer.SubscribeOnTimerChange(timer => _timerText.text = timer.TimeString);
+            _timer.SubscribeOnTimerChange(timer => {
+                _timerText.text = timer.TimeString;
+                if (timer.IntRemainingTime < 4) {
+                    _timerEndSound.Play();
+                }
+            });
             _timer.SubscribeOnTimerEnd(_ =>
             {
                 _endGame.ViewEndGameScreen();

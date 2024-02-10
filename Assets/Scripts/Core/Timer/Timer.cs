@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.Timer
 {
@@ -7,11 +8,11 @@ namespace Core.Timer
     {
         public string TimeString { get; private set; }
         public bool TimerIsRunning { get; private set; }
+        public uint IntRemainingTime { get; private set; }
 
         private Action<Timer> _onTimerChanged;
         private Action<Timer> _onTimerEnd;
         private float _remainingTime;
-        private uint _intRemainingTime;
 
         private void Awake()
         {
@@ -37,7 +38,7 @@ namespace Core.Timer
             if (seconds <= 0) throw new ArgumentException("seconds can not 0");
             
             _remainingTime = seconds;
-            _intRemainingTime = seconds;
+            IntRemainingTime = seconds;
             TimerIsRunning = true;
             
         }
@@ -68,10 +69,10 @@ namespace Core.Timer
 
         private void OnTimeChanged()
         {
-            if((uint)_remainingTime == _intRemainingTime) return;
+            if((uint)_remainingTime == IntRemainingTime) return;
 
-            _intRemainingTime = (uint)_remainingTime;
-            TimeString = $"{_intRemainingTime} {GetHoursPostfix(_intRemainingTime)}";
+            IntRemainingTime = (uint)_remainingTime;
+            TimeString = $"{IntRemainingTime} {GetHoursPostfix(IntRemainingTime)}";
             _onTimerChanged?.Invoke(this);
         }
 
